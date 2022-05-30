@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.onfhir</groupId>
-    <artifactId>tofhir-engine_2.13</artifactId>
+    <groupId>eu.aiccelerate</groupId>
+    <artifactId>data-integration-suite</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -15,19 +15,13 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <!--Dependency versions-->
         <scala.version>2.13.8</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
-        <scala-logging.version>3.9.4</scala-logging.version>
-        <onfhir.version>3.2-SNAPSHOT</onfhir.version>
-        <onfhir-template-engine.version>1.0-SNAPSHOT</onfhir-template-engine.version>
-        <json4s.version>3.7.0-M11</json4s.version>
         <scalatest.version>3.1.4</scalatest.version>
+        <tofhir.version>1.0-SNAPSHOT</tofhir.version>
+        <onfhir.version>3.2-SNAPSHOT</onfhir.version>
         <spark.version>3.2.1</spark.version>
-        <jackson-csv.version>2.13.2</jackson-csv.version>
         <logback.version>1.2.11</logback.version>
-        <typesafe.config.version>1.4.2</typesafe.config.version>
-        <postgres.version>42.3.3</postgres.version>
     </properties>
 
     <build>
@@ -65,11 +59,18 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>3.2.2</version>-->
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <mainClass>eu.aiccelerate.dis.Boot</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -117,11 +118,11 @@
                                     </excludes>
                                 </filter>
                             </filters>
-                            <finalName>tofhir-standalone</finalName>
+                            <finalName>dis-standalone</finalName>
                             <transformers>
                                 <!-- add Main-Class to manifest file -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>io.onfhir.tofhir.Boot</mainClass>
+                                    <mainClass>eu.aiccelerate.dis.Boot</mainClass>
                                 </transformer>
 
                                 <!-- Append reference.conf to jar configurations for Akka to run -->
@@ -148,112 +149,46 @@
             <version>${scala.version}</version>
         </dependency>
 
-        <!-- Scala Logging -->
+        <!-- toFHIR dependencies -->
         <dependency>
-            <groupId>com.typesafe.scala-logging</groupId>
-            <artifactId>scala-logging_${scala.binary.version}</artifactId>
-            <version>${scala-logging.version}</version>
-        </dependency>
-
-        <!-- Logback dependencies -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
+            <groupId>io.onfhir</groupId>
+            <artifactId>tofhir-engine_${scala.binary.version}</artifactId>
+            <version>${tofhir.version}</version>
         </dependency>
 
         <!-- onFHIR dependencies -->
-        <dependency>
-            <groupId>io.onfhir</groupId>
-            <artifactId>onfhir-expression_${scala.binary.version}</artifactId>
-            <version>${onfhir.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.onfhir</groupId>
-            <artifactId>onfhir-client_${scala.binary.version}</artifactId>
-            <version>${onfhir.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.onfhir</groupId>
-            <artifactId>onfhir-r4_${scala.binary.version}</artifactId>
-            <version>${onfhir.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.onfhir</groupId>
-            <artifactId>onfhir-path_${scala.binary.version}</artifactId>
-            <version>${onfhir.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.onfhir</groupId>
-            <artifactId>onfhir-template-engine_${scala.binary.version}</artifactId>
-            <version>${onfhir-template-engine.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.onfhir</groupId>-->
+<!--            <artifactId>onfhir-client_${scala.binary.version}</artifactId>-->
+<!--            <version>${onfhir.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.onfhir</groupId>-->
+<!--            <artifactId>onfhir-path_${scala.binary.version}</artifactId>-->
+<!--            <version>${onfhir.version}</version>-->
+<!--        </dependency>-->
 
-        <!-- JSON4S -->
-        <dependency>
-            <groupId>org.json4s</groupId>
-            <artifactId>json4s-jackson_${scala.binary.version}</artifactId>
-            <version>${json4s.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json4s</groupId>
-            <artifactId>json4s-ext_${scala.binary.version}</artifactId>
-            <version>${json4s.version}</version>
-        </dependency>
-        <!-- Spark dependencies -->
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <!-- This is to meet the hard dependency of Spark on log4j -->
-            <!-- https://stackoverflow.com/questions/70374165/how-to-override-log4j-with-log4j2-version-to-resolve-socketserver-class-vulnera -->
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>2.16.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-
-        <!-- Application Configuration -->
-        <dependency>
-            <groupId>com.typesafe</groupId>
-            <artifactId>config</artifactId>
-            <version>${typesafe.config.version}</version>
-        </dependency>
-
-        <!-- For csv parsing -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-csv</artifactId>
-            <version>${jackson-csv.version}</version>
-        </dependency>
-
-        <!-- Postgres driver for Spark Read JDBC -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgres.version}</version>
-        </dependency>
+<!--        &lt;!&ndash; Spark dependencies &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.spark</groupId>-->
+<!--            <artifactId>spark-core_${scala.binary.version}</artifactId>-->
+<!--            <version>${spark.version}</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.slf4j</groupId>-->
+<!--                    <artifactId>slf4j-log4j12</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>log4j</groupId>-->
+<!--                    <artifactId>log4j</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.spark</groupId>-->
+<!--            <artifactId>spark-sql_${scala.binary.version}</artifactId>-->
+<!--            <version>${spark.version}</version>-->
+<!--        </dependency>-->
 
         <!-- For Unit testing -->
         <dependency>
@@ -263,13 +198,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- For database testing -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.1.210</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <repositories>
