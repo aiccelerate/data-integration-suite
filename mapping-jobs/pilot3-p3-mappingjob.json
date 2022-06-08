@@ -14,26 +14,32 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
+      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/patient-mapping",
       "filePath": "patients.csv"
     },
     {
+      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/encounter-mapping",
       "filePath": "encounters.csv"
     },
     {
+      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/condition-mapping",
       "filePath": "conditions.csv"
     },
     {
+      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/medication-used-mapping",
       "filePath": "medications-used.csv"
     },
     {
+      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/procedure-mapping",
       "filePath": "procedures.csv"
     },
     {
+      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/assessment-observation-mapping",
       "filePath": "assessment-observations.csv"
     }
