@@ -11,5 +11,5 @@ object Boot extends App {
   val toFhirEngine = new ToFhirEngine(ToFhirConfig.appName, ToFhirConfig.sparkMaster,
     ToFhirConfig.mappingRepositoryFolderPath, ToFhirConfig.schemaRepositoryFolderPath)
 
-  CommandLineInterface.start(toFhirEngine)
+  CommandLineInterface.start(toFhirEngine, ToFhirConfig.mappingJobFilePath)
 }
