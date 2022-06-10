@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: mongo
+    volumes:
+      - fhirdb:/data/db
+    restart: always
+  onfhir:
+    image: srdc/onfhir:r4
+    container_name: onfhir
+    environment:
+      - APP_CONF_FILE=/usr/local/onfhir/conf/onfhir.conf
+      - FHIR_ROOT_URL=http://127.0.0.1:8080/fhir
+      - DB_EMBEDDED=false
+      - DB_HOST=mongo:27017
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./common-data-model:/usr/local/onfhir/conf
+  tofhir:
+    image: srdc/tofhir:latest
+    container_name: tofhir
+    environment:
+      - APP_CONF_FILE=/usr/local/tofhir/conf/tofhir.conf
+      - DELAY_EXECUTION=10
+    command: ["run --job /usr/local/tofhir/conf/mapping-jobs/pilot2-mappingjob.json"]
+    volumes:
+      - ./data-integration-suite:/usr/local/tofhir/conf
+volumes:
+  fhirdb: {}
