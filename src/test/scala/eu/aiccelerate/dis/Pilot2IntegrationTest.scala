@@ -208,12 +208,12 @@ class Pilot2IntegrationTest extends PilotTestSpec {
   "condition mapping" should "map test data" in {
     //Some semantic tests on generated content
     fhirMappingJobManager.executeMappingTaskAndReturn(task = conditionMappingTask) map { results =>
-       results.length shouldBe 5
+       results.length shouldBe 10
 
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.apply(1) \ "encounter" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Encounter", "e2")
-      (results.apply(2) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "J85"
-      (results.apply(2) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Abscess of lung and mediastinum"
+      (results.apply(2) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "K76.8"
+      (results.apply(2) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Other specified diseases of liver"
 
       (results.head \ "onsetDateTime" ).extract[String] shouldBe "2010-10-15"
       (results.head \ "abatementDateTime" ).extract[String] shouldBe "2010-11-15"
