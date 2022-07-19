@@ -1,10 +1,12 @@
 {
   "id": "pilot3-p3-mapping-job",
   "sourceSettings": {
-    "jsonClass": "FileSystemSourceSettings",
-    "name": "pilot3-p3-source",
-    "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot3-p3-data",
-    "dataFolderPath": "test-data/pilot3-p3"
+    "source": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "pilot3-p3-source",
+      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot3-p3-data",
+      "dataFolderPath": "test-data/pilot3-p3"
+    }
   },
   "sinkSettings": {
     "jsonClass": "FhirRepositorySinkSettings",
@@ -14,34 +16,58 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/patient-mapping",
-      "filePath": "patients.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "patients.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/encounter-mapping",
-      "filePath": "encounters.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "encounters.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/condition-mapping",
-      "filePath": "conditions.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "conditions.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/medication-used-mapping",
-      "filePath": "medications-used.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "medications-used.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/procedure-mapping",
-      "filePath": "procedures.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "procedures.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/assessment-observation-mapping",
-      "filePath": "assessment-observations.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "assessment-observations.csv"
+        }
+      }
     }
   ]
 }

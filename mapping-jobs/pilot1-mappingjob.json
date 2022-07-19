@@ -1,10 +1,12 @@
 {
   "id": "pilot1-mapping-job",
   "sourceSettings": {
-    "jsonClass": "FileSystemSourceSettings",
-    "name": "pilot1-source",
-    "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot1-data",
-    "dataFolderPath": "test-data/pilot1"
+    "source": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "pilot1-source",
+      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot1-data",
+      "dataFolderPath": "test-data/pilot1"
+    }
   },
   "sinkSettings": {
     "jsonClass": "FhirRepositorySinkSettings",
@@ -14,109 +16,193 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/patient-mapping",
-      "filePath": "patients.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "patients.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/practitioner-mapping",
-      "filePath": "practitioners.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "practitioners.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/hospital-unit-mapping",
-      "filePath": "hospital-unit.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "hospital-unit.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/workshift-mapping",
-      "filePath": "workshift.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "workshift.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-plan-mapping",
-      "filePath": "surgery-plans.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "surgery-plans.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/operation-episode-encounter-mapping",
-      "filePath": "operation-episode-encounters.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "operation-episode-encounters.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-details-mapping",
-      "filePath": "surgery-details.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "surgery-details.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/condition-mapping",
-      "filePath": "conditions.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "conditions.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/patient-reported-conditions-mapping",
-      "filePath": "patient-reported-conditions.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "patient-reported-conditions.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/medication-used-mapping",
-      "filePath": "medication-used.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "medication-used.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/medication-administration-mapping",
-      "filePath": "medication-administration.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "medication-administration.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/health-behavior-assessment-mapping",
-      "filePath": "health-behavior-assessment.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "health-behavior-assessment.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/background-information-mapping",
-      "filePath": "background-information.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "background-information.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-assessment-mapping",
-      "filePath": "preoperative-assessment.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "preoperative-assessment.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-risks-mapping",
-      "filePath": "preoperative-risk-factors.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "preoperative-risk-factors.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-symptoms-mapping",
-      "filePath": "preoperative-symptoms.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "preoperative-symptoms.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/radiological-studies-mapping",
-      "filePath": "radiological-studies.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "radiological-studies.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/lab-results-mapping",
-      "filePath": "lab-results.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "lab-results.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/vital-signs-mapping",
-      "filePath": "vitalsigns.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "vitalsigns.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/anesthesia-observations-mapping",
-      "filePath": "anesthesia-observations.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "anesthesia-observations.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1/other-observation-mapping",
-      "filePath": "other-observations.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "other-observations.csv"
+        }
+      }
     }
   ]
 }

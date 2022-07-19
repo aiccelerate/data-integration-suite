@@ -1,10 +1,12 @@
 {
   "id": "pilot2-mapping-job",
   "sourceSettings": {
-    "jsonClass": "FileSystemSourceSettings",
-    "name": "pilot2-source",
-    "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot2-data",
-    "dataFolderPath": "test-data/pilot2"
+    "source": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "pilot2-source",
+      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot2-data",
+      "dataFolderPath": "test-data/pilot2"
+    }
   },
   "sinkSettings": {
     "jsonClass": "FhirRepositorySinkSettings",
@@ -14,44 +16,76 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/patient-mapping",
-      "filePath": "patients.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "patients.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/encounter-mapping",
-      "filePath": "encounters.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "encounters.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/condition-mapping",
-      "filePath": "conditions.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "conditions.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/medication-used-mapping",
-      "filePath": "medication-used.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "medication-used.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/device-used-mapping",
-      "filePath": "device-used.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "device-used.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-existence-mapping",
-      "filePath": "parkinson-symptom-existence.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "parkinson-symptom-existence.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-assessment-mapping",
-      "filePath": "parkinson-symptom-assessments.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "parkinson-symptom-assessments.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/other-assessments-mapping",
-      "filePath": "other-assessments.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "other-assessments.csv"
+        }
+      }
     }
   ]
 }

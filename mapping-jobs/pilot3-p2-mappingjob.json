@@ -1,10 +1,12 @@
 {
   "id": "pilot3-p2-mapping-job",
   "sourceSettings": {
-    "jsonClass": "FileSystemSourceSettings",
-    "name": "pilot3-p2-source",
-    "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot3-p2-data",
-    "dataFolderPath": "test-data/pilot3-p2"
+    "source": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "pilot3-p2-source",
+      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot3-p2-data",
+      "dataFolderPath": "test-data/pilot3-p2"
+    }
   },
   "sinkSettings": {
     "jsonClass": "FhirRepositorySinkSettings",
@@ -14,44 +16,76 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/patient-mapping",
-      "filePath": "patients.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "patients.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/condition-mapping",
-      "filePath": "conditions.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "conditions.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-used-mapping",
-      "filePath": "medications-used.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "medications-used.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-administration-mapping",
-      "filePath": "medication-administrations.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "medication-administrations.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/lab-results-mapping",
-      "filePath": "lab-results.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "lab-results.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/neurooncological-observation-mapping",
-      "filePath": "neurooncological-observations.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "neurooncological-observations.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/symptom-observation-mapping",
-      "filePath": "symptoms.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "symptoms.csv"
+        }
+      }
     },
     {
-      "jsonClass": "FileSourceMappingDefinition",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/vital-signs-mapping",
-      "filePath": "vitalsigns.csv"
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "vitalsigns.csv"
+        }
+      }
     }
   ]
 }
