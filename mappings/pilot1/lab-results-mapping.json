@@ -53,7 +53,8 @@
                   "display": "{{? mpp:getConcept(%labResultsConceptMap, code.toString(), 'target_display')}}"
                 }
               }
-            ]
+            ],
+            "text": "{{description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
