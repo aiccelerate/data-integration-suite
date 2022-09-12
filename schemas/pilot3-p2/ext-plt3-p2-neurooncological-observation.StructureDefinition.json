@@ -91,7 +91,7 @@
         "path": "Ext-plt3-p2-neurooncological-observation.valueCode",
         "short": "Coded value for measurement",
         "definition": "Coded value to indicate the result of this observation. At least one of the value fields (valueCode | valueQuantity) should be provided. If the observation code is 84892-9 (Residual Tumor existence), then use one of the following: (R0 | R1 | R2).If the observation code is 88040-1 (Response to cancer treatment), then use one of the following: (CR | PR | SD | PD)",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -107,7 +107,7 @@
         "path": "Ext-plt3-p2-neurooncological-observation.valueQuantity",
         "short": "Numeric value to indicate the result of this observation.",
         "definition": "Numeric value to indicate the result of this observation.",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {

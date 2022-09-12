@@ -156,40 +156,6 @@
             <version>${tofhir.version}</version>
         </dependency>
 
-        <!-- onFHIR dependencies -->
-<!--        <dependency>-->
-<!--            <groupId>io.onfhir</groupId>-->
-<!--            <artifactId>onfhir-client_${scala.binary.version}</artifactId>-->
-<!--            <version>${onfhir.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.onfhir</groupId>-->
-<!--            <artifactId>onfhir-path_${scala.binary.version}</artifactId>-->
-<!--            <version>${onfhir.version}</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; Spark dependencies &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.spark</groupId>-->
-<!--            <artifactId>spark-core_${scala.binary.version}</artifactId>-->
-<!--            <version>${spark.version}</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.slf4j</groupId>-->
-<!--                    <artifactId>slf4j-log4j12</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>log4j</groupId>-->
-<!--                    <artifactId>log4j</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.spark</groupId>-->
-<!--            <artifactId>spark-sql_${scala.binary.version}</artifactId>-->
-<!--            <version>${spark.version}</version>-->
-<!--        </dependency>-->
-
         <!-- For Unit testing -->
         <dependency>
             <groupId>org.scalatest</groupId>
@@ -206,7 +172,7 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
+<!--                <updatePolicy>always</updatePolicy>-->
             </snapshots>
         </repository>
     </repositories>

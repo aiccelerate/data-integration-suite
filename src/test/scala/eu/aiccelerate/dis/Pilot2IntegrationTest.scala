@@ -2,12 +2,12 @@ package eu.aiccelerate.dis
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.StatusCodes
+import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
-import io.onfhir.tofhir.config.MappingErrorHandling
 import io.onfhir.tofhir.engine._
 import io.onfhir.tofhir.model._
 import io.onfhir.tofhir.util.FhirMappingUtility
-import io.onfhir.util.JsonFormatter.formats
+import io.onfhir.util.JsonFormatter._
 import org.json4s.JsonAST.JArray
 
 import java.nio.file.Paths
@@ -29,7 +29,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaRepository, sparkSession, mappingErrorHandling)
 
-  val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", writeErrorHandling = MappingErrorHandling.CONTINUE)
+  val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", errorHandling = Some(fhirWriteErrorHandling))
   implicit val actorSystem = ActorSystem("Pilot2IntegrationTest")
   val onFhirClient = OnFhirNetworkClient.apply(fhirSinkSetting.fhirRepoUrl)
 
@@ -79,7 +79,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "patient mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = patientMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = patientMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       //10 patients and 4 motorSymptomsOnset
        results.length shouldBe 14
 
@@ -108,7 +114,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "encounter mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = encounterMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = encounterMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 3
       (results.head \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
       (results.apply(1) \ "id").extract[String] shouldBe FhirMappingUtility.getHashedId("Encounter", "e2")
@@ -132,7 +144,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "symptom assessment mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = symptomsAssMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = symptomsAssMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 12
       (results.apply(2) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
       (results.apply(2) \ "encounter" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Encounter", "e1")
@@ -158,7 +176,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "symptom existence mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = symptomsExistenceMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = symptomsExistenceMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 6
       (results.head \ "identifier" \ "value").extract[Seq[String]] shouldBe Seq("se1")
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
@@ -183,7 +207,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "other assessment mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = otherAssMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = otherAssMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 5
       (results.head \ "identifier" \ "value").extract[Seq[String]] shouldBe Seq("oo1")
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
@@ -207,7 +237,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "condition mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = conditionMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = conditionMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
        results.length shouldBe 10
 
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
@@ -232,7 +268,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "medication used mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = medicationUsedMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = medicationUsedMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 5
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.apply(2) \ "medicationCodeableConcept" \ "coding" \ "code").extract[Seq[String]].head shouldBe "N06AB03"
@@ -256,7 +298,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "device used mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = deviceUsedMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = deviceUsedMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 2
       (results.last \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.last \ "device" \"identifier" \ "value").extract[String] shouldBe "levodopa-infusion-pump"

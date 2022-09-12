@@ -1,4 +1,4 @@
-observationID,pid,time,code,value
+observationID,pid,startDate,code,value
 vs1,p1,2010-05-17T12:35:15+01:00,29463-7,75
 vs2,p1,2009-10-12T10:00:00+01:00,8302-2,178
 vs3,p1,2009-10-12T10:00:00+01:00,39156-5,25.5

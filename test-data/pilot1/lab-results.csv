@@ -1,4 +1,4 @@
-pid,time,code,description,value,unit,interpretation
+pid,time,code,description,value,unit,interpretation,encounterId
 p1,2012-05-10T10:00:00+01:00,1552,Hemogoblin,10.5,g/l,A,e1
 p2,2012-05-10,1358,Hematocrit,22,%,N,e2
 p1,2012-05-10,2218,fB-Leucos,23.5,E9/l,A,

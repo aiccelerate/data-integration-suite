@@ -2,12 +2,12 @@ package eu.aiccelerate.dis
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.StatusCodes
+import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
-import io.onfhir.tofhir.config.MappingErrorHandling
 import io.onfhir.tofhir.engine._
 import io.onfhir.tofhir.model._
 import io.onfhir.tofhir.util.FhirMappingUtility
-import io.onfhir.util.JsonFormatter.formats
+import io.onfhir.util.JsonFormatter._
 import org.json4s.JsonAST.JArray
 
 import java.nio.file.Paths
@@ -29,7 +29,7 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaRepository, sparkSession, mappingErrorHandling)
 
-  val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", writeErrorHandling = MappingErrorHandling.CONTINUE)
+  val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", errorHandling = Some(fhirWriteErrorHandling))
   implicit val actorSystem = ActorSystem("Pilot3Part2IntegrationTest")
   val onFhirClient = OnFhirNetworkClient.apply(fhirSinkSetting.fhirRepoUrl)
 
@@ -79,7 +79,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "patient mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = patientMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = patientMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 10
       (JArray(results.toList) \ "meta" \ "profile").extract[Seq[Seq[String]]].flatten.toSet shouldBe Set("https://aiccelerate.eu/fhir/StructureDefinition/AIC-Patient")
     }
@@ -97,7 +103,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "condition mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = conditionMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = conditionMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 5
 
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
@@ -121,7 +133,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "lab results mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = labResultsMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = labResultsMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 33
       (results.apply(25) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p21")
       (results.apply(25) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "2141-0"
@@ -146,7 +164,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "symptoms mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = symptomMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = symptomMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 12
 
       val patient1 = results.filter(r => (r \ "subject" \ "reference").extract[String] == FhirMappingUtility.getHashedReference("Patient", "p1"))
@@ -172,7 +196,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "vital signs mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = vitalSignsMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = vitalSignsMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 8
     }
   }
@@ -189,7 +219,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "neurooncological observations mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = neuroObsMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = neuroObsMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 21
       (results.apply(9) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.apply(9) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "18156-0"
@@ -215,7 +251,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "medication administration mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = medAdministrationMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = medAdministrationMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 12
 
       (results.apply(4) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p3")
@@ -235,7 +277,13 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   "medication used mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(task = medUsedMappingTask, sourceSettings = dataSourceSettings) map { results =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = medUsedMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
       results.length shouldBe 10
       (results.apply(4) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p5")
       (results.apply(4) \ "medicationCodeableConcept" \ "coding" \ "display").extract[Seq[String]].head shouldBe "vancomycin"

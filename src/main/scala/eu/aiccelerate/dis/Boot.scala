@@ -8,7 +8,7 @@ import io.onfhir.tofhir.config.ToFhirConfig
  * Entrypoint of toFHIR
  */
 object Boot extends App {
-  val toFhirEngine = new ToFhirEngine(ToFhirConfig.appName, ToFhirConfig.sparkMaster,
+  val toFhirEngine = new ToFhirEngine(ToFhirConfig.sparkAppName, ToFhirConfig.sparkMaster,
     ToFhirConfig.mappingRepositoryFolderPath, ToFhirConfig.schemaRepositoryFolderPath)
 
   CommandLineInterface.start(toFhirEngine, ToFhirConfig.mappingJobFilePath)
