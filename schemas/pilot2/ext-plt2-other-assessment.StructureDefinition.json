@@ -111,9 +111,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]

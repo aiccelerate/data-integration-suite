@@ -47,9 +47,16 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterID)}}",
+          "effectiveDateTime": {
+            "{{#edNotExists}}": "{{iif(endDate.exists(), {}, true)}}",
+            "{{?}}": "{{startDate}}"
+          },
           "effectivePeriod": {
-            "start": "{{startDate}}",
-            "end": "{{? endDate}}"
+            "{{#ed}}": "{{endDate}}",
+            "{{?}}": {
+              "start": "{{startDate}}",
+              "end": "{{%ed}}"
+            }
           },
           "method": {
             "coding": [

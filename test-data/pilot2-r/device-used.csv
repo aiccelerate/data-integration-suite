@@ -1,0 +1,5 @@
+deviceUseID,pid,startDate,endDate,code
+du1,p1,2022-01-23,,deep-brain-stimulator
+du2,p2,2021-09-17,2021-11-10,levodopa-infusion-pump
+du3,p3,2022-01-02,2022-03-02,apomorfine-pump
+du4,p3,2021-11-17,,levodopa-infusion-pump

@@ -1,0 +1,14 @@
+observationID,pid,startDate,endDate,code,symptomExists,isProm,encounterID
+se1,p5,2022-02-23,,dyskinesia,FALSE,FALSE,e1
+se2,p5,2021-08-17,,dyskinesia,FALSE,FALSE,e2
+se3,p5,2022-02-23,,wearing-off,FALSE,FALSE,e1
+se4,p5,2021-08-17,,wearing-off,FALSE,FALSE,e2
+se5,p5,2022-02-23,,fluctuations,TRUE,FALSE,e1
+se6,p5,2021-08-17,,fluctuations,FALSE,FALSE,e2
+se7,p5,2022-02-23,,freezing-of-gait,FALSE,FALSE,e1
+se8,p5,2021-08-17,,freezing-of-gait,FALSE,FALSE,e2
+se9,p5,2022-02-23,,postural-balance,FALSE,FALSE,e1
+se10,p5,2021-08-17,,postural-balance,FALSE,FALSE,e2
+se11,p5,2022-02-23,,bradykinesia,TRUE,FALSE,e1
+se12,p5,2021-08-17,,bradykinesia,FALSE,FALSE,e2
+se13,p5,2022-02-23,,orthostatic-hypotension,TRUE,FALSE,e1

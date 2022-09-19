@@ -2,6 +2,7 @@ source_code,source_display
 neuropath,Neuropath Device
 garmin,Garmin wearable
 mds-updrs,MDS-UPDRS Questionnaire
+mds-updrs3,MDS-UPDRS (v3) Questionnaire
 updrs3,UPDRS v3 Questionnaire
 pkg-ptt,"Parkinson KinetiGraph Percent Time Tremor (PTT) Score"
 pkg-dks,"Parkinson KinetiGraph Dyskenizia Score (DKS)"
