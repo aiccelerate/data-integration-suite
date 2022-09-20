@@ -25,3 +25,13 @@ non-motor-symptoms,non-motor-symptoms,https://aiccelerate.eu/fhir/CodeSystem/par
 cognition,449888003,http://snomed.info/sct,Normal Cognition,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
 psychiatric-symptoms,75864003,http://snomed.info/sct,Psychiatric symptoms,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
 impulse-control-disorder,66347000,http://snomed.info/sct,Impulse control disorder,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+executive-function,736317001,http://snomed.info/sct,Impaired executive functioning,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+gambling,105523009,http://snomed.info/sct,Gambling,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+hallucination,7011001,http://snomed.info/sct,Hallucinations,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+impulsivity,39178003,http://snomed.info/sct,Emotional impulsivity,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+memory,386807006,http://snomed.info/sct,Memory impairment,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+visuospatial,304656009,http://snomed.info/sct,Unable to use visuospatial reasoning,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+verbal-fluency,289197000,http://snomed.info/sct,Lack of fluency in speech,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+attention,76039005,http://snomed.info/sct,Disturbance of attention,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+atrophy,278849000,http://snomed.info/sct,Cerebral atrophy,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
+apathy,20602000,http://snomed.info/sct,"Apathy, indifference (finding)",https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment
