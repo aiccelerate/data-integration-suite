@@ -23,22 +23,6 @@
         ]
       },
       {
-        "id": "Ext-plt2-clinical-note.clinicalNoteID",
-        "path": "Ext-plt2-clinical-note.clinicalNoteID",
-        "short": "Unique identifier for the clinical note.",
-        "definition": "Unique identifier for the clinical note.",
-        "min": 1,
-        "max": "1",
-        "type": [
-          {
-            "code": "id",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/id"
-            ]
-          }
-        ]
-      },
-      {
         "id": "Ext-plt2-clinical-note.pid",
         "path": "Ext-plt2-clinical-note.pid",
         "short": "Patient identifier",

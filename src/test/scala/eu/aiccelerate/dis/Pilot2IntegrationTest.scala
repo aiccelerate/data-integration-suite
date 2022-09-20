@@ -77,6 +77,11 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     sourceContext = Map("source" ->  FileSystemSource(path = "device-used.csv"))
   )
 
+  val clinicalNoteMappingTask = FhirMappingTask(
+    mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/clinical-note-mapping",
+    sourceContext = Map("source" -> FileSystemSource(path = "clinical-notes.csv"))
+  )
+
   "patient mapping" should "map test data" in {
     //Some semantic tests on generated content
     fhirMappingJobManager.executeMappingTaskAndReturn(task = patientMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
@@ -318,6 +323,30 @@ class Pilot2IntegrationTest extends PilotTestSpec {
       .executeMappingJob(tasks = Seq(deviceUsedMappingTask), sourceSettings = dataSourceSettings,sinkSettings = fhirSinkSetting)
       .map( unit =>
         unit shouldBe ()
+      )
+  }
+
+  "clinical note mapping" should "map test data" in {
+    //Some semantic tests on generated content
+    fhirMappingJobManager.executeMappingTaskAndReturn(task = clinicalNoteMappingTask, sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
+      results.length shouldBe 1
+      (results.last \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
+    }
+  }
+
+  it should "map test data and write it to FHIR repo successfully" in {
+    //Send it to our fhir repo if they are also validated
+    assume(fhirServerIsAvailable)
+    fhirMappingJobManager
+      .executeMappingJob(tasks = Seq(clinicalNoteMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
