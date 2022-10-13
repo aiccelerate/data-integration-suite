@@ -1,0 +1,148 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/procedure-mapping",
+  "name": "procedure-mapping",
+  "title": "Mapping of procedure schema for pilot-3 p1 (OPBG) to Encounter (PediatricNeurooncologicalCareEncounter), ServiceRequest (AIC-PediatricNeurooncologicalPlannedProcedure) and Procedure (AIC-PediatricNeurooncologicalProcedure) resources",
+  "source": [
+    {
+      "alias": "source",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-procedure"
+    }
+  ],
+  "mapping": [
+    {
+      "expression": {
+        "name": "surgery_encounter",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Encounter",
+          "id": "{{mpp:getHashedId('Encounter', procedureId)}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalCareEncounter"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "{{iif(isCancelled, 'cancelled', 'finished')}}",
+          "class": {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code": "IMP",
+            "display": "Inpatient encounter"
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "305408004",
+                  "display": "Admission to surgical department"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "period": {
+            "start": "{{startTime.nav:orElse(plannedTime)}}",
+            "end": "{{? endTime}}"
+          }
+        }
+      }
+    },
+    {
+      "expression": {
+        "name": "surgery_plan",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "ServiceRequest",
+          "id": "{{mpp:getHashedId('ServiceRequest', procedureId)}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalPlannedProcedure"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "{{iif(isCancelled, 'revoked', 'completed')}}",
+          "intent": "order",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "387713003",
+                  "display": "Surgical procedure"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "{{%sourceSystem.sourceUri}}/surgical-procedures",
+                "code": "{{code}}",
+                "display": "{{description}}"
+              }
+            ],
+            "text" : "{{description}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "authoredOn": "{{procedureRequestDate}}",
+          "occurrenceDateTime": "{{plannedTime}}"
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isNotCancelled",
+        "language": "text/fhirpath",
+        "expression": "isCancelled.not()"
+      },
+      "expression": {
+        "name": "surgery",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', procedureId)}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalProcedure"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "basedOn": "{{* mpp:createFhirReferenceWithHashedId('ServiceRequest', procedureId)}}",
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{procedureId}}"
+            }
+          ],
+          "status": "completed",
+          "category": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "387713003",
+                  "display": "Surgical procedure"
+                }
+              ]
+            },
+          "code": {
+            "coding": [
+              {
+                "system": "{{%sourceSystem.sourceUri}}/surgical-procedures",
+                "code": "{{code}}",
+                "display": "{{description}}"
+              }
+            ],
+            "text" : "{{description}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', procedureId)}}",
+          "performedPeriod": {
+            "start": "{{startTime}}",
+            "end": "{{? endTime}}"
+          }
+        }
+      }
+    }
+  ]
+}

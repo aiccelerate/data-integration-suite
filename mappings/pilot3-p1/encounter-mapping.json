@@ -1,0 +1,87 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/encounter-mapping",
+  "name": "encounter-mapping",
+  "title": "Mapping of encounter schema for pilot-3 p1 (OPBG) to AIC-PediatricNeurooncologicalCareEncounter",
+  "source": [
+    {
+      "alias": "source",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-encounter"
+    }
+  ],
+  "context": {
+    "encounterConceptMap": {
+      "category": "concept-map",
+      "url": "./encounter-type-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Encounter",
+          "id": "{{mpp:getHashedId('Encounter', encounterId & pid & type & startTime.toString())}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalCareEncounter"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "finished",
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{encounterId & type & startTime.toString()}}"
+            }
+          ],
+          "class": {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code": "{{class}}",
+            "display": "{{iif(class='AMB', 'Ambulatory', 'Inpatient encounter')}}"
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{mpp:getConcept(%encounterConceptMap, type, 'target_code')}}",
+                  "display": "{{mpp:getConcept(%encounterConceptMap, type, 'target_display')}}"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "period": {
+            "start": "{{startTime}}",
+            "end": "{{? endTime}}"
+          },
+          "participant": {
+            "{{#prid}}": "{{participant}}",
+            "{{*}}": {
+              "type": [{
+                "coding": [{
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                  "code": "PPRF",
+                  "display": "Primary performer"
+                }]
+              }],
+              "individual": "{{mpp:createFhirReferenceWithHashedId('Practitioner', %prid)}}"
+            }
+          },
+          "location": {
+            "{{#loc}}": "{{location}}",
+            "{{*}}": {
+              "location": "{{mpp:createFhirReferenceWithHashedId('Location', %loc)}}",
+              "period": {
+                "start": "{{startTime}}",
+                "end": "{{? endTime}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

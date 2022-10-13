@@ -1,0 +1,109 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
+  "name": "diagnostic-study-mapping",
+  "title": "Mapping of diagnostic study schema for pilot-3 p1 (OPBG) to FHIR Service Request (AIC-PediatricNeurooncologicalDiagnosticStudyOrder) and Diagnostic Report(AIC-PediatricNeurooncologicalDiagnosticStudyReport) resources ",
+  "source": [
+    {
+      "alias": "source",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-diagnosticStudy"
+    }
+  ],
+  "context": {
+    "diagnosticStudyConceptMap": {
+      "category": "concept-map",
+      "url": "./diagnostic-study-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "study-order",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "ServiceRequest",
+          "id": "{{mpp:getHashedId('ServiceRequest', studyId)}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalDiagnosticStudyOrder"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "intent": "order",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{category}}",
+                  "display": "{{mpp:getConcept(%diagnosticStudyConceptMap, category.toString(), 'source_display')}}"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "{{%sourceSystem.sourceUri}}/diagnostic-studies",
+                "code": "{{code}}",
+                "display": "{{description}}"
+              }
+            ],
+            "text" : "{{description}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "authoredOn": "{{orderTime}}",
+          "performer": "{{* mpp:createFhirReferenceWithHashedId('Organization', organization)}}"
+        }
+      }
+    },
+    {
+      "expression": {
+        "name": "study-result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "DiagnosticReport",
+          "id": "{{mpp:getHashedId('DiagnosticReport', studyId)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalDiagnosticStudyReport"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "basedOn": "{{* mpp:createFhirReferenceWithHashedId('ServiceRequest', studyId)}}",
+          "issued": "{{endTime}}",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{category}}",
+                  "display": "{{mpp:getConcept(%diagnosticStudyConceptMap, category.toString(), 'source_display')}}"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "{{%sourceSystem.sourceUri}}/diagnostic-studies",
+                "code": "{{code}}",
+                "display": "{{description}}"
+              }
+            ],
+            "text" : "{{description}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', procedureId)}}",
+          "effectivePeriod": {
+            "start": "{{startTime}}",
+            "end": "{{? endTime}}"
+          },
+          "performer": {
+            "{{#prf}}": "{{performer}}",
+            "{{*}}": "{{mpp:createFhirReferenceWithHashedId('Practitioner', %prf)}}"
+          }
+        }
+      }
+    }
+  ]
+}

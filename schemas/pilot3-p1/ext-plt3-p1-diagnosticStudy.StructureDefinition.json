@@ -1,0 +1,203 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-diagnosticStudy",
+  "name": "Ext-plt3-p1-diagnosticStudy",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt3-p1-diagnosticStudy",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy",
+        "path": "Ext-plt3-p1-diagnosticStudy",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.studyId",
+        "path": "Ext-plt3-p1-diagnosticStudy.studyId",
+        "short": "Unique identifier for the procedure/study",
+        "definition": "UUnique identifier for the procedure/study",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.procedureId",
+        "path": "Ext-plt3-p1-diagnosticStudy.procedureId",
+        "short": "Surgery procedure identifier",
+        "definition": "Id of the surgical operation that this diagnostic study is done for",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.pid",
+        "path": "Ext-plt3-p1-diagnosticStudy.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.orderTime",
+        "path": "Ext-plt3-p1-diagnosticStudy.orderTime",
+        "short": "Time procedure is requested",
+        "definition": "Time procedure is requested",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.category",
+        "path": "Ext-plt3-p1-diagnosticStudy.category",
+        "short": "Birth date",
+        "definition": "Category of the requested procedure. Use one of the followings; 108252007 : For lab procedures, 363679005 : For medical imaging studies, 409063005 : For counselling",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.code",
+        "path": "Ext-plt3-p1-diagnosticStudy.code",
+        "short": "Code for the requested procedure",
+        "definition": "Code for the requested procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.description",
+        "path": "Ext-plt3-p1-diagnosticStudy.description",
+        "short": "Name of the requested procedure",
+        "definition": "Name of the requested procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.startTime",
+        "path": "Ext-plt3-p1-diagnosticStudy.startTime",
+        "short": "Start time for performing the procedure",
+        "definition": "Start time for performing the procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.endTime",
+        "path": "Ext-plt3-p1-diagnosticStudy.endTime",
+        "short": "End time for performing the procedure",
+        "definition": "End time for performing the procedure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.organization",
+        "path": "Ext-plt3-p1-diagnosticStudy.organization",
+        "short": "Identifier of the department that performs the study",
+        "definition": "Identifier of the department that performs the study",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-diagnosticStudy.performer",
+        "path": "Ext-plt3-p1-diagnosticStudy.performer",
+        "short": "Practitioners to perform the study",
+        "definition": "'Pipe '|' separated ids of the practitioner that participate into the procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

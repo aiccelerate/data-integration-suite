@@ -1,0 +1,44 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/organization-mapping",
+  "name": "organization-mapping",
+  "title": "Mapping of organization (Hospital Department) schema for pilots to AIC-HospitalDepartment profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-organization"
+  }],
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Organization",
+          "id": "{{mpp:getHashedId('Organization',did)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Patient"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{did}}"
+            }
+          ],
+          "name": "{{name}}",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+                  "code": "dept",
+                  "display": "Hospital Department"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

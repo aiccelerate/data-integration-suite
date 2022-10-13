@@ -1,0 +1,171 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-procedure",
+  "name": "Ext-plt3-p1-procedure",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt3-p1-procedure",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt3-p1-procedure",
+        "path": "Ext-plt3-p1-procedure",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.procedureId",
+        "path": "Ext-plt3-p1-procedure.procedureId",
+        "short": "Unique identifier for the procedure",
+        "definition": "Unique identifier for the procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.pid",
+        "path": "Ext-plt3-p1-procedure.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.code",
+        "path": "Ext-plt3-p1-procedure.code",
+        "short": "Code for the requested procedure",
+        "definition": "Code for the requested procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.description",
+        "path": "Ext-plt3-p1-procedure.description",
+        "short": "Name of the requested procedure",
+        "definition": "Name of the requested procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.procedureRequestDate",
+        "path": "Ext-plt3-p1-procedure.procedureRequestDate",
+        "short": "Time surgery is requested first",
+        "definition": "Time surgery is requested first",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.plannedTime",
+        "path": "Ext-plt3-p1-procedure.plannedTime",
+        "short": "Planned time for the procedure",
+        "definition": "Planned time for the procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.isCancelled",
+        "path": "Ext-plt3-p1-procedure.isCancelled",
+        "short": "Whether procedure is cancelled",
+        "definition": "Whether procedure is cancelled",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.startTime",
+        "path": "Ext-plt3-p1-procedure.startTime",
+        "short": "Start time for performing the procedure",
+        "definition": "Start time for performing the procedure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-procedure.endTime",
+        "path": "Ext-plt3-p1-procedure.endTime",
+        "short": "End time for performing the procedure",
+        "definition": "End time for performing the procedure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

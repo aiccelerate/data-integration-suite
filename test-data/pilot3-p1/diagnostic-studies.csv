@@ -1,0 +1,2 @@
+studyId,procedureId,pid,orderTime,category,code,description,startTime,endTime,organization,performer
+s1,prc1,p1,2020-10-11T10:00:00Z,108252007,020,P-CRP,2020-10-13T11:00:00Z,2020-10-13T13:00:00Z,o1,pr1
