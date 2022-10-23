@@ -6,9 +6,18 @@ services:
     volumes:
       - fhirdb:/data/db
     restart: always
+  wait-for-mongo:
+    image: waisbrot/wait
+    container_name: wait-for-mongo
+    depends_on:
+      - mongo
+    environment:
+      - TARGETS=mongo:27017
   onfhir:
     image: srdc/onfhir:r4
     container_name: onfhir
+    depends_on:
+      - wait-for-mongo
     environment:
       - APP_CONF_FILE=/usr/local/onfhir/conf/onfhir.conf
       - FHIR_ROOT_URL=http://127.0.0.1:8080/fhir
@@ -18,12 +27,22 @@ services:
       - "8080:8080"
     volumes:
       - ./common-data-model:/usr/local/onfhir/conf
+  wait-for-onfhir:
+    image: waisbrot/wait
+    container_name: wait-for-onfhir
+    depends_on:
+      - onfhir
+    environment:
+      - TARGETS=onfhir:8080
   tofhir:
     image: srdc/tofhir:latest
     container_name: tofhir
+    depends_on:
+      - wait-for-onfhir
     environment:
-      - APP_CONF_FILE=/usr/local/tofhir/conf/tofhir.conf
-      - DELAY_EXECUTION=10
+      - APP_CONF_FILE=/usr/local/tofhir/conf/docker/tofhir.conf
+      - CONTEXT_PATH=conf
+      - FHIR_REPO_URL=http://onfhir:8080/fhir
     command: ["run --job /usr/local/tofhir/conf/mapping-jobs/pilot2-mappingjob.json"]
     volumes:
       - ./data-integration-suite:/usr/local/tofhir/conf
