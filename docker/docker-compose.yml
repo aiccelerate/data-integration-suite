@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   mongo:
     image: mongo:4.4
@@ -7,17 +7,17 @@ services:
       - fhirdb:/data/db
     restart: always
   wait-for-mongo:
-    image: waisbrot/wait
+    image: atkrad/wait4x
     container_name: wait-for-mongo
     depends_on:
       - mongo
-    environment:
-      - TARGETS=mongo:27017
+    command: mongodb 'mongodb://mongo:27017' -t 10s -i 250ms
   onfhir:
     image: srdc/onfhir:r4
     container_name: onfhir
     depends_on:
-      - wait-for-mongo
+      wait-for-mongo:
+        condition: service_completed_successfully
     environment:
       - APP_CONF_FILE=/usr/local/onfhir/conf/onfhir.conf
       - FHIR_ROOT_URL=http://127.0.0.1:8080/fhir
@@ -28,17 +28,17 @@ services:
     volumes:
       - ./common-data-model:/usr/local/onfhir/conf
   wait-for-onfhir:
-    image: waisbrot/wait
+    image: atkrad/wait4x
     container_name: wait-for-onfhir
     depends_on:
       - onfhir
-    environment:
-      - TARGETS=onfhir:8080
+    command: http 'http://onfhir:8080' -t 30s -i 250ms
   tofhir:
     image: srdc/tofhir:latest
     container_name: tofhir
     depends_on:
-      - wait-for-onfhir
+      wait-for-onfhir:
+        condition: service_completed_successfully
     environment:
       - APP_CONF_FILE=/usr/local/tofhir/conf/docker/tofhir.conf
       - CONTEXT_PATH=conf
@@ -46,5 +46,6 @@ services:
     command: ["run --job /usr/local/tofhir/conf/mapping-jobs/pilot2-mappingjob.json"]
     volumes:
       - ./data-integration-suite:/usr/local/tofhir/conf
+      - ./tofhir-logs:/usr/local/tofhir/logs
 volumes:
   fhirdb: {}

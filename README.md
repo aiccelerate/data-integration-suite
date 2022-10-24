@@ -28,3 +28,13 @@ The mapping definitions for the 3rd pilot are divided into multiple phases.
 Data Integration Suite uses toFHIR to generate the FHIR resources based on the mapping definitions.
 You can get more information about how mappings and mapping jobs are defined from [toFHIR](https://github.com/srdc/tofhir).
 
+## Deployment
+
+For demonstration, a toFHIR instance can be run with the mappings defined in this project. A docker compose file is
+provided to start up an onFHIR instance bundled with [AICCELERATE Common Data Model](https://github.com/aiccelerate/common-data-model)
+and a toFHIR instance. You can configure the mapping job to run from `docker-compose.yml` file under `docker` folder.
+
+```
+docker-compose -f ./data-integration-suite/docker/docker-compose.yml --project-directory ./:q
+ -p aic up -d
+```
