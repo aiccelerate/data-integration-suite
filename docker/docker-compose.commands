@@ -1,3 +1,7 @@
 docker-compose -f .\data-integration-suite\docker\docker-compose.yml --project-directory .\ -p aic up -d
-
 docker-compose -p aic down
+
+-----------------------------------
+
+docker-compose -f .\data-integration-suite\docker\elk\docker-compose.yml -p elk up -d
+docker-compose -p elk down
