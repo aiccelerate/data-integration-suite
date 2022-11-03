@@ -284,10 +284,6 @@ class Pilot2IntegrationTest extends PilotTestSpec {
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.apply(2) \ "medicationCodeableConcept" \ "coding" \ "code").extract[Seq[String]].head shouldBe "N06AB03"
       (results.apply(2) \ "medicationCodeableConcept" \ "coding" \ "display").extract[Seq[String]].head shouldBe "fluoxetine"
-
-      (results.apply(1) \ "dosage" \"timing" \ "repeat" \ "frequency").extract[Seq[Int]] shouldBe Seq(2)
-      (results.apply(1) \ "dosage" \"doseAndRate" \ "doseQuantity" \ "value").extract[Seq[Double]] shouldBe Seq(10)
-      (results.apply(1) \ "dosage" \"doseAndRate" \ "doseQuantity" \ "code").extract[Seq[String]] shouldBe Seq("mg")
     }
   }
 

@@ -1,0 +1,75 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/practitioner-mapping",
+  "name": "practitioner-mapping",
+  "title": "Mapping of schema practitioner  to AIC-Practitioner profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-practitioner"
+  }],
+  "context": {
+    "practitionerConceptMap":  {
+      "category": "concept-map",
+      "url": "./practitioner-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Practitioner",
+          "id": "{{mpp:getHashedId('Practitioner',pid)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Practitioner"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{pid}}"
+            }
+          ],
+          "name": {
+            "{{#fname}}": "{{familyName}}",
+            "{{*}}":  {
+              "use": "official",
+              "family": "{{%fname}}",
+              "given": "{{* givenName.split(' ')}}"
+            }
+          },
+          "qualification": [
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0360|2.7",
+                    "code": "{{mpp:getConcept(%practitionerConceptMap, role, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%practitionerConceptMap, role, 'target_display')}}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "PractitionerRole",
+          "id": "{{mpp:getHashedId('PractitionerRole',pid)}}",
+          "meta": {
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "active": true,
+          "practitioner": "{{mpp:createFhirReferenceWithHashedId('Practitioner',pid)}}",
+          "organization": "{{? mpp:createFhirReferenceWithHashedId('Organization',organization)}}"
+        }
+      }
+    }
+  ]
+}

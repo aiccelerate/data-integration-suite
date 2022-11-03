@@ -1,13 +1,13 @@
-medicationUseID,pid,startDate,endDate,code,codeDisplay,frequency,dose,doseUnit
-mu1,p1,2021-10-17,2022-04-10,N04BA01,Levodopa,2,25,mg
-mu2,p1,2021-08-17,2021-10-16,N04BA01,Levodopa,1,40,mg
-mu3,p1,2021-07-01,2021-08-16,N04BA01,Levodopa,1,35,mg
-mu4,p2,2022-03-10,2022-05-10,N04BA01,Levodopa,1,30,mg
-mu5,p2,2022-01-10,2022-03-09,N04BA01,Levodopa,2,25,mg
-mu6,p3,2022-01-10,2022-04-02,N04BA01,Levodopa,4,10,mg
-mu7,p3,2021-07-10,2022-01-09,N04BA01,Levodopa,4,8,mg
-mu8,p3,2021-02-10,2021-07-09,N04BA01,Levodopa,4,6,mg
-mu9,p3,2022-01-10,2022-04-02,N04BC02,Dopamine Agonist,2,3,mg
+medicationUseID,pid,startDate,endDate,code,codeDisplay,frequency,dose,doseUnit,strength
+mu1,p1,2021-10-17,2022-04-10,N04BA01,Levodopa,2,"1+1",mg,10
+mu2,p1,2021-08-17,2021-10-16,N04BA01,Levodopa,1,"1",mg,10
+mu3,p1,2021-07-01,2021-08-16,N04BA01,Levodopa,1,"1",mg,10
+mu4,p2,2022-03-10,2022-05-10,N04BA01,Levodopa,1,"1",mg,15
+mu5,p2,2022-01-10,2022-03-09,N04BA01,Levodopa,2,"1+2",mg,15
+mu6,p3,2022-01-10,2022-04-02,N04BA01,Levodopa,5,"1+1+1+1+1",mg,15
+mu7,p3,2021-07-10,2022-01-09,N04BA01,Levodopa,4,"1+1+1+1",mg,15
+mu8,p3,2021-02-10,2021-07-09,N04BA01,Levodopa,2,"2+1",mg,10
+mu9,p3,2022-01-10,2022-04-02,N04BC02,Dopamine Agonist,1,"2",mg,5
 mu10,p3,2021-07-10,2022-01-10,N06AX03,Mianserin,,,
 mu11,p2,2022-01-10,2022-03-10,N05CD04,Estazolam,,,
 mu12,p1,2021-10-17,2022-04-10,N05AG01,Fluspirilene,,

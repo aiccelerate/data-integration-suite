@@ -21,7 +21,7 @@
           "resourceType": "Observation",
           "id": "{{mpp:getHashedId('Observation',observationID)}}",
           "meta": {
-            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonMotorSymptom"],
+            "profile": ["{{mpp:getConcept(%symptomCodesMap, code, 'target_profile_existence')}}"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
           "identifier": [

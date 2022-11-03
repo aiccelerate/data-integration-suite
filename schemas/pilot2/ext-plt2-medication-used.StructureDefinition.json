@@ -138,14 +138,14 @@
         "id": "Ext-plt2-medication-used.dose",
         "path": "Ext-plt2-medication-used.dose",
         "short": "Dose per usage",
-        "definition": "Dose per usage",
+        "definition": "Dose per usage in the following format for Levodopa related medications. e.g. 1+1+2",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "decimal",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -162,6 +162,22 @@
             "code": "code",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-medication-used.strength",
+        "path": "Ext-plt2-medication-used.strength",
+        "short": "LEDD equivalent strength of unit dose",
+        "definition": "Levodopa equivalent strength in mg for the medication taken e.g. 1 tablet --> 20mg",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]

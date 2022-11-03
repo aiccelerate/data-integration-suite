@@ -38,14 +38,15 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "effectivePeriod": {
             "start": "{{startDate}}",
-            "end": "{{? endDate}}"
+            "end": "{{endDate.nav:orElse(startDate + 24 months)}}"
           },
           "dosage": {
-            "{{#ds}}": "{{dose}}",
+            "{{#ds}}": "{{dose.utl:split('+').select($this.toDecimal())}}",
             "{{*}}": {
+              "sequence": "{{%sectionIndex}}",
               "timing": {
                 "repeat": {
-                  "frequency": "{{frequency}}",
+                  "frequency": 1,
                   "periodUnit": "d",
                   "period": 1
                 }
@@ -54,9 +55,9 @@
                 {
                   "doseQuantity": {
                     "system": "http://unitsofmeasure.org",
-                    "code": "{{doseUnit}}",
-                    "unit": "{{doseUnit}}",
-                    "value": "{{%ds}}"
+                    "code": "mg",
+                    "unit": "mg",
+                    "value": "{{%ds * strength}}"
                   }
                 }
               ]

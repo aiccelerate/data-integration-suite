@@ -25,7 +25,7 @@
           "resourceType": "Observation",
           "id": "{{mpp:getHashedId('Observation',observationID)}}",
           "meta": {
-            "profile": ["{{mpp:getConcept(%symptomCodesMap, code, 'target_profile')}}"],
+            "profile": ["{{mpp:getConcept(%symptomCodesMap, code, 'target_profile_score')}}"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
           "identifier": [
