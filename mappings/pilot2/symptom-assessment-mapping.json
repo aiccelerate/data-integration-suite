@@ -62,8 +62,8 @@
             "coding": [
               {
                 "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
-                "code": "{{method}}",
-                "display": "{{mpp:getConcept(%symptomMethodsMap, method, 'source_display')}}"
+                "code": "{{mpp:getConcept(%symptomMethodsMap, method, 'target_code')}}",
+                "display": "{{mpp:getConcept(%symptomMethodsMap, method, 'target_display')}}"
               }
             ]
           },

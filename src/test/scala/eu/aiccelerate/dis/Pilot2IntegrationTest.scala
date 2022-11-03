@@ -4,10 +4,11 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.model.StatusCodes
 import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
+import io.onfhir.tofhir.engine.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IMappingContextLoader, MappingContextLoader, SchemaFolderRepository}
+import io.onfhir.tofhir.model.{FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
+import io.onfhir.tofhir.util.FhirMappingUtility
+
 import io.onfhir.util.JsonFormatter._
-import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IMappingContextLoader, MappingContextLoader, SchemaFolderRepository}
-import io.tofhir.engine.model.{FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
-import io.tofhir.engine.util.FhirMappingUtility
 import org.json4s.JsonAST.JArray
 
 import java.nio.file.Paths
@@ -162,8 +163,8 @@ class Pilot2IntegrationTest extends PilotTestSpec {
       (results.apply(2) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "271587009"
       (results.apply(2) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Stiffness, rigidity"
       (results.apply(2) \ "meta" \ "profile").extract[Seq[String]].head shouldBe "https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonStiffnessScore"
-      (results.apply(2) \ "method" \ "coding" \ "code").extract[Seq[String]].head shouldBe "updrs3"
-      (results.apply(2) \ "method" \ "coding" \ "display").extract[Seq[String]].head shouldBe "UPDRS v3 Questionnaire"
+      (results.apply(2) \ "method" \ "coding" \ "code").extract[Seq[String]].head shouldBe "updrs"
+      (results.apply(2) \ "method" \ "coding" \ "display").extract[Seq[String]].head shouldBe "UPDRS Questionnaire"
       (results.apply(5) \ "effectivePeriod" \ "start").extract[String] shouldBe "2012-02-07"
       (results.apply(5) \ "effectivePeriod" \ "end").extract[String] shouldBe "2012-02-13"
     }
