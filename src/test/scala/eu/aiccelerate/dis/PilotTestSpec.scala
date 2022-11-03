@@ -1,7 +1,7 @@
 package eu.aiccelerate.dis
 
-import io.onfhir.tofhir.config.ErrorHandlingType.ErrorHandlingType
-import io.onfhir.tofhir.config.{ErrorHandlingType, ToFhirConfig}
+import io.tofhir.engine.config.ErrorHandlingType.ErrorHandlingType
+import io.tofhir.engine.config.{ErrorHandlingType, ToFhirConfig}
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.scalatest.flatspec.AsyncFlatSpec
