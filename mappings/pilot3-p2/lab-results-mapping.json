@@ -13,7 +13,7 @@
     },
     "labResultUnitConversion": {
       "category": "unit-conversion",
-      "url": "./lab-results-unit-conversion.csv"
+      "url": "./lab-results-ucum-unit-conversion.csv"
     }
   },
   "mapping": [
@@ -49,14 +49,21 @@
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "{{code}}",
+                "code": "{{code.toString()}}",
                 "display": "{{mpp:getConcept(%labResultsConceptMap, code, 'source_display')}}"
               }
-            ]
+            ],
+            "text": "{{description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
           "effectiveDateTime": "{{date}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%labResultUnitConversion, code, value, unit)}}"
+          "valueQuantity": {
+            "value": "{{value}}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{{mpp:getConcept(%labResultUnitConversion, unit, 'target_unit')}}",
+            "unit": "{{unit}}"
+          }
         }
       }
     }

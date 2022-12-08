@@ -1,0 +1,6 @@
+source_code,target_code,target_display
+N,N,Normal
+AH,H,High
+AVH,HU,Significantly high
+AL,L,Low
+AVL,LU,Significantly low

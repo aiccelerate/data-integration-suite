@@ -1,0 +1,269 @@
+source_code,source_display,target_code,target_display
+"425.9","Secondary cardiomyopathy, unspecified",I42.7,"Cardiomyopathy due to drug and external agent"
+"427.0","Paroxysmal supraventricular tachycardia",I47.1,"Supraventricular tachycardia"
+"427.9","Cardiac dysrhythmia, unspecified",I49.9,"Cardiac arrhythmia, unspecified"
+"428.9","Heart failure, unspecified",I50.9,"Heart failure, unspecified"
+"429.9","Heart disease, unspecified",I51.9,"Heart disease, unspecified"
+"459.9","Unspecified circulatory system disorder",I99.9,"Unspecified disorder of circulatory system"
+"465.8","Acute upper respiratory infections of other multiple sites",J06.9,"Acute upper respiratory infection, unspecified"
+"682.2","Cellulitis and abscess of trunk",L03.319,"Cellulitis of trunk, unspecified"
+"745.1","Transposition of great vessels",Q20.3,"Discordant ventriculoarterial connection"
+"745.12","Corrected transposition of great vessels",Q20.5,"Discordant atrioventricular connection"
+"745.2","Tetralogy of fallot",Q21.3,"Tetralogy of Fallot"
+"745.4","Ventricular septal defect",Q21.0,"Ventricular septal defect"
+"745.5","Ostium secundum type atrial septal defect",Q21.1,"Atrial septal defect"
+"745.69","Other endocardial cushion defects",Q21.2,"Atrioventricular septal defect"
+"746.00","Congenital pulmonary valve anomaly, unspecified",Q22.3,"Other congenital malformations of pulmonary valve"
+"746.02","Stenosis of pulmonary valve, congenital",Q22.1,"Congenital pulmonary valve stenosis"
+"746.3","Congenital stenosis of aortic valve",Q23.0,"Congenital stenosis of aortic valve"
+"746.7","Hypoplastic left heart syndrome",Q23.4,"Hypoplastic left heart syndrome"
+"746.81","Subaortic stenosis",Q24.4,"Congenital subaortic stenosis"
+"746.83","Infundibular pulmonic stenosis",Q24.3,"Pulmonary infundibular stenosis"
+"746.9","Unspecified congenital anomaly of heart",Q24.9,"Congenital malformation of heart, unspecified"
+"747.0","Patent ductus arteriosus",Q25.0,"Patent ductus arteriosus"
+"747.10","Coarctation of aorta",Q25.1,"Coarctation of aorta"
+"747.22","Atresia and stenosis of aorta",Q25.3,"Supravalvular aortic stenosis"
+"747.3","Congenital anomalies of pulmonary artery",Q25.7,"Other congenital malformations of pulmonary artery"
+"747.31","Pulmonary artery coarctation and atresia",Q25-5 Q25.71,"Atresia of pulmonary artery, Coarctation of pulmonary artery"
+"747.39","Other anomalies of pulmonary artery and pulmonary circulation",Q25.79,"Other congenital malformations of pulmonary artery"
+"747.60","Anomaly of the peripheral vascular system, unspecified site",Q27.9,"Congenital malformation of peripheral vascular system, unspecified"
+"780.4","Dizziness and giddiness",R42,"Dizziness and giddiness"
+"780.60","Fever, unspecified",R50.9,"Fever, unspecified"
+"783.0","Anorexia",R63.0,"Anorexia"
+"785.2","Undiagnosed cardiac murmurs",R01.1,"Cardiac murmur, unspecified"
+"786","Dyspnea and respiratory abnormalities",R06.9,"Unspecified abnormalities of breathing"
+"799.8","Other ill-defined conditions",R69,"Illness, unspecified"
+"799.89","Other ill-defined conditions",R69,"Illness, unspecified"
+"799.9","Other unknown and unspecified cause of morbidity and mortality",R69,"Illness, unspecified"
+"996.1","Mechanical complication of other vascular device, implant, and graft",T82.5,"Mechanical complication of other cardiac and vascular devices and implants"
+"996.67","Infection and inflammatory reaction due to other internal orthopedic device, implant, and graft",T84.7XXA,"Infection and inflammatory reaction due to other internal orthopedic prosthetic devices, implants and grafts, initial encounter"
+A09,,A09,"Infectious gastroenteritis and colitis, unspecified"
+A41.9,,A41.9,"Sepsis, unspecified organism"
+B01.9,,B01.9,Varicella without complication
+C71.9,,C71.9,"Malignant neoplasm of brain, unspecified"
+C80.1,,C80.1,"Malignant (primary) neoplasm, unspecified"
+C91.00,,C91.00,Acute lymphoblastic leukemia not having achieved remission
+D64.9,,D64.9,"Anemia, unspecified"
+D68.8,,D68.8,Other specified coagulation defects
+D84.9,,D84.9,"Immunodeficiency, unspecified"
+E83.51,,E83.51,Hypocalcemia
+G00.8,,G00.8,Other bacterial meningitis
+G31.81,,G31.81,Alpers disease
+G71.0,,G71.00,"Muscular dystrophy, unspecified"
+G71.01,,G71.01,Duchenne or Becker muscular dystrophy
+G71.09,,G71.09,Other specified muscular dystrophies
+G71.2,,G71.20,"Congenital myopathy, unspecified"
+G97.82,,G97.82,Other postprocedural complications and disorders of nervous system
+H10.9,,H10.9,Unspecified conjunctivitis
+I05.2,,I05.2,Rheumatic mitral stenosis with insufficiency
+I09.2,,I09.2,Chronic rheumatic pericarditis
+I15.8,,I15.8,Other secondary hypertension
+I24.1,,I24.1,Dressler's syndrome
+I25.41,,I25.41,Coronary artery aneurysm
+I27.0,,I27.0,Primary pulmonary hypertension
+I27.20,,I27.20,"Pulmonary hypertension, unspecified"
+I27.21,,I27.21,Secondary pulmonary arterial hypertension
+I27.29,,I27.29,Other secondary pulmonary hypertension
+I27.89,,I27.89,Other specified pulmonary heart diseases
+I31.1,,I31.1,Chronic constrictive pericarditis
+I31.9,,I31.9,"Disease of pericardium, unspecified"
+I33.0,,I33.0,Acute and subacute infective endocarditis
+I34.0,,I34.0,Nonrheumatic mitral (valve) insufficiency
+I34.8,,I34.8,Other nonrheumatic mitral valve disorders
+I35.0,,I35.0,Nonrheumatic aortic (valve) stenosis
+I35.1,,I35.1,Nonrheumatic aortic (valve) insufficiency
+I36.1,,I36.1,Nonrheumatic tricuspid (valve) insufficiency
+I36.8,,I36.8,Other nonrheumatic tricuspid valve disorders
+I37.0,,I37.0,Nonrheumatic pulmonary valve stenosis
+I37.1,,I37.1,Nonrheumatic pulmonary valve insufficiency
+I38,,I38,"Endocarditis, valve unspecified"
+I40.9,,I40.9,"Acute myocarditis, unspecified"
+I42.0,,I42.0,Dilated cardiomyopathy
+I42.2,,I42.2,Other hypertrophic cardiomyopathy
+I42.5,,I42.5,Other restrictive cardiomyopathy
+I42.7,,I42.7,Cardiomyopathy due to drug and external agent
+I42.8,,I42.8,Other cardiomyopathies
+I42.9,,I42.9,"Cardiomyopathy, unspecified"
+I44.2,,I44.2,"Atrioventricular block, complete"
+I44.30,,I44.30,Unspecified atrioventricular block
+I45.19,,I45.19,Other right bundle-branch block
+I45.4,,I45.4,Nonspecific intraventricular block
+I45.6,,I45.6,Pre-excitation syndrome
+I45.81,,I45.81,Long QT syndrome
+I45.89,,I45.89,Other specified conduction disorders
+I45.9,,I45.9,"Conduction disorder, unspecified"
+I47.1,,I47.1,Supraventricular tachycardia
+I47.2,,I47.2,Ventricular tachycardia
+I47.9,,I47.9,"Paroxysmal tachycardia, unspecified"
+I48.3,,I48.3,Typical atrial flutter
+I48.4,,I48.4,Atypical atrial flutter
+I48.91,,I48.91,Unspecified atrial fibrillation
+I48.92,,I48.92,Unspecified atrial flutter
+I49.01,,I49.01,Ventricular fibrillation
+I49.1,,I49.1,Atrial premature depolarization
+I49.3,,I49.3,Ventricular premature depolarization
+I49.40,,I49.40,Unspecified premature depolarization
+I49.5,,I49.5,Sick sinus syndrome
+I49.8,,I49.8,Other specified cardiac arrhythmias
+I49.9,,I49.9,"Cardiac arrhythmia, unspecified"
+I50.9,,I50.9,"Heart failure, unspecified"
+I51.9,,I51.9,"Heart disease, unspecified"
+I77.1,,I77.1,Stricture of artery
+I82.91,,I82.91,Chronic embolism and thrombosis of unspecified vein
+I89.8,,I89.8,Other specified noninfective disorders of lymphatic vessels and lymph nodes
+I97.88,,I97.88,"Other intraoperative complications of the circulatory system, not elsewhere classified"
+I99.9,,I99.9,Unspecified disorder of circulatory system
+J02.9,,J02.9,"Acute pharyngitis, unspecified"
+J06.9,,J06.9,"Acute upper respiratory infection, unspecified"
+J18.9,,J18.9,"Pneumonia, unspecified organism"
+J21.0,,J21.0,Acute bronchiolitis due to respiratory syncytial virus
+J81.0,,J81.0,Acute pulmonary edema
+J91.8,,J91.8,Pleural effusion in other conditions classified elsewhere
+J94.0,,J94.0,Chylous effusion
+J95.1,,J95.1,Acute pulmonary insufficiency following thoracic surgery
+J95.3,,J95.3,Chronic pulmonary insufficiency following surgery
+J98.11,,J98.11,Atelectasis
+J98.6,,J98.6,Disorders of diaphragm
+K52.89,,K52.89,Other specified noninfective gastroenteritis and colitis
+K61.4,,K61.4,Intrasphincteric abscess
+K72.91,,K72.91,"Hepatic failure, unspecified with coma"
+K76.9,,K76.9,"Liver disease, unspecified"
+K90.89,,K90.89,Other intestinal malabsorption
+L03.90,,L03.90,"Cellulitis, unspecified"
+L08.9,,L08.9,"Local infection of the skin and subcutaneous tissue, unspecified"
+M30.3,,M30.3,Mucocutaneous lymph node syndrome [Kawasaki]
+M72.4,,M72.4,Pseudosarcomatous fibromatosis
+N10,,N10,Acute pyelonephritis
+O98.911,,O98.911,"Unspecified maternal infectious and parasitic disease complicating pregnancy, first trimester"
+P00.2,,P00.2,Newborn affected by maternal infectious and parasitic diseases
+P05.19,,P05.19,"Newborn small for gestational age, other"
+P14.2,,P14.2,Phrenic nerve paralysis due to birth injury
+P27.8,,P27.8,Other chronic respiratory diseases originating in the perinatal period
+P29.30,,P29.30,Pulmonary hypertension of newborn
+P29.38,,P29.38,Other persistent fetal circulation
+P29.9,,P29.9,"Cardiovascular disorder originating in the perinatal period, unspecified"
+P36.39,,P36.39,Sepsis of newborn due to other staphylococci
+P91.4,,P91.4,Neonatal cerebral depression
+P96.1,,P96.1,Neonatal withdrawal symptoms from maternal use of drugs of addiction
+Q20.0,,Q20.0,Common arterial trunk
+Q20.1,,Q20.1,Double outlet right ventricle
+Q20.2,,Q20.2,Double outlet left ventricle
+Q20.3,,Q20.3,Discordant ventriculoarterial connection
+Q20.4,,Q20.4,Double inlet ventricle
+Q20.5,,Q20.5,Discordant atrioventricular connection
+Q20.6,,Q20.6,Isomerism of atrial appendages
+Q20.8,,Q20.8,Other congenital malformations of cardiac chambers and connections
+Q21.0,,Q21.0,Ventricular septal defect
+Q21.1,,Q21.1,Atrial septal defect
+Q21.2,,Q21.2,Atrioventricular septal defect
+Q21.3,,Q21.3,Tetralogy of Fallot
+Q21.8,,Q21.8,Other congenital malformations of cardiac septa
+Q21.9,,Q21.9,"Congenital malformation of cardiac septum, unspecified"
+Q22.0,,Q22.0,Pulmonary valve atresia
+Q22.1,,Q22.1,Congenital pulmonary valve stenosis
+Q22.2,,Q22.2,Congenital pulmonary valve insufficiency
+Q22.3,,Q22.3,Other congenital malformations of pulmonary valve
+Q22.4,,Q22.4,Congenital tricuspid stenosis
+Q22.5,,Q22.5,Ebstein's anomaly
+Q22.8,,Q22.8,Other congenital malformations of tricuspid valve
+Q22.9,,Q22.9,"Congenital malformation of tricuspid valve, unspecified"
+Q23.0,,Q23.0,Congenital stenosis of aortic valve
+Q23.2,,Q23.2,Congenital mitral stenosis
+Q23.3,,Q23.3,Congenital mitral insufficiency
+Q23.4,,Q23.4,Hypoplastic left heart syndrome
+Q23.8,,Q23.8,Other congenital malformations of aortic and mitral valves
+Q24.0,,Q24.0,Dextrocardia
+Q24.3,,Q24.3,Pulmonary infundibular stenosis
+Q24.4,,Q24.4,Congenital subaortic stenosis
+Q24.5,,Q24.5,Malformation of coronary vessels
+Q24.6,,Q24.6,Congenital heart block
+Q24.8,,Q24.8,Other specified congenital malformations of heart
+Q24.9,,Q24.9,"Congenital malformation of heart, unspecified"
+Q25.0,,Q25.0,Patent ductus arteriosus
+Q25.1,,Q25.1,Coarctation of aorta
+Q25.21,,Q25.21,Interruption of aortic arch
+Q25.3,,Q25.3,Supravalvular aortic stenosis
+Q25.42,,Q25.42,Hypoplasia of aorta
+Q25.45,,Q25.45,Double aortic arch
+Q25.47,,Q25.47,Right aortic arch
+Q25.49,,Q25.49,Other congenital malformations of aorta
+Q25.5,,Q25.5,Atresia of pulmonary artery
+Q25.6,,Q25.6,Stenosis of pulmonary artery
+Q25.72,,Q25.72,Congenital pulmonary arteriovenous malformation
+Q25.79,,Q25.79,Other congenital malformations of pulmonary artery
+Q26.2,,Q26.2,Total anomalous pulmonary venous connection
+Q26.3,,Q26.3,Partial anomalous pulmonary venous connection
+Q26.4,,Q26.4,"Anomalous pulmonary venous connection, unspecified"
+Q26.9,,Q26.9,"Congenital malformation of great vein, unspecified"
+Q27.9,,Q27.9,"Congenital malformation of peripheral vascular system, unspecified"
+Q28.3,,Q28.3,Other malformations of cerebral vessels
+Q28.9,,Q28.9,"Congenital malformation of circulatory system, unspecified"
+Q33.6,,Q33.6,Congenital hypoplasia and dysplasia of lung
+Q43.1,,Q43.1,Hirschsprung's disease
+Q61.19,,Q61.19,"Other polycystic kidney, infantile type"
+Q85.1,,Q85.1,Tuberous sclerosis
+Q87.2,,Q87.2,Congenital malformation syndromes predominantly involving limbs
+Q89.3,,Q89.3,Situs inversus
+Q89.8,,Q89.8,Other specified congenital malformations
+Q90.2,,Q90.2,"Trisomy 21, translocation"
+Q90.9,,Q90.9,"Down syndrome, unspecified"
+Q92.5,,Q92.5,Duplications with other complex rearrangements
+Q93.82,,Q93.82,Williams syndrome
+R00.1,,R00.1,"Bradycardia, unspecified"
+R00.2,,R00.2,Palpitations
+R06.02,,R06.02,Shortness of breath
+R06.89,,R06.89,Other abnormalities of breathing
+R06.9,,R06.9,Unspecified abnormalities of breathing
+R07.89,,R07.89,Other chest pain
+R07.9,,R07.9,"Chest pain, unspecified"
+R11.11,,R11.11,Vomiting without nausea
+R13.10,,R13.10,"Dysphagia, unspecified"
+R40.0,,R40.0,Somnolence
+R42,,R42,Dizziness and giddiness
+R49.0,,R49.0,Dysphonia
+R50.9,,R50.9,"Fever, unspecified"
+R53.1,,R53.1,Weakness
+R53.81,,R53.81,Other malaise
+R55,,R55,Syncope and collapse
+R56.9,,R56.9,Unspecified convulsions
+R62.51,,R62.51,Failure to thrive (child)
+R69,,R69,"Illness, unspecified"
+S27.808S,,S27.808S,"Other injury of diaphragm, sequela"
+T82.09XA,,T82.09XA,"Other mechanical complication of heart valve prosthesis, initial encounter"
+T82.09XD,,T82.09XD,"Other mechanical complication of heart valve prosthesis, subsequent encounter"
+T82.9XXA,,T82.9XXA,"Unspecified complication of cardiac and vascular prosthetic device, implant and graft, initial encounter"
+Z00.129,,Z00.129,Encounter for routine child health examination without abnormal findings
+Z03.89,,Z03.89,Encounter for observation for other suspected diseases and conditions ruled out
+Z45.02,,Z45.02,Encounter for adjustment and management of automatic implantable cardiac defibrillator
+Z45.2,,Z45.2,Encounter for adjustment and management of vascular access device
+Z65.9,,Z65.9,Problem related to unspecified psychosocial circumstances
+Z71.9,,Z71.9,"Counseling, unspecified"
+Z79.01,,Z79.01,Long term (current) use of anticoagulants
+Z82.41,,Z82.41,Family history of sudden cardiac death
+Z82.49,,Z82.49,Family history of ischemic heart disease and other diseases of the circulatory system
+Z95.0,,Z95.0,Presence of cardiac pacemaker
+Z95.2,,Z95.2,Presence of prosthetic heart valve
+Z95.4,,Z95.4,Presence of other heart-valve replacement
+Z95.810,,Z95.810,Presence of automatic (implantable) cardiac defibrillator
+Z95.828,,Z95.828,Presence of other vascular implants and grafts
+U07.1,,U07.1,COVID-19
+H49.81,,H49.81,Kearns-Sayre syndrome
+I42,,I42,Cardiomyopathy
+E74.0,,E74.0,Glycogen storage disease
+I49,,I49,Other cardiac arrhythmias
+I50,,I50,Heart failure
+I82,,I82,Other venous embolism and thrombosis
+J81,,J81,Pulmonary edema
+K21,,K21,Gastro-esophageal reflux disease
+Q25.4,,Q25.4,Other congenital malformations of aorta
+Q25.7,,Q25.7,Other congenital malformations of pulmonary artery
+Q87.1,,Q87.1,Congenital malformation syndromes predominantly associated with short stature
+R07.8,,R07.8,Other chest pain
+S35.09,,S35.09,Other injury of abdominal aorta
+T81.4XXA,,T81.4,Infection following a procedure
+T82.0,,T82.0,Mechanical complication of heart valve prosthesis
+T82.01,,T82.01,Breakdown (mechanical) of heart valve prosthesis
+T82.09,,T82.09,Other mechanical complication of heart valve prosthesis
+T82.857,,T82.857,"Stenosis of other cardiac prosthetic devices, implants and grafts"
+V15.1,,V15.1,Pedal cycle passenger injured in collision with railway train or railway vehicle in nontraffic accident
+Z98.89,,Z98.89,Other specified postprocedural states

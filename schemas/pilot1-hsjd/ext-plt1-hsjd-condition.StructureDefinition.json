@@ -1,0 +1,139 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-condition",
+  "name": "Ext-plt1-hsjd-condition",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt1-hsjd-condition",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt1-hsjd-condition",
+        "path": "Ext-plt1-hsjd-condition",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.pid",
+        "path": "Ext-plt1-hsjd-condition.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.code",
+        "path": "Ext-plt1-hsjd-condition.code",
+        "short": "Condition code",
+        "definition": "ICD-10 code for diagnosis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.codeDisplay",
+        "path": "Ext-plt1-hsjd-condition.codeDisplay",
+        "short": "Condition name",
+        "definition": "Name of the diagnosis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.onsetDateTime",
+        "path": "Ext-plt1-hsjd-condition.onsetDateTime",
+        "short": "Condition start date",
+        "definition": "When this condition is started or diagnosis is set. ",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.abatementDateTime",
+        "path": "Ext-plt1-hsjd-condition.abatementDateTime",
+        "short": "Condition abatement date",
+        "definition": "If the disease is resolved/no longer active, the end date.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.episodeId",
+        "path": "Ext-plt1-hsjd-condition.episodeId",
+        "short": "Episode identifier",
+        "definition": "Unique identifier of the visit/encounter that this diagnosis is set (if exists and related)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-condition.diagnosisType",
+        "path": "Ext-plt1-hsjd-condition.diagnosisType",
+        "short": "Diagnosis category",
+        "definition": "Type of diagnosis related with the surgery. Use one of the following codes; main: Main pre-operative diagnosis for sugery, comorbidity: A comorbidity diagnosis related with the surgery, other: Other diagnosis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

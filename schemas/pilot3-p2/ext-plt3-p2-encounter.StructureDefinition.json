@@ -1,19 +1,19 @@
 {
   "resourceType": "StructureDefinition",
-  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p3-encounter",
-  "name": "Ext-plt3-p3-encounter",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p2-encounter",
+  "name": "Ext-plt3-p2-encounter",
   "status": "draft",
   "fhirVersion": "4.0.1",
   "kind": "logical",
   "abstract": false,
-  "type": "Ext-plt3-p3-encounter",
+  "type": "Ext-plt3-p2-encounter",
   "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
   "derivation": "specialization",
   "differential": {
     "element": [
       {
-        "id": "Ext-plt3-p3-encounter",
-        "path": "Ext-plt3-p3-encounter",
+        "id": "Ext-plt3-p2-encounter",
+        "path": "Ext-plt3-p2-encounter",
         "min": 0,
         "max": "*",
         "type": [
@@ -23,8 +23,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.encounterID",
-        "path": "Ext-plt3-p3-encounter.encounterID",
+        "id": "Ext-plt3-p2-encounter.encounterId",
+        "path": "Ext-plt3-p2-encounter.encounterId",
         "short": "Id of encounter/episode",
         "definition": "Identifier of this encounter/episode",
         "min": 1,
@@ -39,8 +39,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.pid",
-        "path": "Ext-plt3-p3-encounter.pid",
+        "id": "Ext-plt3-p2-encounter.pid",
+        "path": "Ext-plt3-p2-encounter.pid",
         "short": "Patient identifier",
         "definition": "Unique patient identifier  (a pseudoynm)",
         "min": 1,
@@ -55,8 +55,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.category",
-        "path": "Ext-plt3-p3-encounter.category",
+        "id": "Ext-plt3-p2-encounter.category",
+        "path": "Ext-plt3-p2-encounter.category",
         "short": "Category of visit/encounter/episode",
         "definition": "Category of the visit, use one of the followings; (AMB | IMP | VR | EMER | HH)",
         "min": 1,
@@ -71,8 +71,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.type",
-        "path": "Ext-plt3-p3-encounter.type",
+        "id": "Ext-plt3-p2-encounter.type",
+        "path": "Ext-plt3-p2-encounter.type",
         "short": "Type of encounter/episode",
         "definition": "Type of the encounter or episode. If this is an episode, use one of the following -> 305354007: Pediatric Ward Stay, 305353001: PICU stay. If this is an encounter, use one of the following -> 183452005: ER visits, 305731000: nurse (C2P2INF), 305647009: pediatric (C2P2), 310348003: psychologist (C2P2PSQ).",
         "min": 0,
@@ -87,8 +87,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.startDate",
-        "path": "Ext-plt3-p3-encounter.startDate",
+        "id": "Ext-plt3-p2-encounter.startDate",
+        "path": "Ext-plt3-p2-encounter.startDate",
         "short": "(Start) date of encounter/episode",
         "definition": "(Start) date of encounter/episode",
         "min": 1,
@@ -103,8 +103,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.endDate",
-        "path": "Ext-plt3-p3-encounter.endDate",
+        "id": "Ext-plt3-p2-encounter.endDate",
+        "path": "Ext-plt3-p2-encounter.endDate",
         "short": "End date of the episode/encounter.",
         "definition": "End date of this encounter or episode. i.e., for hospital stays, the discharge date.",
         "min": 0,
@@ -114,22 +114,6 @@
             "code": "dateTime",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/dateTime"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Ext-plt3-p3-encounter.dischargeType",
-        "path": "Ext-plt3-p3-encounter.dischargeType",
-        "short": "Type of this discharge.",
-        "definition": "Discharge type from the hospital. Use one of the following -> other-hcf: Transition, home: Discharge, exp: Death (Exitus)",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "code",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/code"
             ]
           }
         ]

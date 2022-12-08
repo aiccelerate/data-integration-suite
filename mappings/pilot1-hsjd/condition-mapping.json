@@ -1,0 +1,75 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/condition-mapping",
+  "name": "condition-mapping",
+  "title": "Mapping of condition schema for pilots to AIC-Condition FHIR profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-condition"
+  }],
+  "context": {
+    "icdConceptMap":  {
+      "category": "concept-map",
+      "url": "./icd10-context-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Condition",
+          "id": "{{mpp:getHashedId('Condition', pid & code & codeDisplay & onsetDateTime.toString())}}",
+          "meta": {
+            "profile": "{{* iif(code.exists(), 'https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition', {})}}",
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "{{iif(abatementDateTime.exists().not, 'active', 'inactive')}}"
+              }
+            ]
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                  "code": "encounter-diagnosis"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding":
+            [
+              {
+                "{{#icd9Code}}": "{{iif(code.exists() and code.utl:isLetter().not(), code, {})}}",
+                "{{?}}": {
+                  "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                  "code": "{{%icd9Code}}",
+                  "display": "{{mpp:getConcept(%icdConceptMap, %icd9Code, 'source_display')}}"
+                }
+              },
+              {
+                "{{#icd10Code}}": "{{iif(code.exists() and code.utl:isLetter(), code, {})}}",
+                "{{?}}": {
+                  "system": "http://hl7.org/fhir/sid/icd-10",
+                  "code": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_code')}}",
+                  "display": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_display')}}"
+                }
+              }
+            ],
+            "text": "{{codeDisplay}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', episodeId)}}",
+          "onsetDateTime": "{{onsetDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
+          "abatementDateTime": "{{? abatementDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}"
+        }
+      }
+    }
+  ]
+}

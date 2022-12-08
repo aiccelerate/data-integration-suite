@@ -1,7 +1,8 @@
 source_code,source_system,source_display,target_unit
 72106-8,http://loinc.org,MMSE total score (1-30 range),{score}
 72172-0,http://loinc.org,MoCA total score (1-30 range),{score}
-57048-1,http://loinc.org,"ADL/IADL total score (Likert 0-5, 0-7)",{score}
+273547007,http://snomed.info/sct,"Katz ADL scale (0-6)",{score}
+273534002,http://snomed.info/sct,"Instrumental ADL scale",{score}
 pd-cfrs,https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments,Cognitive functional rating scale PD-CFRS (0-24),{score}
 pd-mci,https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments,PD-MCI total score,{score}
 sas,https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments,Starkstein Apathy Scale (SAS) score,{score}

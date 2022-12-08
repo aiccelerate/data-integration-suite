@@ -38,16 +38,23 @@
           ],
           "class": {
             "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-            "code": "{{class}}",
-            "display": "{{iif(class='AMB', 'Ambulatory', 'Inpatient encounter')}}"
+            "code": "{{mpp:getConcept(%encounterConceptMap, type, 'target_class').nav:orElse(class)}}"
           },
           "type": [
             {
               "coding": [
                 {
-                  "system": "http://snomed.info/sct",
-                  "code": "{{mpp:getConcept(%encounterConceptMap, type, 'target_code')}}",
-                  "display": "{{mpp:getConcept(%encounterConceptMap, type, 'target_display')}}"
+                  "{{#typeSnomed}}": "{{mpp:getConcept(%encounterConceptMap, type, 'target_code')}}",
+                  "{{?}}": {
+                    "system": "http://snomed.info/sct",
+                    "code": "{{%typeSnomed}}",
+                    "display": "{{mpp:getConcept(%encounterConceptMap, type, 'target_display')}}"
+                  }
+                },
+                {
+                  "system": "{{%sourceSystem}}/encounter-types",
+                  "code": "{{type}}",
+                  "display": "{{mpp:getConcept(%encounterConceptMap, type, 'source_display')}}"
                 }
               ]
             }

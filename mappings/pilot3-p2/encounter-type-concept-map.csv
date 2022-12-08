@@ -1,0 +1,42 @@
+source_code,source_display,target_code,target_system,target_display,target_class
+01,Päivystys,4525004,http://snomed.info/sct,Emergency Department Visit,EMER
+02,Ensikäynti,,,,AMB
+03,Uusintakäynti,,,,AMB
+04,Osastopotilaan konsultaatio,,,,AMB
+05,Avohoitokonsultaatio,,,,AMB
+07,Sarjahoitokäynti,,,,AMB
+08,Hoitokäynti,,,,AMB
+10,Hoitopuhelu,386472008,http://snomed.info/sct,Telephone Consultation,VR
+11,Lisäkäynti,,,,AMB
+12,Tutkimus- ja hoitokäynti,,,,AMB
+13,Palveluseteli,,,,AMB
+16,Päiväsairaanhoito,183484003,http://snomed.info/sct,Day Hospital Care,SS
+17,Kotikäynti (esh),439708006,http://snomed.info/sct,Home visit,HH
+19,Potilasryhmäkäynti,,,,AMB
+20,Ryhmävastaanotto,,,,AMB
+34,Päätöskäynti/psyk.,,,,AMB
+35,Tutkimuskäynti/psyk.,,,,AMB
+61,Erikoissairaanhoidon konsultaatio,,,,AMB
+62,Hoitokirje,308720009,http://snomed.info/sct,Letter encounter,AMB
+75,Soitto,185317003,http://snomed.info/sct,Telephone encounter,AMB
+76,Muualle ohjattu,,,,AMB
+77,Poistunut hoidotta,,,,AMB
+E81,eLääkärikäynti,,,,VR
+E82,eHoitajakäynti,,,,VR
+E83,eErityistyöntekijä,,,,VR
+E84,eHoito-ohjelma,,,,VR
+E85,eSeuranta,,,,VR
+E87,eTiimivastaanotto	eTeam reception,,,,VR
+E88,eRyhmäkäynti	eGroup visit,,,,VR
+E89,eSarjahoitokäynti	eSerial treatment visit,,,,VR
+HTK,"Tk-hoitokäynti, hoitaja",,,,AMB
+IN,Orton Oy:n potilas (ent. Hyksin Oy),,,,AMB
+PH,Potilashotelli,,,,AMB
+PK,Päiväkirurgia,709063003,http://snomed.info/sct,Admission to day surgery,SS
+TK,Terveyskeskus päivystyskäynti,,,,EMER
+TKA,Tk-apuvälinekäynti,,,,AMB
+TKP,Tk-hammaspäivystys,,,,AMB
+V,"Projektikäynti, ilman henkilök",,,,AMB
+
+
+

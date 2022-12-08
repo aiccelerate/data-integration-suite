@@ -87,6 +87,22 @@
         ]
       },
       {
+        "id": "Ext-plt3-p2-lab-result.description",
+        "path": "Ext-plt3-p2-lab-result.description",
+        "short": "Lab test name",
+        "definition": "Name of the lab result",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt3-p2-lab-result.value",
         "path": "Ext-plt3-p2-lab-result.value",
         "short": "Value of the measurement.",
