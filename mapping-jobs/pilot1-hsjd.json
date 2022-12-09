@@ -3,8 +3,8 @@
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",
-      "name": "pilot1-source",
-      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot1-data",
+      "name": "HSJD",
+      "sourceUri": "https://aiccelerate.eu/hsjd",
       "dataFolderPath": "${DATA_FOLDER_PATH}"
     }
   },
@@ -16,35 +16,11 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/patient-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/operation-episode-encounter-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "PatientX.csv",
-          "options": {
-            "sep": ";"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/condition-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "ConditionX.csv",
-          "options": {
-            "sep": ";"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/lab-results-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "LabResultsX.csv",
+          "path": "OperationEpisodeEncounterX.csv",
           "options": {
             "sep": ";"
           }

@@ -65,9 +65,15 @@
             "text": "{{codeDisplay}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', episodeId)}}",
           "onsetDateTime": "{{onsetDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
-          "abatementDateTime": "{{? abatementDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}"
+          "abatementDateTime": "{{? abatementDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
         }
       }
     }

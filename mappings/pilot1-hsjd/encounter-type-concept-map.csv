@@ -1,0 +1,6 @@
+source_code,target_code,target_display
+ICU,305351004,ICU stay
+WARD,305354007,Ward stay
+OR,305408004,Operation
+Admission,8715000,Elective Hospital Admission
+DeliveryRoom,133905007,Delivery Room Care (for new born)

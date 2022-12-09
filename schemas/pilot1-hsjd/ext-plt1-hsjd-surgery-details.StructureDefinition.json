@@ -1,0 +1,267 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-surgery-details",
+  "name": "Ext-plt1-hsjd-surgery-details",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt1-hsjd-surgery-details",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt1-hsjd-surgery-details",
+        "path": "Ext-plt1-hsjd-surgery-details",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.pid",
+        "path": "Ext-plt1-hsjd-surgery-details.pid",
+        "short": "Unique patient identifier",
+        "definition": "Unique patient identifier you are using to identify the patient e.g. a study id, a pseudonym, etc.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.episodeId",
+        "path": "Ext-plt1-hsjd-surgery-details.episodeId",
+        "short": "Operation episode identifier",
+        "definition": "Unique identifier for the main episode (OperationEpisode) that this surgery takes place",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.surgeryId",
+        "path": "Ext-plt1-hsjd-surgery-details.surgeryId",
+        "short": "Surgical Encounter identifier",
+        "definition": "Reference to the encounter that this surgery is done",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.subspecialty",
+        "path": "Ext-plt1-hsjd-surgery-details.subspecialty",
+        "short": "Surgery specialty",
+        "definition": "Specialty code (SNOMED-CT) of the performed surgery. e.g.Neurosurgery",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.cssCategory",
+        "path": "Ext-plt1-hsjd-surgery-details.cssCategory",
+        "short": "Surgical procedure category",
+        "definition": "Category of the operation in terms of Clinical Classifications Software (CCS) for ICD-10-PCS.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.mainProcedureCode",
+        "path": "Ext-plt1-hsjd-surgery-details.mainProcedureCode",
+        "short": "Surgical procedure code",
+        "definition": "Code for the main procedure for the operation in source system. ",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.mainProcedureDescription",
+        "path": "Ext-plt1-hsjd-surgery-details.mainProcedureDescription",
+        "short": "Name of surgical procedure",
+        "definition": "Description/name of the main surgical procedure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.otherProcedureCodes",
+        "path": "Ext-plt1-hsjd-surgery-details.otherProcedureCodes",
+        "short": "Other surgical procedures",
+        "definition": "Empty space separated codes for the other procedures applied in operation in source system.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.status",
+        "path": "Ext-plt1-hsjd-surgery-details.status",
+        "short": "Surgery status",
+        "definition": "Status of the operation. Use one of the followings: finished | cancelled",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.reasonForCancelling",
+        "path": "Ext-plt1-hsjd-surgery-details.reasonForCancelling",
+        "short": "Cancellation reason",
+        "definition": "If cancelled, the code used in source system indicating the reason for cancelling.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.location",
+        "path": "Ext-plt1-hsjd-surgery-details.location",
+        "short": "Operating room",
+        "definition": "Reference to the Operating Room (HospitalUnit) that this operation is performed",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.estimatedDuration",
+        "path": "Ext-plt1-hsjd-surgery-details.estimatedDuration",
+        "short": "Estimated duration of surgery",
+        "definition": "Estimated duration (in minutes) of surgery by the surgeon",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.ost",
+        "path": "Ext-plt1-hsjd-surgery-details.ost",
+        "short": "Surgery start time",
+        "definition": "Time when the surgery started (timestamp)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.oet",
+        "path": "Ext-plt1-hsjd-surgery-details.oet",
+        "short": "Surgery end time",
+        "definition": "Time when the surgery ended (timestamp)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.typeOfSurgery",
+        "path": "Ext-plt1-hsjd-surgery-details.typeOfSurgery",
+        "short": "Type of surgery (elective or optional)",
+        "definition": "Type of surgery (elective or optional)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

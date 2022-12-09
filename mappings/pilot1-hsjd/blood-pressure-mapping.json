@@ -1,0 +1,121 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
+  "name": "blood-pressure-mapping",
+  "title": "Mapping of grouped blood pressure results in vital sign schema to FHIR Vital signs profiles",
+  "source": [{
+    "alias": "vitalsigns",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-blood-pressure"
+  }],
+  "mapping": [
+    {
+      "expression": {
+        "name": "bp-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', pid & '85354-9' & time.toString())}}",
+          "meta": {
+            "profile": ["http://hl7.org/fhir/StructureDefinition/bp"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "85354-9",
+                "display": "Blood pressure"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "effectiveDateTime": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
+          "component": [
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8480-6",
+                    "display": "Systolic blood pressure"
+                  }
+                ]
+              },
+              "valueQuantity":{
+                "{{#sysBp}}": "{{systolic}}",
+                "{{?}}": {
+                  "value": "{{%sysBp.replace(',', '.').toDecimal()}}",
+                  "unit": "mmHg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mm[Hg]"
+                }
+              },
+              "dataAbsentReason": {
+                "{{#isAbsent}}": "{{iif(systolic.exists(), {}, true)}}",
+                "{{?}}": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+                      "code": "not-performed",
+                      "display": "Not Performed"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8462-4",
+                    "display": "Diastolic blood pressure"
+                  }
+                ]
+              },
+              "valueQuantity":{
+                "{{#diasBp}}": "{{diastolic}}",
+                "{{?}}": {
+                  "value": "{{%diasBp.replace(',', '.').toDecimal()}}",
+                  "unit": "mmHg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mm[Hg]"
+                }
+              },
+              "dataAbsentReason": {
+                "{{#isAbsent}}": "{{iif(diastolic.exists(), {}, true)}}",
+                "{{?}}": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+                      "code": "not-performed",
+                      "display": "Not Performed"
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
