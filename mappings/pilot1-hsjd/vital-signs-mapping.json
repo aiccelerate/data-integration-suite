@@ -2,16 +2,31 @@
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/vital-signs-mapping",
   "name": "vital-signs-mapping",
   "title": "Mapping of schema vital signs to FHIR Vital signs profiles",
-  "source": [{
-    "alias": "source",
-    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-vital-signs"
-  }],
+  "source": [
+    {
+      "alias": "vitalSigns",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-vital-signs",
+      "joinOn": ["episodeId"]
+    },
+    {
+      "alias": "encounters",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-operation-episode-encounter",
+      "joinOn": ["episodeId"]
+    }
+  ],
   "context": {
     "vitalSignsConceptMap":  {
       "category": "concept-map",
       "url": "./vital-signs-concept-map.csv"
     }
   },
+  "variable": [
+    {
+      "name": "relatedEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')).first()"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
@@ -51,6 +66,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', %relatedEncounter.encounterId)}}",
           "effectiveDateTime": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
           "valueQuantity": {
             "value": "{{value.replace(',', '.').toDecimal()}}",

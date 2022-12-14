@@ -5,11 +5,13 @@
   "source": [
     {
       "alias": "surgeryDetails",
-      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-surgery-details"
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-surgery-details",
+      "joinOn": ["episodeId"]
     },
     {
       "alias": "encounters",
-      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-operation-episode-encounter"
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-operation-episode-encounter",
+      "joinOn": ["episodeId"]
     }
   ],
   "context": {
@@ -43,19 +45,34 @@
       "expression": "%encounterForSurgery.endTime.orElse(oet).utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')"
     },
     {
+      "name": "surgeryStartTime",
+      "language": "text/fhirpath",
+      "expression": "ost.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')"
+    },
+    {
+      "name": "surgeryEndTime",
+      "language": "text/fhirpath",
+      "expression": "oet.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')"
+    },
+    {
       "name": "mappedMainICD10pcs",
       "language": "text/fhirpath",
       "expression": "iif(mainProcedureCode.contains('.'),mpp:getConcept(%icd9to10ConceptMap, mainProcedureCode),{})"
     },
     {
-      "name": "mappedOtherICD10pcs",
+      "name": "mainProcedureCcs",
       "language": "text/fhirpath",
-      "expression": "iif(otherProcedureCode.split(',').select(iif($this.contains('.') and $this.utl:isLetter().not(),mpp:getConcept(%icd9to10ConceptMap, mainProcedureCode),{}))"
+      "expression": "iif(mainProcedureCode.contains('.'),mpp:getConcept(%ccsConceptMap, %mappedMainICD10pcs.approximation.utl:split(',').first()), mpp:getConcept(%ccsConceptMap, mainProcedureCode))"
     },
     {
-      "name": "procedureCcs",
+      "name": "mappedOtherICD10pcs",
       "language": "text/fhirpath",
-      "expression": "ccsCategory.orElse(mpp:getConcept(%ccsConceptMap, mainProcedureCode))"
+      "expression": "iif(otherProcedureCodes.contains('.') and otherProcedureCodes.isLetter().not(),mpp:getConcept(%icd9to10ConceptMap, otherProcedureCodes),{})"
+    },
+    {
+      "name": "otherProcedureCcs",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%ccsConceptMap, %mappedOtherICD10pcs.approximation.utl:split(',').first().orElse(otherProcedureCodes))"
     }
   ],
   "mapping": [
@@ -65,7 +82,7 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Encounter",
-          "id": "{{mpp:getHashedId('Encounter',encounterId)}}",
+          "id": "{{mpp:getHashedId('Encounter',surgeryId)}}",
           "meta": {
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-SurgeryEncounter"],
             "source": "{{%sourceSystem.sourceUri}}"
@@ -88,6 +105,7 @@
             }
           ],
           "serviceType": "{{? utl:createFhirCodeableConcept('http://snomed.info/sct', '394603008', 'Cardiothoracic surgery')}}",
+          "priority": "{{? utl:createFhirCodeableConcept('http://snomed.info/sct', typeOfSurgery, iif(typeOfSurgery = '274075007', 'Optional surgery', 'Elective surgery'))}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "episodeOfCare": ["{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"],
           "period": {
@@ -110,7 +128,7 @@
             }
           },
           "length": "{{? utl:getDurationAsQuantityObject(%encounterStartTime.toDateTime(), %encounterEndTime.toDateTime())}}",
-          "reasonCode": "{{* utl:createFhirCodeableConcept('https://aiccelerate.eu/fhir/CodeSystem/operation-cancellation-reasons', mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'target_code')), mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'target_display'))}}",
+          "reasonCode": "{{* utl:createFhirCodeableConcept('https://aiccelerate.eu/fhir/CodeSystem/operation-cancellation-reasons', mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'target_code'), mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'target_display'))}}",
           "serviceProvider": {
             "{{#sp}}": "{{%encounterForSurgery.nurseUnit}}",
             "{{?}}": {
@@ -146,53 +164,40 @@
                 "system": "http://snomed.info/sct",
                 "code": "387713003",
                 "display": "Surgery phase"
+              },
+              {
+                "{{#ccs}}": "{{%mainProcedureCcs}}",
+                "{{?}}": {
+                  "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures-ccs",
+                  "code": "{{%ccs.`MULTI CCS LVL 2`}}",
+                  "display": "{{? %ccs.`MULTI CCS LVL 2 LABEL`}}"
+                }
               }
             ]
           },
           "code": {
             "coding": [
               {
-                "{{#ccs}}": "{{cssCategory}}",
-                "{{?}}": {
-                  "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures-ccs",
-                  "code": "{{%ccs}}",
-                  "display": "{{? mpp:getConcept(%ccsConceptMap, %ccs, 'source_display')}}"
-                }
+                "system": "{{iif(mainProcedureCode.isLetter().not() and mainProcedureCode.contains('.'), 'http://hl7.org/fhir/sid/ex-icd-9-procedure', 'http://hl7.org/fhir/sid/ex-icd-10-procedure')}}",
+                "code": "{{mainProcedureCode}}",
+                "display": "{{? mpp:getConcept(%ccsConceptMap,mainProcedureCode,'ICD-10-PCS CODE DESCRIPTION')}}"
               },
               {
-                "{{#pcc}}": "{{mainProcedureCode}}",
-                "{{?}}": {
-                  "system": "https://koodistopalvelu.kanta.fi/codeserver/pages/classification-view-page.xhtml?classificationKey=57&versionKey=119",
-                  "code": "{{%pcc}}",
-                  "display": "{{? mainProcedureDescription}}"
+                "{{#icd10pcs}}": "{{%mappedMainICD10pcs.where(target_code.trim().exists()).target_code.trim().utl:split(',')}}",
+                "{{*}}": {
+                  "system": "http://hl7.org/fhir/sid/ex-icd-10-procedure",
+                  "code": "{{%icd10pcs}}"
                 }
               }
-            ]
+            ],
+            "text": "{{? mainProcedureDescription}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
           "performedPeriod": {
-            "start": "{{ost.nav:orElse(ort)}}",
-            "end": "{{oet.nav:orElse(plt)}}"
-          },
-          "location": "{{? mpp:createFhirReferenceWithHashedId('Location', location)}}",
-          "performer": [
-            {
-              "{{#pr}}": "{{primarySurgeon | otherSurgeons.split(' ')}}",
-              "{{*}}": {
-                "function": "{{utl:createFhirCodeableConcept('http://snomed.info/sct', '304292004', 'Surgeon')}}",
-                "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', %pr)}}"
-              }
-            },
-            {
-              "{{#pr}}": "{{nurses.split(' ')}}",
-              "{{*}}": {
-                "function": "{{utl:createFhirCodeableConcept('http://snomed.info/sct', '224561008', 'Theatre Nurse')}}",
-                "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', %pr)}}"
-              }
-            }
-          ],
-          "bodySite": "{{* utl:createFhirCodeableConcept('http://snomed.info/sct', iif(bodySite='left', '7771000', iif(bodySite='right', '24028007', iif(bodySite='both', '51440002', {}))), bodySite)}}"
+            "start": "{{%surgeryStartTime}}",
+            "end": "{{? %surgeryEndTime}}"
+          }
         }
       }
     },
@@ -200,39 +205,54 @@
       "precondition": {
         "name": "hasOtherProcedures",
         "language": "text/fhirpath",
-        "expression": "otherProcedureCodes.exists()"
+        "expression": "otherProcedureCodes.exists() and (otherProcedureCodes.length()=7 or (otherProcedureCodes.contains('.') and otherProcedureCodes.isLetter().not()))"
       },
       "expression": {
         "name": "otherProceduresMapping",
         "language": "application/fhir-template+json",
         "value": {
-          "{{#opcd}}": "{{otherProcedureCodes.split(' ')}}",
-          "{{*}}": {
             "resourceType": "Procedure",
-            "id": "{{mpp:getHashedId('Procedure', encounterId & %opcd)}}",
+            "id": "{{mpp:getHashedId('Procedure', surgeryId & otherProcedureCodes)}}",
             "meta": {
               "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ProcedureRelatedWithSurgicalWorkflow"],
               "source": "{{%sourceSystem.sourceUri}}"
             },
             "status": "completed",
+            "category": {
+              "{{#ccs}}": "{{%otherProcedureCcs}}",
+              "{{?}}": {
+                "coding": [{
+                  "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures-ccs",
+                  "code": "{{%ccs.`MULTI CCS LVL 2`}}",
+                  "display": "{{? %ccs.`MULTI CCS LVL 2 LABEL`}}"
+                }]
+              }
+            },
             "code": {
               "coding": [
                 {
-                  "system": "https://koodistopalvelu.kanta.fi/codeserver/pages/classification-view-page.xhtml?classificationKey=57&versionKey=119",
-                  "code": "{{%opcd}}"
+                  "system": "{{iif(otherProcedureCodes.length()!=7, 'http://hl7.org/fhir/sid/ex-icd-9-procedure', 'http://hl7.org/fhir/sid/ex-icd-10-procedure')}}",
+                  "code": "{{otherProcedureCodes}}",
+                  "display": "{{? mpp:getConcept(%ccsConceptMap, otherProcedureCodes, 'ICD-10-PCS CODE DESCRIPTION')}}"
+                },
+                {
+                  "{{#icd10pcs}}": "{{%mappedOtherICD10pcs.where(target_code.trim().exists()).target_code.trim().utl:split(',')}}",
+                  "{{*}}": {
+                    "system": "http://hl7.org/fhir/sid/ex-icd-10-procedure",
+                    "code": "{{%icd10pcs}}"
+                  }
                 }
               ]
             },
             "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-            "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
+            "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
             "partOf": [
               "{{utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}"
             ],
             "performedPeriod": {
-              "start": "{{ost.nav:orElse(ort)}}",
-              "end": "{{oet.nav:orElse(plt)}}"
+              "start": "{{%surgeryStartTime}}",
+              "end": "{{? %surgeryEndTime}}"
             }
-          }
         }
       }
     }

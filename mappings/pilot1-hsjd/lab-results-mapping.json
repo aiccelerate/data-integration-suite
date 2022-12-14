@@ -2,10 +2,18 @@
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/lab-results-mapping",
   "name": "lab-results-mapping",
   "title": "Mapping of schema lab results to AIC-LabResults profile",
-  "source": [{
-    "alias": "source",
-    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-lab-results"
-  }],
+  "source": [
+    {
+      "alias": "labResults",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-lab-results",
+      "joinOn": ["episodeId"]
+    },
+    {
+      "alias": "encounters",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-operation-episode-encounter",
+      "joinOn": ["episodeId"]
+    }
+  ],
   "context": {
     "labResultsConceptMap":  {
       "category": "concept-map",
@@ -20,6 +28,13 @@
       "url": "./lab-results-unit-conversion.csv"
     }
   },
+  "variable": [
+    {
+      "name": "relatedEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')).first()"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
@@ -58,6 +73,7 @@
             "text": "{{description.trim()}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', %relatedEncounter.encounterId)}}",
           "effectiveDateTime": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd', 'Europe/Madrid')}}",
           "valueQuantity": "{{mpp:convertAndReturnQuantity(%labResultUnitConversion, code.trim(), value, unit.trim().orElse('-'))}}",
           "interpretation": {

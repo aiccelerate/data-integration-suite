@@ -1,0 +1,68 @@
+{
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/complication-mapping",
+  "name": "complication-mapping",
+  "title": "Mapping of complication schema for pilots to AIC-AdverseEvent FHIR profile",
+  "source": [
+    {
+      "alias": "complications",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-complication",
+      "joinOn": ["episodeId"]
+    },
+    {
+      "alias": "encounters",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-operation-episode-encounter",
+      "joinOn": ["episodeId"]
+    }
+  ],
+  "context": {
+    "complicationConceptMap":  {
+      "category": "concept-map",
+      "url": "./complication-codes.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "relatedEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm')).first()"
+    },
+    {
+      "name": "eventCode",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%complicationConceptMap,code.trim().nav:orElse(codeDisplay.trim()))"
+    }
+  ],
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "AdverseEvent",
+          "id": "{{mpp:getHashedId('AdverseEvent', pid & code & codeDisplay & time)}}",
+          "actuality": "actual",
+          "event": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "{{%eventCode.target_code}}",
+                "display": "{{%eventCode.target_display}}"
+              }
+            ],
+            "text": "{{? codeDisplay}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', %relatedEncounter.encounterId)}}",
+          "date": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm', 'Europe/Madrid')}}",
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

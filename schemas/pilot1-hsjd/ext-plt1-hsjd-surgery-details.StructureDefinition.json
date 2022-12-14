@@ -71,8 +71,8 @@
         ]
       },
       {
-        "id": "Ext-plt1-hsjd-surgery-details.subspecialty",
-        "path": "Ext-plt1-hsjd-surgery-details.subspecialty",
+        "id": "Ext-plt1-hsjd-surgery-details.subspeciality",
+        "path": "Ext-plt1-hsjd-surgery-details.subspeciality",
         "short": "Surgery specialty",
         "definition": "Specialty code (SNOMED-CT) of the performed surgery. e.g.Neurosurgery",
         "min": 1,

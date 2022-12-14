@@ -2,10 +2,25 @@
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
   "name": "blood-pressure-mapping",
   "title": "Mapping of grouped blood pressure results in vital sign schema to FHIR Vital signs profiles",
-  "source": [{
-    "alias": "vitalsigns",
-    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-blood-pressure"
-  }],
+  "source": [
+    {
+      "alias": "vitalsigns",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-blood-pressure",
+      "joinOn": ["episodeId"]
+    },
+    {
+      "alias": "encounters",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-operation-episode-encounter",
+      "joinOn": ["episodeId"]
+    }
+  ],
+  "variable": [
+    {
+      "name": "relatedEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')).first()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
@@ -40,6 +55,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', %relatedEncounter.encounterId)}}",
           "effectiveDateTime": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
           "component": [
             {
