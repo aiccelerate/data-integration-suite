@@ -39,8 +39,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p3-encounter.pid",
-        "path": "Ext-plt3-p3-encounter.pid",
+        "id": "Ext-plt3-p3-condition.pid",
+        "path": "Ext-plt3-p3-condition.pid",
         "short": "Patient identifier",
         "definition": "Unique patient identifier  (a pseudoynm)",
         "min": 1,
@@ -135,8 +135,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-condition.encounterID",
-        "path": "Ext-plt3-condition.encounterID",
+        "id": "Ext-plt3-p3-condition.encounterID",
+        "path": "Ext-plt3-p3-condition.encounterID",
         "short": "Encounter",
         "definition": "Unique identifier of the visit/encounter that this diagnosis is set (if exists and related)",
         "min": 0,

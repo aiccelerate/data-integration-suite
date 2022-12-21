@@ -135,8 +135,8 @@
         ]
       },
       {
-        "id": "Ext-plt1-vital-signs.encounterId",
-        "path": "Ext-plt1-vital-signs.encounterId",
+        "id": "Ext-plt1-lab-results.encounterId",
+        "path": "Ext-plt1-lab-results.encounterId",
         "short": "Encounter",
         "definition": "Reference to the encounter that this observation is performed",
         "min": 0,

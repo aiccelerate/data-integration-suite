@@ -135,8 +135,8 @@
         ]
       },
       {
-        "id": "Ext-plt1-vital-signs.episodeId",
-        "path": "Ext-plt1-vital-signs.episodeId",
+        "id": "Ext-plt1-hsjd-lab-results.episodeId",
+        "path": "Ext-plt1-hsjd-lab-results.episodeId",
         "short": "Episode identifier",
         "definition": "Reference to the episode of care that this observation is performed",
         "min": 0,
