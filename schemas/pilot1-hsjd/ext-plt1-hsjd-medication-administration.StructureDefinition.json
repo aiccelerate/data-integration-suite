@@ -1,0 +1,139 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-hsjd-medication-administration",
+  "name": "Ext-plt1-hsjd-medication-administration",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt1-hsjd-medication-administration",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt1-hsjd-medication-administration",
+        "path": "Ext-plt1-hsjd-medication-administration",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.pid",
+        "path": "Ext-plt1-hsjd-medication-administration.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.startTime",
+        "path": "Ext-plt1-hsjd-medication-administration.startTime",
+        "short": "Medication administration time",
+        "definition": "Time of the medication administration",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.code",
+        "path": "Ext-plt1-hsjd-medication-administration.code",
+        "short": "Medication ATC code",
+        "definition": "The ATC code for the medication",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.ndc",
+        "path": "Ext-plt1-hsjd-medication-administration.ndc",
+        "short": "National drug code",
+        "definition": "The national drug code for the medication",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.display",
+        "path": "Ext-plt1-hsjd-medication-administration.display",
+        "short": "Medication name",
+        "definition": "Medication name",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.dose",
+        "path": "Ext-plt1-hsjd-medication-administration.dose",
+        "short": "Dose administered",
+        "definition": "Dose administered ",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.episodeId",
+        "path": "Ext-plt1-hsjd-medication-administration.episodeId",
+        "short": "Episode of care  identifier",
+        "definition": "Episode of care identifier",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -26,6 +26,11 @@
   ],
   "mapping": [
     {
+      "precondition": {
+        "name": "exceptSurgeryEncounters",
+        "language": "text/fhirpath",
+        "expression": "location.trim()!='OR'"
+      },
       "expression": {
         "name": "result",
         "language": "application/fhir-template+json",

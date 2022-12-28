@@ -36,8 +36,8 @@
               "coding": [
                 {
                   "system": "http://snomed.info/sct",
-                  "code": "274075007",
-                  "display": "Elective surgery episode"
+                  "code": "736770009",
+                  "display": "Surgery care"
                 }
               ]
             }
