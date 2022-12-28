@@ -87,8 +87,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-condition.encounterID",
-        "path": "Ext-plt3-condition.encounterID",
+        "id": "Ext-plt3-p3-procedure.encounterID",
+        "path": "Ext-plt3-p3-procedure.encounterID",
         "short": "Encounter",
         "definition": "Unique identifier of the visit/encounter that this procedure is applied (if exists and related).",
         "min": 0,
