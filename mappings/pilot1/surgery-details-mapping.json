@@ -111,7 +111,12 @@
               }
             }
           },
-          "length": "{{? utl:getDurationAsQuantityObject(ort, plt)}}",
+          "length": {
+            "value": "{{utl:getPeriod(ort.toDateTime(), plt.toDateTime(), 'min')}}",
+            "system": "http://unitsofmeasure.org",
+            "unit": "min",
+            "code": "min"
+          },
           "reasonCode": "{{* utl:createFhirCodeableConcept('https://aiccelerate.eu/fhir/CodeSystem/operation-cancellation-reasons', reasonForCancelling, mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'source_display'))}}"
         }
       }
@@ -147,6 +152,13 @@
           "performedPeriod": {
             "start": "{{pet}}",
             "end": "{{pct}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
           }
         }
       }
@@ -182,6 +194,13 @@
           "performedPeriod": {
             "start": "{{pct}}",
             "end": "{{ort}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
           }
         }
       }
@@ -244,6 +263,13 @@
             "{{*}}": {
               "function": "{{utl:createFhirCodeableConcept('http://snomed.info/sct', '88189002', 'Anesthesiologist')}}",
               "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', %pr)}}"
+            }
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
             }
           }
         }
@@ -318,7 +344,14 @@
               }
             }
           ],
-          "bodySite": "{{* utl:createFhirCodeableConcept('http://snomed.info/sct', iif(bodySite='left', '7771000', iif(bodySite='right', '24028007', iif(bodySite='both', '51440002', {}))), bodySite)}}"
+          "bodySite": "{{* utl:createFhirCodeableConcept('http://snomed.info/sct', iif(bodySite='left', '7771000', iif(bodySite='right', '24028007', iif(bodySite='both', '51440002', {}))), bodySite)}}",
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
         }
       }
     },
@@ -357,6 +390,13 @@
             "performedPeriod": {
               "start": "{{ost.nav:orElse(ort)}}",
               "end": "{{oet.nav:orElse(plt)}}"
+            },
+            "extension": {
+              "{{#eps}}": "{{episodeId}}",
+              "{{*}}": {
+                "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+                "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+              }
             }
           }
         }
@@ -393,6 +433,13 @@
           "performedPeriod": {
             "start": "{{cst}}",
             "end": "{{cet}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
           }
         }
       }
@@ -511,6 +558,13 @@
           "performedPeriod": {
             "start": "{{act.nav:orElse(ost).nav:orElse(ort)}}",
             "end": "{{? oet}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
           }
         }
       }
