@@ -244,7 +244,7 @@
               {
                 "{{#acode}}": "{{anesthesiaCode}}",
                 "{{?}}": {
-                  "system": "https://koodistopalvelu.kanta.fi/codeserver/pages/classification-view-page.xhtml?classificationKey=57&versionKey=119",
+                  "system": "urn:oid:1.2.246.537.6.2",
                   "code": "{{%acode}}",
                   "display": "{{? mpp:getConcept(%anesthesiaProceduresConceptMap, %acode, 'source_display')}}"
                 }
@@ -255,7 +255,7 @@
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
           "performedPeriod": {
             "start": "{{ort}}",
-            "end": "{{? act}}"
+            "end": "{{act.nav:orElse(plt)}}"
           },
           "location": "{{? mpp:createFhirReferenceWithHashedId('Location', location)}}",
           "performer": {
@@ -314,7 +314,7 @@
               {
                 "{{#pcc}}": "{{mainProcedureCode}}",
                 "{{?}}": {
-                  "system": "https://koodistopalvelu.kanta.fi/codeserver/pages/classification-view-page.xhtml?classificationKey=57&versionKey=119",
+                  "system": "urn:oid:1.2.246.537.6.2",
                   "code": "{{%pcc}}",
                   "display": "{{? mainProcedureDescription}}"
                 }
@@ -377,7 +377,7 @@
             "code": {
               "coding": [
                 {
-                  "system": "https://koodistopalvelu.kanta.fi/codeserver/pages/classification-view-page.xhtml?classificationKey=57&versionKey=119",
+                  "system": "urn:oid:1.2.246.537.6.2",
                   "code": "{{%opcd}}"
                 }
               ]
@@ -557,7 +557,7 @@
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
           "performedPeriod": {
             "start": "{{act.nav:orElse(ost).nav:orElse(ort)}}",
-            "end": "{{? oet}}"
+            "end": "{{oet.nav:orElse(plt)}}"
           },
           "extension": {
             "{{#eps}}": "{{episodeId}}",
