@@ -1,4 +1,5 @@
 {
+  "id": "practitioner-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/practitioner-mapping",
   "name": "practitioner-mapping",
   "title": "Mapping of schema practitioner  to AIC-Practitioner profile",

@@ -53,9 +53,9 @@
                   }
                 },
                 {
-                  "system": "{{%sourceSystem}}/encounter-types",
+                  "system": "{{%sourceSystem.sourceUri}}",
                   "code": "{{type}}",
-                  "display": "{{mpp:getConcept(%encounterConceptMap, type, 'source_display')}}"
+                  "display": "{{? mpp:getConcept(%encounterConceptMap, type, 'source_display')}}"
                 }
               ]
             }

@@ -5,10 +5,9 @@ import akka.http.scaladsl.model.StatusCodes
 import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
 import io.onfhir.util.JsonFormatter._
-import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IMappingContextLoader, MappingContextLoader, SchemaFolderRepository}
+import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IFhirSchemaLoader, IMappingContextLoader, MappingContextLoader, SchemaFolderLoader}
 import io.tofhir.engine.model.{FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
 import io.tofhir.engine.util.FhirMappingUtility
-
 import org.json4s.JsonAST.JArray
 
 import java.nio.file.Paths
@@ -24,11 +23,11 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
 
   val contextLoader: IMappingContextLoader = new MappingContextLoader(mappingRepository)
 
-  val schemaRepository = new SchemaFolderRepository(Paths.get("schemas/pilot3-p2").toAbsolutePath.toUri)
+  val schemaLoader: IFhirSchemaLoader = new SchemaFolderLoader(Paths.get("schemas/pilot3-p2").toAbsolutePath.toUri)
 
   val dataSourceSettings = Map("source" -> FileSystemSourceSettings("test-source-1", "http://hus.fi", Paths.get("test-data/pilot3-p2").toAbsolutePath.toString))
 
-  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaRepository, sparkSession, mappingErrorHandling)
+  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, sparkSession, mappingErrorHandling)
 
   val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", errorHandling = Some(fhirWriteErrorHandling))
   implicit val actorSystem = ActorSystem("Pilot3Part2IntegrationTest")
@@ -146,10 +145,10 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
       (results.apply(25) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "2141-0"
       (results.apply(25) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Corticotropin [Mass/volume] in Plasma (P-ACTH)"
       (results.apply(25) \ "valueQuantity" \ "value").extract[Double] shouldBe 18.16060583
-      (results.apply(25) \ "valueQuantity" \ "unit").extract[String] shouldBe "pg/mL"
+      (results.apply(25) \ "valueQuantity" \ "unit").extract[String] shouldBe "ng/L"
 
-      (results.apply(24) \ "valueQuantity" \ "value").extract[Double] shouldBe 123.06613514285
-      (results.apply(24) \ "valueQuantity" \ "unit").extract[String] shouldBe "ng/mL"
+      (results.apply(24) \ "valueQuantity" \ "value").extract[Double] shouldBe 16.08917965
+      (results.apply(24) \ "valueQuantity" \ "unit").extract[String] shouldBe "nmol/L"
     }
   }
 

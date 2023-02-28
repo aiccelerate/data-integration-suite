@@ -1,4 +1,5 @@
 {
+  "id": "patient-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/patient-mapping",
   "name": "patient-mapping",
   "title": "Mapping of patient schema for pilot-3 p3 (HSJD) to AIC-Patient FHIR profile",

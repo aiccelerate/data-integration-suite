@@ -1,4 +1,5 @@
 {
+  "id": "procedure-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/procedure-mapping",
   "name": "procedure-mapping",
   "title": "Mapping of procedure schema for pilot-3 p1 (OPBG) to Encounter (PediatricNeurooncologicalCareEncounter), ServiceRequest (AIC-PediatricNeurooncologicalPlannedProcedure) and Procedure (AIC-PediatricNeurooncologicalProcedure) resources",
