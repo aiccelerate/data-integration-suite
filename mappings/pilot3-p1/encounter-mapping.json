@@ -1,12 +1,12 @@
 {
   "id": "encounter-mapping",
-  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/encounter-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/encounter-mapping",
   "name": "encounter-mapping",
-  "title": "Mapping of encounter schema for pilot-3 p2 (OPBG) to AIC-PediatricNeurooncologicalCareEncounter",
+  "title": "Mapping of encounter schema for pilot-3 p1 (OPBG) to AIC-PediatricNeurooncologicalCareEncounter",
   "source": [
     {
       "alias": "source",
-      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p2-encounter"
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-encounter"
     }
   ],
   "context": {
@@ -53,9 +53,9 @@
                   }
                 },
                 {
-                  "system": "{{%sourceSystem}}/encounter-types",
+                  "system": "{{%sourceSystem.sourceUri}}",
                   "code": "{{type}}",
-                  "display": "{{mpp:getConcept(%encounterConceptMap, type, 'source_display')}}"
+                  "display": "{{? mpp:getConcept(%encounterConceptMap, type, 'source_display')}}"
                 }
               ]
             }

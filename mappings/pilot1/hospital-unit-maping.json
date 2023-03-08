@@ -1,4 +1,5 @@
 {
+  "id": "hospital-unit-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/hospital-unit-mapping",
   "name": "hospital-unit-mapping",
   "title": "Mapping of schema hospital unit to AIC Hospital Unit profile",

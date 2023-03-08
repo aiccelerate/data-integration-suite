@@ -5,10 +5,9 @@ import akka.http.scaladsl.model.StatusCodes
 import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
 import io.onfhir.util.JsonFormatter._
-import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IMappingContextLoader, MappingContextLoader, SchemaFolderRepository}
+import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IFhirSchemaLoader, IMappingContextLoader, MappingContextLoader, SchemaFolderLoader}
 import io.tofhir.engine.model.{FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
 import io.tofhir.engine.util.FhirMappingUtility
-
 import org.json4s.JArray
 
 import java.nio.file.Paths
@@ -24,11 +23,11 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
 
   val contextLoader: IMappingContextLoader = new MappingContextLoader(mappingRepository)
 
-  val schemaRepository = new SchemaFolderRepository(Paths.get("schemas/pilot3-p1").toAbsolutePath.toUri)
+  val schemaLoader: IFhirSchemaLoader = new SchemaFolderLoader(Paths.get("schemas/pilot3-p1").toAbsolutePath.toUri)
 
   val dataSourceSettings = Map("source" -> FileSystemSourceSettings("test-source-1", "http://opbg.it", Paths.get("test-data/pilot3-p1").toAbsolutePath.toString))
 
-  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaRepository, sparkSession, mappingErrorHandling)
+  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, sparkSession, mappingErrorHandling)
 
   val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", errorHandling = Some(fhirWriteErrorHandling))
   implicit val actorSystem = ActorSystem("Pilot3Part1IntegrationTest")
@@ -133,7 +132,7 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
       })
       results.length shouldBe 6
       (results.head \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
-      (results.head \ "type" \ "coding" \ "code").extract[Seq[String]] shouldBe Seq("305828008")
+      (results.head \ "type" \ "coding" \ "code").extract[Seq[String]] shouldBe Seq("00000406")
     }
   }
 

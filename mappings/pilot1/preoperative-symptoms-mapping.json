@@ -1,4 +1,5 @@
 {
+  "id": "preoperative-symptoms-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-symptoms-mapping",
   "name": "preoperative-symptoms-mapping",
   "title": "Mapping of schema preoperative symptoms to AIC-PreoperativeSymptom profile resources",

@@ -1,4 +1,5 @@
 {
+  "id": "complication-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/complication-mapping",
   "name": "complication-mapping",
   "title": "Mapping of complication schema for pilots to AIC-AdverseEvent FHIR profile",

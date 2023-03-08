@@ -1,4 +1,5 @@
 {
+  "id": "operation-episode-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/operation-episode-mapping",
   "name": "operation-episode-mapping",
   "title": "Mapping of schema Operation Episodes to FHIR EpisodeOfCare",
