@@ -12,7 +12,7 @@
   "context": {
     "procedureConceptMap": {
       "category": "concept-map",
-      "url": "./procedures-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p3/procedures-concept-map.csv"
     }
   },
   "mapping": [

@@ -10,7 +10,7 @@
   "context": {
     "obsConceptMap":  {
       "category": "concept-map",
-      "url": "./other-observation-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/other-observation-concept-map.csv"
     }
   },
   "mapping": [

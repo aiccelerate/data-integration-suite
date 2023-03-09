@@ -10,11 +10,11 @@
   "context": {
     "obsConceptMap":  {
       "category": "concept-map",
-      "url": "./assessment-observation-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p3/assessment-observation-concept-map.csv"
     },
     "vitalSignsConceptMap":  {
       "category": "concept-map",
-      "url": "./vital-signs-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p3/vital-signs-concept-map.csv"
     }
   },
   "mapping": [

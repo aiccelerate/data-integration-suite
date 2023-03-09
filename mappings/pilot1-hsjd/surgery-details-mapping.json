@@ -18,15 +18,15 @@
   "context": {
     "surgeryCancellationReasonsConceptMap" : {
       "category": "concept-map",
-      "url": "./surgery-cancellation-reasons-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/surgery-cancellation-reasons-concept-map.csv"
     },
     "ccsConceptMap": {
       "category": "concept-map",
-      "url": "./ccs_pr_icd10pcs_2020_1.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/ccs_pr_icd10pcs_2020_1.csv"
     },
     "icd9to10ConceptMap":{
       "category": "concept-map",
-      "url": "./icd9-to-icd10-pcs.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/icd9-to-icd10-pcs.csv"
     }
   },
   "variable": [

@@ -10,7 +10,7 @@
   "context": {
     "atcConceptMap": {
       "category": "concept-map",
-      "url": "./medication-to-atc.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/medication-to-atc.csv"
     }
   },
   "variable": [

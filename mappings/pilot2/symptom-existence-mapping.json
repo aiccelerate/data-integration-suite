@@ -10,7 +10,7 @@
   "context": {
     "symptomCodesMap":  {
       "category": "concept-map",
-      "url": "./symptom-codes-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot2/symptom-codes-concept-map.csv"
     }
   },
   "mapping": [

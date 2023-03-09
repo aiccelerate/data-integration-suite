@@ -10,7 +10,7 @@
   "context": {
     "preOpConceptMap":  {
       "category": "concept-map",
-      "url": "./preoperative-assessment-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/preoperative-assessment-concept-map.csv"
     }
   },
   "mapping": [

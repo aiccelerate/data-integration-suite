@@ -10,7 +10,7 @@
   "context": {
     "anstObsConceptMap":  {
       "category": "concept-map",
-      "url": "./anesthesia-observations-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/anesthesia-observations-concept-map.csv"
     }
   },
   "mapping": [

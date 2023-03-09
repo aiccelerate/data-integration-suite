@@ -18,7 +18,7 @@
   "context": {
     "vitalSignsConceptMap":  {
       "category": "concept-map",
-      "url": "./vital-signs-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/vital-signs-concept-map.csv"
     }
   },
   "variable": [
