@@ -10,11 +10,11 @@
   "context": {
     "labResultsConceptMap":  {
       "category": "concept-map",
-      "url": "./lab-results-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/lab-results-concept-map.csv"
     },
     "labResultUnitConversion": {
       "category": "unit-conversion",
-      "url": "./lab-results-unit-conversion.csv"
+      "url": "$CONTEXT_REPO/pilot1/lab-results-unit-conversion.csv"
     }
   },
   "mapping": [

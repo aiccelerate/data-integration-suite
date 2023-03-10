@@ -10,7 +10,7 @@
   "context": {
     "otherAssessmentsMap":  {
       "category": "concept-map",
-      "url": "./other-assessments-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot2/other-assessments-concept-map.csv"
     }
   },
   "mapping": [

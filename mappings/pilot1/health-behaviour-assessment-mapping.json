@@ -10,7 +10,7 @@
   "context": {
     "hbaConceptMap":  {
       "category": "concept-map",
-      "url": "./health-behavior-assessment-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/health-behavior-assessment-concept-map.csv"
     }
   },
   "mapping": [

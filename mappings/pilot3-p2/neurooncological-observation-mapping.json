@@ -10,11 +10,11 @@
   "context": {
     "obsConceptMap":  {
       "category": "concept-map",
-      "url": "./neurooncological-observation-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p2/neurooncological-observation-concept-map.csv"
     },
     "obsValuesConceptMap":  {
       "category": "concept-map",
-      "url": "./neurooncological-observation-values-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p2/neurooncological-observation-values-concept-map.csv"
     }
   },
   "mapping": [

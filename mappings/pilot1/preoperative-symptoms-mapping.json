@@ -10,7 +10,7 @@
   "context": {
     "prsConceptMap":  {
       "category": "concept-map",
-      "url": "./preoperative-symptoms-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/preoperative-symptoms-concept-map.csv"
     }
   },
   "mapping": [

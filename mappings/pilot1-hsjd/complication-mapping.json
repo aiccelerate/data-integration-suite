@@ -18,7 +18,7 @@
   "context": {
     "complicationConceptMap":  {
       "category": "concept-map",
-      "url": "./complication-codes.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/complication-codes.csv"
     }
   },
   "variable": [

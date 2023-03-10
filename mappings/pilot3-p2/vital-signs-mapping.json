@@ -10,7 +10,7 @@
   "context": {
     "vitalSignsConceptMap":  {
       "category": "concept-map",
-      "url": "./vital-signs-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p2/vital-signs-concept-map.csv"
     }
   },
   "mapping": [

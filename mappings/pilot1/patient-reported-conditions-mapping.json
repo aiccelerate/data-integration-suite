@@ -10,7 +10,7 @@
   "context": {
     "prcConceptMap":  {
       "category": "concept-map",
-      "url": "./patient-reported-conditions-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/patient-reported-conditions-concept-map.csv"
     }
   },
   "mapping": [

@@ -10,7 +10,7 @@
   "context": {
     "hospitalUnitConceptMap":  {
       "category": "concept-map",
-      "url": "./hospital-unit-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/hospital-unit-concept-map.csv"
     }
   },
   "mapping": [

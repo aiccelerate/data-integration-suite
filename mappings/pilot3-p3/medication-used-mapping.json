@@ -10,7 +10,7 @@
   "context": {
     "medsConceptMap": {
       "category": "concept-map",
-      "url": "./medications-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p3/medications-concept-map.csv"
     }
   },
   "mapping": [

@@ -10,7 +10,7 @@
   "context": {
     "icdConceptMap":  {
       "category": "concept-map",
-      "url": "./icd10-context-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/icd10-context-map.csv"
     }
   },
   "mapping": [

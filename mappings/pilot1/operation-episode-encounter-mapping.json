@@ -10,7 +10,7 @@
   "context": {
     "encounterTypeConceptMap":  {
       "category": "concept-map",
-      "url": "./encounter-type-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/encounter-type-concept-map.csv"
     }
   },
   "mapping": [
