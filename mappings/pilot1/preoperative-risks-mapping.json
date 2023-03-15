@@ -1,4 +1,5 @@
 {
+  "id": "preoperative-risks-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-risks-mapping",
   "name": "preoperative-risks-mapping",
   "title": "Mapping of PreoperativeRiskFactors schema for pilots to AIC-PreoperativeRiskFactor profile",
@@ -9,7 +10,7 @@
   "context": {
     "preOpRisksConceptMap":  {
       "category": "concept-map",
-      "url": "./preoperative-risks-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/preoperative-risks-concept-map.csv"
     }
   },
   "mapping": [

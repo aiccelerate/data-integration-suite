@@ -1,4 +1,5 @@
 {
+  "id": "other-observation-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/other-observation-mapping",
   "name": "other-observation-mapping",
   "title": "Mapping of schema Other Observation to AIC-IntraOperativeObservation, AIC-MedicationAdministration, AIC-NEWSScore, AIC-PEWSScore and AIC-GlascowScale FHIR profiles",
@@ -9,7 +10,7 @@
   "context": {
     "obsConceptMap":  {
       "category": "concept-map",
-      "url": "./other-observation-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/other-observation-concept-map.csv"
     }
   },
   "mapping": [

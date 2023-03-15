@@ -1,4 +1,5 @@
 {
+  "id": "surgery-details-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-details-mapping",
   "name": "surgery-details-mapping",
   "title": "Mapping of schema surgery-details to AIC-SurgeryEncounter, AIC-OperationPhaseDetails, AIC-SurgeryPhaseDetails, AIC-AnesthesiaPhaseDetails profiles",
@@ -9,31 +10,31 @@
   "context": {
     "surgicalSpecialtiesConceptMap": {
       "category": "concept-map",
-      "url": "./surgical-specialties-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/surgical-specialties-concept-map.csv"
     },
     "surgeryCancellationReasonsConceptMap" : {
       "category": "concept-map",
-      "url": "./surgery-cancellation-reasons-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/surgery-cancellation-reasons-concept-map.csv"
     },
     "anesthesiaTypesConceptMap": {
       "category": "concept-map",
-      "url": "./anesthesia-types-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/anesthesia-types-concept-map.csv"
     },
     "anesthesiaProceduresConceptMap": {
       "category": "concept-map",
-      "url": "./anesthesia-procedures-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/anesthesia-procedures-concept-map.csv"
     },
     "ccsConceptMap": {
       "category": "concept-map",
-      "url": "./icd-10-pcs-ccs-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/icd-10-pcs-ccs-concept-map.csv"
     },
     "woundClassificationConceptMap":  {
       "category": "concept-map",
-      "url": "./surgery-wound-classification-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/surgery-wound-classification-concept-map.csv"
     },
     "intubationTypesConceptMap": {
       "category": "concept-map",
-      "url": "./intubation-types-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/intubation-types-concept-map.csv"
     }
   },
   "mapping": [

@@ -1,4 +1,5 @@
 {
+  "id": "condition-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/condition-mapping",
   "name": "condition-mapping",
   "title": "Mapping of condition schema for pilots to AIC-Condition FHIR profile",
@@ -9,7 +10,7 @@
   "context": {
     "icdConceptMap":  {
       "category": "concept-map",
-      "url": "./icd10-context-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/icd10-context-map.csv"
     }
   },
   "mapping": [

@@ -1,4 +1,5 @@
 {
+  "id": "operation-episode-encounter-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot1/operation-episode-encounter-mapping",
   "name": "operation-episode-encounter-mapping",
   "title": "Mapping of OperationEpisodeEncounter schema for pilots to AIC-OperationEpisodeEncounter FHIR profile",
@@ -9,7 +10,7 @@
   "context": {
     "encounterTypeConceptMap":  {
       "category": "concept-map",
-      "url": "./encounter-type-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1/encounter-type-concept-map.csv"
     }
   },
   "mapping": [

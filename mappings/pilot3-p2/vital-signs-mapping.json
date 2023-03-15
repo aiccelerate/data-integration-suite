@@ -1,4 +1,5 @@
 {
+  "id": "vital-signs-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/vital-signs-mapping",
   "name": "vital-signs-mapping",
   "title": "Mapping of schema vital signs to FHIR Vital signs profiles",
@@ -9,7 +10,7 @@
   "context": {
     "vitalSignsConceptMap":  {
       "category": "concept-map",
-      "url": "./vital-signs-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p2/vital-signs-concept-map.csv"
     }
   },
   "mapping": [

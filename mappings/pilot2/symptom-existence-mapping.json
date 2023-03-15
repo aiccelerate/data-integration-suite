@@ -1,4 +1,5 @@
 {
+  "id": "symptom-existence-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-existence-mapping",
   "name": "symptom-existence-mapping",
   "title": "Mapping of symptom existence schema for pilot 2 to AIC-ParkinsonMotorObservation profile",
@@ -9,7 +10,7 @@
   "context": {
     "symptomCodesMap":  {
       "category": "concept-map",
-      "url": "./symptom-codes-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot2/symptom-codes-concept-map.csv"
     }
   },
   "mapping": [

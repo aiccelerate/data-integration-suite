@@ -102,3 +102,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/scala,java,maven,intellij,windows
 *.iml
+
+#Custom
+tofhir-db

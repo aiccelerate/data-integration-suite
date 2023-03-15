@@ -1,4 +1,5 @@
 {
+  "id": "symptom-assessment-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-assessment-mapping",
   "name": "symptom-assessment-mapping",
   "title": "Mapping of symptom assessment schema for pilot 2 to AIC-ParkinsonNonMotorSymptomAssessment, AIC-ParkinsonMotorObservation and its children profiles",
@@ -9,11 +10,11 @@
   "context": {
     "symptomCodesMap":  {
       "category": "concept-map",
-      "url": "./symptom-codes-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot2/symptom-codes-concept-map.csv"
     },
     "symptomMethodsMap":  {
       "category": "concept-map",
-      "url": "./symptom-methods-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot2/symptom-methods-concept-map.csv"
     }
   },
   "mapping": [

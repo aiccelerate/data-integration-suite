@@ -1,4 +1,5 @@
 {
+  "id": "device-used-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot2/device-used-mapping",
   "name": "device-used-mapping",
   "title": "Mapping of schema DeviceUsed to AIC-MedicationUsed FHIR profile",

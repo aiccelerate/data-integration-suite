@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.StatusCodes
 import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
 import io.onfhir.path.FhirPathEvaluator
-import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IMappingContextLoader, MappingContextLoader, SchemaFolderRepository}
+import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IFhirSchemaLoader, IMappingContextLoader, MappingContextLoader, SchemaFolderLoader}
 import io.tofhir.engine.model.{FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
 import io.tofhir.engine.util.FhirMappingUtility
 import io.onfhir.util.JsonFormatter._
@@ -25,11 +25,11 @@ class Pilot1IntegrationTest extends PilotTestSpec {
 
   val contextLoader: IMappingContextLoader = new MappingContextLoader(mappingRepository)
 
-  val schemaRepository = new SchemaFolderRepository(Paths.get("schemas/pilot1").toAbsolutePath.toUri)
+  val schemaLoader: IFhirSchemaLoader = new SchemaFolderLoader(Paths.get("schemas/pilot1").toAbsolutePath.toUri)
 
   val dataSourceSettings = Map("source" -> FileSystemSourceSettings("test-source-1", "http://hus.fi", Paths.get("test-data/pilot1").toAbsolutePath.toString))
 
-  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaRepository, sparkSession, mappingErrorHandling)
+  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, sparkSession, mappingErrorHandling)
 
   val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", errorHandling = Some(fhirWriteErrorHandling))
   implicit val actorSystem = ActorSystem("Pilot1IntegrationTest")
@@ -583,11 +583,11 @@ class Pilot1IntegrationTest extends PilotTestSpec {
       (results.head \ "effectiveDateTime").extract[String] shouldBe "2012-05-10T10:00:00+01:00"
 
       (results.head \ "code" \ "coding" \ "code").extract[Seq[String]].toSet shouldBe Set("1552", "718-7")
-      (results.head \ "valueQuantity" \ "value").extract[Double] shouldBe 1.05
-      (results.head \ "valueQuantity" \ "unit").extract[String] shouldBe "g/dL"
+      (results.head \ "valueQuantity" \ "value").extract[Double] shouldBe 10.5
+      (results.head \ "valueQuantity" \ "unit").extract[String] shouldBe "g/l"
 
-      (results.apply(6) \ "valueQuantity" \ "value").extract[Double] shouldBe 15 * 7.500617
-      (results.apply(6) \ "valueQuantity" \ "unit").extract[String] shouldBe "mm[Hg]"
+      (results.apply(6) \ "valueQuantity" \ "value").extract[Double] shouldBe 15.0
+      (results.apply(6) \ "valueQuantity" \ "unit").extract[String] shouldBe "kPa"
 
       (results.apply(3) \ "interpretation" \ "coding" \ "code").extract[Seq[String]].head shouldBe "N"
 
