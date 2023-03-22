@@ -39,12 +39,12 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "effectivePeriod": {
             "start": "{{startDate}}",
-            "end": "{{endDate.nav:orElse(startDate + 24 months)}}"
+            "end": "{{endDate.nav:orElse(startDate.toDate() + 24 months)}}"
           },
           "dosage": {
             "{{#ds}}": "{{dose.utl:split('+').select($this.toDecimal())}}",
             "{{*}}": {
-              "sequence": "{{%sectionIndex}}",
+              "sequence": "{{? %sectionIndex}}",
               "timing": {
                 "repeat": {
                   "frequency": 1,
@@ -58,7 +58,7 @@
                     "system": "http://unitsofmeasure.org",
                     "code": "mg",
                     "unit": "mg",
-                    "value": "{{%ds * strength}}"
+                    "value": "{{? %ds * strength}}"
                   }
                 }
               ]
