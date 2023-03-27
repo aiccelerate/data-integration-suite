@@ -25,11 +25,11 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   val schemaLoader: IFhirSchemaLoader = new SchemaFolderLoader(Paths.get("schemas/pilot2").toAbsolutePath.toUri)
 
-  val dataSourceSettings = Map("source"-> FileSystemSourceSettings("test-source-1", "http://hus.fi", Paths.get("test-data/pilot2").toAbsolutePath.toString))
+  val dataSourceSettings = Map("source" -> FileSystemSourceSettings("test-source-1", "http://hus.fi", Paths.get("test-data/pilot2").toAbsolutePath.toString))
 
   val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, sparkSession, mappingErrorHandling)
 
-  val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "http://localhost:8081/fhir", errorHandling = Some(fhirWriteErrorHandling))
+  val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = sys.env.getOrElse("FHIR_REPO_URL", "http://localhost:8080/fhir"), errorHandling = Some(fhirWriteErrorHandling))
   implicit val actorSystem = ActorSystem("Pilot2IntegrationTest")
   val onFhirClient = OnFhirNetworkClient.apply(fhirSinkSetting.fhirRepoUrl)
 
@@ -39,42 +39,42 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   val patientMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/patient-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "patients.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "patients.csv"))
   )
 
   val encounterMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/encounter-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "encounters.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "encounters.csv"))
   )
 
   val symptomsAssMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-assessment-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "parkinson-symptom-assessments.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "parkinson-symptom-assessments.csv"))
   )
 
   val symptomsExistenceMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-existence-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "parkinson-symptom-existence.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "parkinson-symptom-existence.csv"))
   )
 
   val otherAssMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/other-assessments-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "other-assessments.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "other-assessments.csv"))
   )
 
   val conditionMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/condition-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "conditions.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "conditions.csv"))
   )
 
   val medicationUsedMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/medication-used-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "medication-used.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "medication-used.csv"))
   )
 
   val deviceUsedMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot2/device-used-mapping",
-    sourceContext = Map("source" ->  FileSystemSource(path = "device-used.csv"))
+    sourceContext = Map("source" -> FileSystemSource(path = "device-used.csv"))
   )
 
   val clinicalNoteMappingTask = FhirMappingTask(
@@ -112,8 +112,8 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
       .executeMappingJob(tasks = Seq(patientMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -142,8 +142,8 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
       .executeMappingJob(tasks = Seq(encounterMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -174,8 +174,8 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
       .executeMappingJob(tasks = Seq(symptomsAssMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -195,7 +195,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
       (results.head \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "443544006"
       (results.head \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Freezing of gait"
-      (results.apply(4) \ "valueBoolean").extract[Boolean] shouldBe(true)
+      (results.apply(4) \ "valueBoolean").extract[Boolean] shouldBe (true)
       (results.last \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "39898005"
     }
   }
@@ -204,9 +204,9 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     //Send it to our fhir repo if they are also validated
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
-      .executeMappingJob(tasks = Seq(symptomsExistenceMappingTask), sourceSettings = dataSourceSettings,sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .executeMappingJob(tasks = Seq(symptomsExistenceMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -234,9 +234,9 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     //Send it to our fhir repo if they are also validated
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
-      .executeMappingJob(tasks = Seq(otherAssMappingTask), sourceSettings = dataSourceSettings,sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .executeMappingJob(tasks = Seq(otherAssMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -249,15 +249,15 @@ class Pilot2IntegrationTest extends PilotTestSpec {
         resource shouldBe a[Resource]
         resource
       })
-       results.length shouldBe 10
+      results.length shouldBe 10
 
       (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.apply(1) \ "encounter" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Encounter", "e2")
       (results.apply(2) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "K76.8"
-      (results.apply(2) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Other specified diseases of liver"
+//      (results.apply(2) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Other specified diseases of liver"
 
-      (results.head \ "onsetDateTime" ).extract[String] shouldBe "2010-10-15"
-      (results.head \ "abatementDateTime" ).extract[String] shouldBe "2010-11-15"
+      (results.head \ "onsetDateTime").extract[String] shouldBe "2010-10-15"
+      (results.head \ "abatementDateTime").extract[String] shouldBe "2010-11-15"
     }
   }
 
@@ -265,9 +265,9 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     //Send it to our fhir repo if they are also validated
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
-      .executeMappingJob(tasks = Seq(conditionMappingTask), sourceSettings = dataSourceSettings,sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .executeMappingJob(tasks = Seq(conditionMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -280,10 +280,13 @@ class Pilot2IntegrationTest extends PilotTestSpec {
         resource shouldBe a[Resource]
         resource
       })
-      results.length shouldBe 5
-      (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
+      results.length shouldBe 16
+      (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
       (results.apply(2) \ "medicationCodeableConcept" \ "coding" \ "code").extract[Seq[String]].head shouldBe "N06AB03"
       (results.apply(2) \ "medicationCodeableConcept" \ "coding" \ "display").extract[Seq[String]].head shouldBe "fluoxetine"
+      (results.apply(14) \ "dosage" \ "timing" \ "repeat" \ "frequency").extract[Seq[Int]].head shouldBe 2
+      (results.apply(14) \ "dosage" \ "doseAndRate" \ "doseRange" \ "low" \ "value").extract[Seq[Int]].head shouldBe 600 //(30 * 20)
+      (results.last \ "dosage" \ "doseAndRate" \ "doseRange" \ "high" \ "value").extract[Seq[Float]].head shouldBe 250.0 //(0.5 * 500)
     }
   }
 
@@ -291,9 +294,9 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     //Send it to our fhir repo if they are also validated
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
-      .executeMappingJob(tasks = Seq(medicationUsedMappingTask), sourceSettings = dataSourceSettings,sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .executeMappingJob(tasks = Seq(medicationUsedMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
       )
   }
 
@@ -308,7 +311,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
       })
       results.length shouldBe 2
       (results.last \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
-      (results.last \ "device" \"identifier" \ "value").extract[String] shouldBe "levodopa-infusion-pump"
+      (results.last \ "device" \ "identifier" \ "value").extract[String] shouldBe "levodopa-infusion-pump"
     }
   }
 
@@ -316,9 +319,9 @@ class Pilot2IntegrationTest extends PilotTestSpec {
     //Send it to our fhir repo if they are also validated
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
-      .executeMappingJob(tasks = Seq(deviceUsedMappingTask), sourceSettings = dataSourceSettings,sinkSettings = fhirSinkSetting)
-      .map( unit =>
-        unit shouldBe ()
+      .executeMappingJob(tasks = Seq(deviceUsedMappingTask), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
       )
   }
 

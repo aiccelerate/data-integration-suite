@@ -41,10 +41,49 @@
             "start": "{{startDate}}",
             "end": "{{endDate.nav:orElse(startDate.toDate() + 24 months)}}"
           },
+          "dosage": [{
+            "{{#singleValue}}": "{{iif(dose.contains('+'), {}, true)}}",
+            "{{?}}": {
+              "sequence": 1,
+              "timing": {
+                "repeat": {
+                  "frequency": "{{iif(frequency.trim().exists(), frequency.trim().toDecimal(), 1)}}",
+                  "periodUnit": "d",
+                  "period": 1
+                }
+              },
+              "doseAndRate": [
+                {
+                  "{{#range}}": "{{iif(dose.contains('-'), true, {})}}",
+                  "{{?}}": {
+                    "doseRange": {
+                      "low": {
+                        "unit": "{{? doseUnit.trim()}}",
+                        "value": "{{dose.utl:split('-').first().trim().toDecimal() * iif(strength.trim().exists(), strength.toDecimal(), 1)}}"
+                      },
+                      "high": {
+                        "unit": "{{? doseUnit.trim()}}",
+                        "value": "{{dose.utl:split('-').last().trim().toDecimal() * iif(strength.trim().exists(), strength.toDecimal(), 1)}}"
+                      }
+                    }
+                  }
+                },
+                {
+                  "{{#single}}": "{{iif(dose.contains('-'), {}, true)}}",
+                  "{{?}}": {
+                    "doseQuantity": {
+                      "unit": "{{? doseUnit.trim()}}",
+                      "value": "{{? dose.toDecimal() * iif(strength.trim().exists(), strength.toDecimal(), 1)}}"
+                    }
+                  }
+                }
+              ]
+            }
+          }],
           "dosage": {
-            "{{#ds}}": "{{dose.utl:split('+').select($this.toDecimal())}}",
+            "{{#ds}}": "{{iif(dose.contains('+'), dose.utl:split('+').select($this.toDecimal()), {})}}",
             "{{*}}": {
-              "sequence": "{{? %sectionIndex}}",
+              "sequence": "{{%sectionIndex}}",
               "timing": {
                 "repeat": {
                   "frequency": 1,
@@ -58,7 +97,7 @@
                     "system": "http://unitsofmeasure.org",
                     "code": "mg",
                     "unit": "mg",
-                    "value": "{{? %ds * strength}}"
+                    "value": "{{%ds * strength.toDecimal()}}"
                   }
                 }
               ]
