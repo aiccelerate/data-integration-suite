@@ -18,15 +18,15 @@
   "context": {
     "labResultsConceptMap":  {
       "category": "concept-map",
-      "url": "./lab-results-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/lab-results-concept-map.csv"
     },
     "labInterpretationsConceptMap":  {
       "category": "concept-map",
-      "url": "./lab-interpretation-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/lab-interpretation-concept-map.csv"
     },
     "labResultUnitConversion": {
       "category": "unit-conversion",
-      "url": "./lab-results-unit-conversion.csv"
+      "url": "$CONTEXT_REPO/pilot1-hsjd/lab-results-unit-conversion.csv"
     }
   },
   "variable": [
