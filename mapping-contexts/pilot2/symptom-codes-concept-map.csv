@@ -36,3 +36,4 @@ verbal-fluency,289197000,http://snomed.info/sct,Lack of fluency in speech,,https
 attention,76039005,http://snomed.info/sct,Disturbance of attention,,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralProblemObservation
 atrophy,9088006,http://snomed.info/sct,Lobar atrophy,,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralProblemObservation
 apathy,20602000,http://snomed.info/sct,"Apathy, indifference (finding)",,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralProblemObservation
+depression,35489007,http://snomed.info/sct,"Depression",,https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralProblemObservation

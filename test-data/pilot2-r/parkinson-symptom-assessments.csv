@@ -1,10 +1,10 @@
 observationID,pid,startDate,endDate,code,method,score,isProm,encounterID
 sa1,p1,2022-04-23,,motor-symptoms,updrs3,21,FALSE,e1
 sa2,p1,2021-10-17,,motor-symptoms,updrs3,29,FALSE,e2
-sa3,p2,2022-05-10,,motor-symptoms,updrs3,35,FALSE,e3
+sa3,p1,2012-02-07,2012-02-13,stiffness-rigidity,updrs3,18,FALSE,e1
 sa4,p2,2021-12-17,,motor-symptoms,updrs3,42,FALSE,e4
 sa5,p3,2022-04-02,,motor-symptoms,updrs3,33,FALSE,e5
-sa6,p3,2021-11-17,,motor-symptoms,updrs3,31,FALSE,e6
+sa6,p1,2012-02-07,2012-02-13,motor-symptoms,updrs4,18,FALSE,e1
 sa7,p4,2022-01-23,,motor-symptoms,updrs4,21,FALSE,e7
 sa8,p4,2021-06-17,,motor-symptoms,updrs4,19,FALSE,e8
 sa9,p5,2022-02-23,,motor-symptoms,updrs4,5,FALSE,e7

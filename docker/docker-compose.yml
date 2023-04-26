@@ -42,6 +42,7 @@ services:
         condition: service_healthy
     environment:
       - APP_CONF_FILE=/usr/local/tofhir/conf/docker/tofhir.conf
+      - LOGBACK_CONF_FILE=/usr/local/tofhir/conf/docker/logback.conf
       - CONTEXT_PATH=conf
       - FHIR_REPO_URL=http://onfhir:8080/fhir
     command: ["run --job /usr/local/tofhir/conf/mapping-jobs/pilot2/pilot2-mappingjob.json"]

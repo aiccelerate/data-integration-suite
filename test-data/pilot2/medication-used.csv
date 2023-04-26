@@ -1,6 +1,18 @@
 medicationUseID,pid,startDate,endDate,code,codeDisplay,frequency,dose,doseUnit,strength
-mu1,p1,"2012-05-10","2012-05-28",N04BA01,Levodopa,1,"1",mg,50
-mu2,p2,"2014-03-10","2014-03-20",N04BB01,Amantadine,2,"1+1",mg,5
+mu1,p1,2021-10-17,2022-04-10,N04BA01,Levodopa,2,"1+1",mg,10
+mu2,p1,2021-08-17,2021-10-16,N04BA01,Levodopa,1,5.00000,mg,10
 mu3,p3,"2011-02-06","2011-04-06",N06AB03,fluoxetine,,,
-mu4,p4,"2009-01-25","2009-01-30",N06DA01,Tacrine,,,
-mu5,p5,"2014-01-25","2014-02-25",A06AB09,Bisoxatin,,,
+mu4,p2,2022-03-10,"2022-05-10",N04BA01,Levodopa,1,"",mg,15
+mu5,p2,2022-01-10,2022-03-09,N04BA01,Levodopa,2,"1.0+2",mg,15
+mu6,p3,2022-01-10,2022-04-02,N04BA01,Levodopa,5,"1+1+1+1+1",mg,15
+mu7,p3,2021-07-10,2022-01-09,N04BA01,Levodopa,4,"2-5",mg,15
+mu8,p3,2021-02-10,2021-07-09,N04BA01,Levodopa,2,"2+1",mg,10
+mu9,p3,2022-01-10,2022-04-02,N04BC02,Dopamine Agonist,1,"2",mg,5
+mu10,p3,2021-07-10,2022-01-10,N06AX03,Mianserin,"","","",1.05
+mu11,p2,2022-01-10,2022-03-10,N05CD04,Estazolam,"","",mg,100.0
+mu12,p1,2021-10-17,2022-04-10,N05AG01,Fluspirilene,"",26.0,"mg",0.25
+mu13,p2,2021-08-17,2021-10-12,N02AD01,Pentazocine,"","",G,""
+mu14,p3,2021-08-17,2021-10-12,A06AD12,Lactitol,"","",TABLETTI,500.0
+mu15,p1,2021-08-17,2021-10-12,A06AD12,Lactitol,2,"30-40","mg",20
+mu16,p2,2021-08-17,2021-10-12,A06AD12,Lactitol,1,".25-.5",TABLETTI,500.0
+

@@ -38,7 +38,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "conditions.csv"
+          "path": "conditions-withoutCodeDisplay.csv"
         }
       }
     },
