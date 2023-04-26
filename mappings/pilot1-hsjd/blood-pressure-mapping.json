@@ -72,7 +72,7 @@
               "valueQuantity":{
                 "{{#sysBp}}": "{{systolic}}",
                 "{{?}}": {
-                  "value": "{{%sysBp.replace(',', '.').toDecimal()}}",
+                  "value": "{{%sysBp}}",
                   "unit": "mmHg",
                   "system": "http://unitsofmeasure.org",
                   "code": "mm[Hg]"
@@ -104,7 +104,7 @@
               "valueQuantity":{
                 "{{#diasBp}}": "{{diastolic}}",
                 "{{?}}": {
-                  "value": "{{%diasBp.replace(',', '.').toDecimal()}}",
+                  "value": "{{%diasBp}}",
                   "unit": "mmHg",
                   "system": "http://unitsofmeasure.org",
                   "code": "mm[Hg]"
