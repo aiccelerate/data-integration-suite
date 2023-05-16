@@ -23,10 +23,10 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-encounter.encounterId",
-        "path": "Ext-plt3-p2-encounter.encounterId",
-        "short": "Id of encounter/episode",
-        "definition": "Identifier of this encounter/episode",
+        "id": "Ext-plt3-p2-encounter.pid",
+        "path": "Ext-plt3-p2-encounter.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
         "min": 1,
         "max": "1",
         "type": [
@@ -39,10 +39,10 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-encounter.pid",
-        "path": "Ext-plt3-p2-encounter.pid",
-        "short": "Patient identifier",
-        "definition": "Unique patient identifier  (a pseudoynm)",
+        "id": "Ext-plt3-p2-encounter.encounterID",
+        "path": "Ext-plt3-p2-encounter.encounterID",
+        "short": "Id of encounter/episode",
+        "definition": "Identifier of this encounter/episode",
         "min": 1,
         "max": "1",
         "type": [

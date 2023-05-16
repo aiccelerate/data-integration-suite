@@ -87,6 +87,22 @@
         ]
       },
       {
+        "id": "Ext-plt3-p2-neurooncological-observation.description",
+        "path": "Ext-plt3-p2-neurooncological-observation.description",
+        "short": "Observation description",
+        "definition": "Description for the type of the measurement",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt3-p2-neurooncological-observation.valueCode",
         "path": "Ext-plt3-p2-neurooncological-observation.valueCode",
         "short": "Coded value for measurement",
@@ -114,6 +130,22 @@
             "code": "decimal",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-symptom-observation.table",
+        "path": "Ext-plt3-p2-symptom-observation.table",
+        "short": "Where this information is coming from",
+        "definition": "Where this information is coming from",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
             ]
           }
         ]

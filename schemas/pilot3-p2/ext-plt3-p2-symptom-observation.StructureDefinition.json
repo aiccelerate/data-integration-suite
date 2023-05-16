@@ -117,6 +117,38 @@
             ]
           }
         ]
+      },
+      {
+        "id": "Ext-plt3-p2-symptom-observation.description",
+        "path": "Ext-plt3-p2-symptom-observation.description",
+        "short": "Symptom description",
+        "definition": "The symptom that this observation is about. ",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-symptom-observation.table",
+        "path": "Ext-plt3-p2-symptom-observation.table",
+        "short": "Where this information is coming from",
+        "definition": "Where this information is coming from (symptom_icd10 | symptom_texts)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
       }
     ]
   }

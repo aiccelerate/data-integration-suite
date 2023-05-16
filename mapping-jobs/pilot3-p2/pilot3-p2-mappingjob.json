@@ -25,6 +25,15 @@
       }
     },
     {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/encounter-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "encounters.csv"
+        }
+      }
+    },
+    {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/condition-mapping",
       "sourceContext": {
         "source": {
@@ -84,6 +93,33 @@
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "vitalsigns.csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/procedure-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "procedures.csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/radiological-studies-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "radiological-studies.csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/clinical-note-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "clinical-notes.csv"
         }
       }
     }

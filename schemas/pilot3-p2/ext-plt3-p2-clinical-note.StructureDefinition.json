@@ -39,6 +39,22 @@
         ]
       },
       {
+        "id": "Ext-plt3-p2-clinical-note.clinicalNoteID",
+        "path": "Ext-plt3-p2-clinical-note.clinicalNoteID",
+        "short": "Record identifier",
+        "definition": "Record identifier",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt3-p2-clinical-note.language",
         "path": "Ext-plt3-p2-clinical-note.language",
         "short": "Language of the content",
@@ -50,6 +66,22 @@
             "code": "code",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-clinical-note.description",
+        "path": "Ext-plt3-p2-clinical-note.description",
+        "short": "Description of type of note",
+        "definition": "Description of type of note",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -91,6 +123,38 @@
         "path": "Ext-plt3-p2-clinical-note.encounterID",
         "short": "Id of encounter",
         "definition": "Reference to the visit/encounter that this note is provided if such an information exists",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-clinical-note.organization",
+        "path": "Ext-plt3-p2-clinical-note.organization",
+        "short": "Id of organization note is retrieved",
+        "definition": "Reference to the organization that this note is provided if such an information exists",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-clinical-note.performer",
+        "path": "Ext-plt3-p2-clinical-note.performer",
+        "short": "Id of practitioner who enters the note",
+        "definition": "Id of practitioner who enters the note",
         "min": 0,
         "max": "1",
         "type": [

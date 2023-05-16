@@ -6,3 +6,5 @@ CR,LA28366-5,Complete response
 PR,LA28369-9,Partial response
 SD,LA28371-5,Stable disease
 PD,LA28370-7,Progressive disease
+true,LA3971-4,Evidence of this Cancer (relapse)
+false,LA4566-1,No Evidence of this Cancer

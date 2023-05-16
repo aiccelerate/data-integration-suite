@@ -28,7 +28,8 @@
           ],
           "active": true,
           "gender": "{{gender}}",
-          "birthDate": "{{birthDate}}"
+          "birthDate": "{{birthDate}}",
+          "deceasedDateTime": "{{? deathDate}}"
         }
       }
     }

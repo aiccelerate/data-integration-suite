@@ -1,5 +1,5 @@
 source_code,source_display
-J01CR05,piperacillin and enzyme inhibitor
+J01CR05,"piperacillin and enzyme inhibitor"
 J01DC02,cefuroxime
 J01DD02,ceftazidime
 J01DD04,ceftriaxone
@@ -21,3 +21,9 @@ L01CA01,vinblastine
 L01DB01,Doxorubicin
 L01DA01,Dactinomycin
 L01AC01,Thiotepa
+G03BA03,Testosterone
+G03CA03,Estradiol
+H02AB09,Hydrocortisone
+H01BA02,Desmopressin
+H03AA01,"Levothyroxine sodium"
+L02AE02,Leuprorelin

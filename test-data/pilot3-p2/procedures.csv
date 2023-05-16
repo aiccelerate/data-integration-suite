@@ -1,0 +1,6 @@
+procedureId,pid,date,code,description
+pr1,p1,2021-10-15,AAB00,"Extirpation of ..."
+pr2,p1,2021-12-05,WW500,"Blood transfusion"
+pr3,p2,2021-03-11,WF002,"Radical radiotherapy"
+pr4,p3,2021-05-06,AAG50,"Streoactic ..."
+pr5,p4,2021-04-23,AAE10,"Transphenoidal ..."

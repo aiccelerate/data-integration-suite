@@ -11,6 +11,10 @@
     "medsConceptMap": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/pilot3-p2/medications-concept-map.csv"
+    },
+    "medsRouteConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot3-p2/medication-routes-concept-map.csv"
     }
   },
   "mapping": [
@@ -31,9 +35,10 @@
               {
                 "system": "http://www.whocc.no/atc",
                 "code": "{{code}}",
-                "display": "{{mpp:getConcept(%medsConceptMap, code, 'source_display')}}"
+                "display": "{{? mpp:getConcept(%medsConceptMap, code, 'source_display')}}"
               }
-            ]
+            ],
+            "text": "{{? description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "effectiveDateTime": "{{startTime}}"

@@ -22,11 +22,8 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Encounter",
-          "id": "{{mpp:getHashedId('Encounter', encounterId & pid & type & startTime.toString())}}",
+          "id": "{{mpp:getHashedId('Encounter', encounterID)}}",
           "meta": {
-            "profile": [
-              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-PediatricNeurooncologicalCareEncounter"
-            ],
             "source": "{{%sourceSystem.sourceUri}}"
           },
           "status": "finished",
@@ -34,12 +31,12 @@
             {
               "use": "official",
               "system": "{{%sourceSystem.sourceUri}}",
-              "value": "{{encounterId & type & startTime.toString()}}"
+              "value": "{{encounterID}}"
             }
           ],
           "class": {
             "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-            "code": "{{mpp:getConcept(%encounterConceptMap, type, 'target_class').nav:orElse(class)}}"
+            "code": "{{mpp:getConcept(%encounterConceptMap, type, 'target_class').nav:orElse(category)}}"
           },
           "type": [
             {
@@ -53,40 +50,20 @@
                   }
                 },
                 {
-                  "system": "{{%sourceSystem}}/encounter-types",
-                  "code": "{{type}}",
-                  "display": "{{mpp:getConcept(%encounterConceptMap, type, 'source_display')}}"
+                  "{{#typ}}": "{{type}}",
+                  "{{?}}": {
+                    "system": "{{%sourceSystem.sourceUri}}/encounter-types",
+                    "code": "{{%typ}}",
+                    "display": "{{mpp:getConcept(%encounterConceptMap, %typ, 'source_display')}}"
+                  }
                 }
               ]
             }
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "period": {
-            "start": "{{startTime}}",
-            "end": "{{? endTime}}"
-          },
-          "participant": {
-            "{{#prid}}": "{{participant}}",
-            "{{*}}": {
-              "type": [{
-                "coding": [{
-                  "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
-                  "code": "PPRF",
-                  "display": "Primary performer"
-                }]
-              }],
-              "individual": "{{mpp:createFhirReferenceWithHashedId('Practitioner', %prid)}}"
-            }
-          },
-          "location": {
-            "{{#loc}}": "{{location}}",
-            "{{*}}": {
-              "location": "{{mpp:createFhirReferenceWithHashedId('Location', %loc)}}",
-              "period": {
-                "start": "{{startTime}}",
-                "end": "{{? endTime}}"
-              }
-            }
+            "start": "{{startDate}}",
+            "end": "{{? endDate}}"
           }
         }
       }

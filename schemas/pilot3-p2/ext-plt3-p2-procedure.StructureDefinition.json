@@ -1,0 +1,107 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p2-procedure",
+  "name": "Ext-plt3-p2-procedure",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt3-p2-procedure",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt3-p2-procedure",
+        "path": "Ext-plt3-p2-procedure",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-procedure.procedureId",
+        "path": "Ext-plt3-p2-procedure.procedureId",
+        "short": "Unique identifier for this procedure record.",
+        "definition": "Unique identifier for this procedure record.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-procedure.pid",
+        "path": "Ext-plt3-p2-procedure.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-procedure.date",
+        "path": "Ext-plt3-p2-procedure.date",
+        "short": "Procedure date",
+        "definition": "When this procedure is applied.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-procedure.code",
+        "path": "Ext-plt3-p2-procedure.code",
+        "short": "Procedure code",
+        "definition": "ICD-10-PCS code for this procedure",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-procedure.description",
+        "path": "Ext-plt3-p2-procedure.description",
+        "short": "Procedure description",
+        "definition": "Description for this procedure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

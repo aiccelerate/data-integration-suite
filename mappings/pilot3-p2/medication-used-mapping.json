@@ -31,9 +31,10 @@
               {
                 "system": "http://www.whocc.no/atc",
                 "code": "{{code}}",
-                "display": "{{mpp:getConcept(%medsConceptMap, code, 'source_display')}}"
+                "display": "{{? mpp:getConcept(%medsConceptMap, code, 'source_display')}}"
               }
-            ]
+            ],
+            "text": "{{? description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "effectivePeriod": {

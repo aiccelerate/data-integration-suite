@@ -31,15 +31,13 @@
               {
                 "system": "http://snomed.info/sct",
                 "code": "{{code}}",
-                "display": "{{mpp:getConcept(%symptomsConceptMap, code, 'source_display')}}"
+                "display": "{{? mpp:getConcept(%symptomsConceptMap, code, 'source_display')}}"
               }
-            ]
+            ],
+            "text": "{{? description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "effectivePeriod": {
-            "start": "{{startDate}}",
-            "end": "{{? endDate}}"
-          },
+          "effectiveDateTime": "{{startDate}}",
           "valueBoolean": "{{value}}"
         }
       }

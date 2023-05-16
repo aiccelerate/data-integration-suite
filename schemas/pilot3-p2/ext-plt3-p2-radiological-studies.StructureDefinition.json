@@ -1,0 +1,139 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p2-radiological-studies",
+  "name": "Ext-plt3-p2-radiological-studies",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt3-p2-radiological-studies",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt3-p2-radiological-studies",
+        "path": "Ext-plt3-p2-radiological-studies",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.pid",
+        "path": "Ext-plt3-p2-radiological-studies.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.studyID",
+        "path": "Ext-plt3-p2-radiological-studies.studyID",
+        "short": "Study identifier",
+        "definition": "Study identifier",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.orderTime",
+        "path": "Ext-plt3-p2-radiological-studies.orderTime",
+        "short": "Study order time",
+        "definition": "Order time of study.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.code",
+        "path": "Ext-plt3-p2-radiological-studies.code",
+        "short": "Study code",
+        "definition": "Code of the radiology examination/study in source system.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.description",
+        "path": "Ext-plt3-p2-radiological-studies.description",
+        "short": "Name of the examination/study",
+        "definition": "Name of the examination/study",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.startTime",
+        "path": "Ext-plt3-p2-radiological-studies.startTime",
+        "short": "Study time",
+        "definition": "Clinical time of study.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p2-radiological-studies.endTime",
+        "path": "Ext-plt3-p2-radiological-studies.endTime",
+        "short": "Study end time",
+        "definition": "Clinical end time of study.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

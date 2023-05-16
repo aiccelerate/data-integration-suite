@@ -15,3 +15,4 @@ source_code,source_display,target_unit
 80066-4,Mitral flow in diastole A-wave - MVA (Mitral valve Maximum A-wave velocity by US.doppler),cm/s
 80070-6,Mitral flow in diastole E-wave - MVE (Mitral valve Maximum E-wave velocity by US.doppler),cm/s
 18038-0,MVE/MVA Mitral valve Peak E wave/Peak A wave by US.doppler,{ratio}
+relapse,Cancer outcome status,

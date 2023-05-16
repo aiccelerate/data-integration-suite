@@ -1,0 +1,2 @@
+pid,clinicalNoteID,language,description,data,date,encounterID,organization,performer
+p1,cn1,fi,,RGVuZW1lLCB0ZXN0LCBkZW5lbWUsIHRlc3QsIGRlbmVtZSwgdGVzdA==,2012-05-28T10:00:00Z,e1,org1,

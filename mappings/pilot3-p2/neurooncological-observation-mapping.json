@@ -22,7 +22,7 @@
       "precondition": {
         "name": "isQuantityObservation",
         "language": "text/fhirpath",
-        "expression": "code != '84892-9' and code != '88040-1'"
+        "expression": "code != '84892-9' and code != '88040-1' and code != 'relapse'"
       },
       "expression": {
         "name": "result",
@@ -64,9 +64,9 @@
     },
     {
       "precondition": {
-        "name": "isQuantityObservation",
+        "name": "isCodedObservation",
         "language": "text/fhirpath",
-        "expression": "code = '84892-9' or code = '88040-1'"
+        "expression": "code = '84892-9' or code = '88040-1' or code = 'relapse'"
       },
       "expression": {
         "name": "result",
@@ -90,7 +90,7 @@
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "{{code}}",
+                "code": "{{iif(code='relapse', '21976-6', code)}}",
                 "display": "{{mpp:getConcept(%obsConceptMap, code, 'source_display')}}"
               }
             ]

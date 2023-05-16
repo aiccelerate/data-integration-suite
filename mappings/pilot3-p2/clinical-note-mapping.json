@@ -14,11 +14,20 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "DocumentReference",
-          "id": "{{mpp:getHashedId('DocumentReference',pid & date.toString() & data.substring(0,50))}}",
+          "id": "{{mpp:getHashedId('DocumentReference', clinicalNoteID)}}",
           "meta": {
-            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ClinicalNote"],
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-ClinicalNote"
+            ],
             "source": "{{%sourceSystem.sourceUri}}"
           },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{clinicalNoteID}}"
+            }
+          ],
           "status": "current",
           "docStatus": "final",
           "category": [
