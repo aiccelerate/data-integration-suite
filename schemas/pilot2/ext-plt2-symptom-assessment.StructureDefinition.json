@@ -23,10 +23,10 @@
         ]
       },
       {
-        "id": "Ext-plt2-symptom-assessment.observationID",
-        "path": "Ext-plt2-symptom-assessment.observationID",
-        "short": "Unique identifier for this symptom assessment observation.",
-        "definition": "Unique identifier for this symptom assessment observation.",
+        "id": "Ext-plt2-symptom-assessment.pid",
+        "path": "Ext-plt2-symptom-assessment.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
         "min": 1,
         "max": "1",
         "type": [
@@ -39,10 +39,10 @@
         ]
       },
       {
-        "id": "Ext-plt2-symptom-assessment.pid",
-        "path": "Ext-plt2-symptom-assessment.pid",
-        "short": "Patient identifier",
-        "definition": "Unique patient identifier  (a pseudoynm)",
+        "id": "Ext-plt2-symptom-assessment.observationID",
+        "path": "Ext-plt2-symptom-assessment.observationID",
+        "short": "Unique identifier for this symptom assessment observation.",
+        "definition": "Unique identifier for this symptom assessment observation.",
         "min": 1,
         "max": "1",
         "type": [
@@ -162,6 +162,22 @@
             "code": "id",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-symptom-assessment.table",
+        "path": "Ext-plt2-symptom-assessment.table",
+        "short": "Original table name",
+        "definition": "Name of the table from which this symptom existence is created.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]

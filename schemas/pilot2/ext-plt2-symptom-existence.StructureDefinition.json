@@ -149,6 +149,22 @@
             ]
           }
         ]
+      },
+      {
+        "id": "Ext-plt2-symptom-existence.table",
+        "path": "Ext-plt2-symptom-existence.table",
+        "short": "Original table name",
+        "definition": "Name of the table from which this symptom existence is created.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
       }
     ]
   }
