@@ -1,0 +1,214 @@
+{
+  "id": "pilot3-hus-mapping-job",
+  "sourceSettings": {
+    "source": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "pilot3-p2-source",
+      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot3-p2-hus",
+      "dataFolderPath": "${DATA_FOLDER_PATH}"
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "${FHIR_REPO_URL}",
+    "writeErrorHandling": "continue"
+  },
+  "mappingErrorHandling": "continue",
+  "mappings": [
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/patient-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "Patient.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/encounter-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "Encounters.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/condition-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "Conditions.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-used-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "MedicationUsed.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-administration-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "MedicationAdministration.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/lab-results-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "LabResult.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/neurooncological-observation-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "NeurooncologicalObservation.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/symptom-observation-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "SymptomObservation_fromtext.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/symptom-observation-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "SymptomObservation_icd10.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/vital-signs-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "VitalObservation.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/procedure-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "Procedure.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/radiological-studies-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "RadiologicalStudy.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/clinical-note-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path": "Notes.csv",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
+        }
+      }
+    }
+  ]
+}
