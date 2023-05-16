@@ -1,6 +1,20 @@
-docker-compose -f .\data-integration-suite\docker\docker-compose.yml --project-directory .\ -p aic up -d
-docker-compose -f ./data-integration-suite/docker/docker-compose.yml --project-directory ./ -p aic up -d
-docker-compose -p aic down
+docker-compose -f .\data-integration-suite\docker\docker-compose-onfhir.yml --project-directory .\ -p aic-fhir up -d
+docker-compose -f ./data-integration-suite/docker/docker-compose-onfhir.yml --project-directory ./ -p aic-fhir up -d
+docker-compose -p aic-fhir down
+
+
+docker run -d `
+    -v ${PWD}\data-integration-suite:/usr/local/tofhir/conf `
+    -v ${PWD}\tofhir-logs:/usr/local/tofhir/logs `
+    --network=aic_net `
+    --env APP_CONF_FILE=/usr/local/tofhir/conf/docker/tofhir.conf `
+    --env LOGBACK_CONF_FILE=/usr/local/tofhir/conf/docker/logback.conf `
+    --env CONTEXT_PATH=conf `
+    --env DATA_FOLDER_PATH=data `
+    --env FHIR_REPO_URL=http://onfhir:8080/fhir `
+    --name tofhir srdc/tofhir:latest `
+    run --job /usr/local/tofhir/conf/mapping-jobs/pilot2/pilot2-mappingjob.json
+
 
 -----------------------------------
 

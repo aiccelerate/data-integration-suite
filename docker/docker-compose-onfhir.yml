@@ -10,6 +10,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+    networks:
+      - aic
     volumes:
       - fhirdb:/data/db
   onfhir:
@@ -32,22 +34,15 @@ services:
       - DB_HOST=mongo:27017
     ports:
       - "8080:8080"
+    networks:
+      - aic
     volumes:
       - ./common-data-model:/usr/local/onfhir/conf
-  tofhir:
-    image: srdc/tofhir:latest
-    container_name: tofhir
-    depends_on:
-      onfhir:
-        condition: service_healthy
-    environment:
-      - APP_CONF_FILE=/usr/local/tofhir/conf/docker/tofhir.conf
-      - LOGBACK_CONF_FILE=/usr/local/tofhir/conf/docker/logback.conf
-      - CONTEXT_PATH=conf
-      - FHIR_REPO_URL=http://onfhir:8080/fhir
-    command: ["run --job /usr/local/tofhir/conf/mapping-jobs/pilot2/pilot2-mappingjob.json"]
-    volumes:
-      - ./data-integration-suite:/usr/local/tofhir/conf
-      - ./tofhir-logs:/usr/local/tofhir/logs
+
+networks:
+  aic:
+    name: aic_net
+
 volumes:
   fhirdb: {}
+
