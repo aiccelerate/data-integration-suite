@@ -145,10 +145,10 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
       (results.apply(25) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "2141-0"
       (results.apply(25) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Corticotropin [Mass/volume] in Plasma (P-ACTH)"
       (results.apply(25) \ "valueQuantity" \ "value").extract[Double] shouldBe 18.16060583
-      (results.apply(25) \ "valueQuantity" \ "unit").extract[String] shouldBe "ng/L"
+      (results.apply(25) \ "valueQuantity" \ "code").extract[String] shouldBe "ng/L"
 
       (results.apply(24) \ "valueQuantity" \ "value").extract[Double] shouldBe 16.08917965
-      (results.apply(24) \ "valueQuantity" \ "unit").extract[String] shouldBe "nmol/L"
+      (results.apply(24) \ "valueQuantity" \ "code").extract[String] shouldBe "nmol/L"
     }
   }
 
@@ -226,7 +226,7 @@ class Pilot3Part2IntegrationTest extends PilotTestSpec {
         resource shouldBe a[Resource]
         resource
       })
-      results.length shouldBe 21
+      results.length shouldBe 22
       (results.apply(9) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
       (results.apply(9) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "18156-0"
       (results.apply(9) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Posterior wall thickness (Left ventricular posterior wall Thickness during systole by US)"
