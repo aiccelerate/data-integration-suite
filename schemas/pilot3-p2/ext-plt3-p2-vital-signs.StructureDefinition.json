@@ -119,8 +119,8 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-symptom-observation.table",
-        "path": "Ext-plt3-p2-symptom-observation.table",
+        "id": "Ext-plt3-p2-vital-signs.table",
+        "path": "Ext-plt3-p2-vital-signs.table",
         "short": "Where this information is coming from",
         "definition": "Where this information is coming from",
         "min": 0,
