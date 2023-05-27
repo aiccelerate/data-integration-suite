@@ -1,5 +1,5 @@
 {
-  "id": "pilot3-p1-mapping-job",
+  "id": "pilot3-p1-mapping-job-deploy",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",
@@ -20,7 +20,13 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "patients.csv"
+          "path": "1_Patient.CSV",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
         }
       }
     },
@@ -29,7 +35,13 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "conditions.csv"
+          "path": "2_Condition.CSV",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
         }
       }
     },
@@ -38,7 +50,13 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "organizations.csv"
+          "path": "7_HospitalDepartment.CSV",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
         }
       }
     },
@@ -47,7 +65,13 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "hospitalUnits.csv"
+          "path": "8_HospitalUnit.CSV",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
         }
       }
     },
@@ -56,7 +80,13 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "encounters.csv"
+          "path": "3_Encounter.CSV",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
         }
       }
     },
@@ -65,10 +95,18 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "procedures.csv"
+          "path": "5_Procedure.CSV",
+          "fileFormat": "csv",
+          "options": {
+            "sep": ";",
+            "ignoreLeadingWhiteSpace": "true",
+            "ignoreTrailingWhiteSpace": "true"
+          }
         }
       }
     },
+
+
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
       "sourceContext": {

@@ -56,6 +56,11 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
     sourceContext = Map("source" -> FileSystemSource(path = "organizations.csv"))
   )
 
+  val hospitalUnitMappingTask = FhirMappingTask(
+    mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot3-p1/hospitalUnit-mapping",
+    sourceContext = Map("source" -> FileSystemSource(path = "hospitalUnits.csv"))
+  )
+
   val diagnosticStudiesMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
     sourceContext = Map("source" -> FileSystemSource(path = "diagnostic-studies.csv"))
@@ -155,7 +160,7 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
         resource shouldBe a[Resource]
         resource
       })
-      results.length shouldBe 1
+      results.length shouldBe 2
     }
   }
 
@@ -164,6 +169,29 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
     assume(fhirServerIsAvailable)
     fhirMappingJobManager
       .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(organizationMappingTask)), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+      .map(unit =>
+        unit shouldBe()
+      )
+  }
+
+  "hospital unit mapping" should "map test data" in {
+    //Some semantic tests on generated content
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(hospitalUnitMappingTask)), sourceSettings = dataSourceSettings) map { mappingResults =>
+      val results = mappingResults.map(r => {
+        r.mappedResource shouldBe defined
+        val resource = r.mappedResource.get.parseJson
+        resource shouldBe a[Resource]
+        resource
+      })
+      results.length shouldBe 2
+    }
+  }
+
+  it should "map test data and write it to FHIR repo successfully" in {
+    //Send it to our fhir repo if they are also validated
+    assume(fhirServerIsAvailable)
+    fhirMappingJobManager
+      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(hospitalUnitMappingTask)), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
       .map(unit =>
         unit shouldBe()
       )
