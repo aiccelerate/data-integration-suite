@@ -42,7 +42,7 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "period": {
-            "start": "{{startTime.nav.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'):orElse(plannedTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'))}}",
+            "start": "{{startTime.nav:orElse(plannedTime).utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
             "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           }
         }
@@ -85,7 +85,7 @@
             "text" : "{{description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "authoredOn": "{{procedureRequestDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "authoredOn": "{{procedureRequestDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')}}",
           "occurrenceDateTime": "{{plannedTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
         }
       }
