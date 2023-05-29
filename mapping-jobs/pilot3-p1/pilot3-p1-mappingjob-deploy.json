@@ -20,7 +20,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "1_Patient.CSV",
+          "path": "1_Patient.csv",
           "fileFormat": "csv",
           "options": {
             "sep": ",",
@@ -110,7 +110,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "7_HospitalDepartment.CSV",
+          "path": "7_HospitalDepartment.csv",
           "fileFormat": "csv",
           "options": {
             "sep": ",",
@@ -125,7 +125,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "8_HospitalUnit.CSV",
+          "path": "8_HospitalUnit.csv",
           "fileFormat": "csv",
           "options": {
             "sep": ",",
