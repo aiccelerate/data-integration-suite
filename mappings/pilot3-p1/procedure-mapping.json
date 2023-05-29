@@ -42,8 +42,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "period": {
-            "start": "{{startTime.nav:orElse(plannedTime)}}",
-            "end": "{{? endTime}}"
+            "start": "{{startTime.nav.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'):orElse(plannedTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'))}}",
+            "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           }
         }
       }
@@ -85,8 +85,8 @@
             "text" : "{{description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "authoredOn": "{{procedureRequestDate}}",
-          "occurrenceDateTime": "{{plannedTime}}"
+          "authoredOn": "{{procedureRequestDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "occurrenceDateTime": "{{plannedTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
         }
       }
     },
@@ -139,8 +139,8 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', procedureId)}}",
           "performedPeriod": {
-            "start": "{{startTime}}",
-            "end": "{{? endTime}}"
+            "start": "{{startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+            "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           }
         }
       }
