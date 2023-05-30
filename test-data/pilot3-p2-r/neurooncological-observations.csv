@@ -1,0 +1,8 @@
+observationID,pid,startDate,code,description,valueCode,valueQuantity,table
+nobs1,p1,2011-08-12,89015-2,,,12,
+nobs2,p2,2013-04-12,89015-2,,,7,
+nobs3,p1,2011-08-12,10230-1,,,34,
+nobs4,p1,2015-01-12,10230-1,,,55,
+nobs5,p1,2015-03-12,10230-1,,,48,
+nobs6,p1,2014-10-01,relapse,,true,,
+

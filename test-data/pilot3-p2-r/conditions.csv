@@ -1,0 +1,5 @@
+conditionID,pid,code,codeDisplay,clinicalStatus,onsetDateTime,abatementDateTime
+c1,p1,C71.01,Cerebrum except lobes and ventricles,,2010-10-15,
+c2,p1,C71.20,Temporal lobe,,2010-10-15,
+c3,p2,D43.1,"Brain,suprotentorial",,2012-10-15,
+c4,p3,D33.05,"Brain,suprotentorial",,2009-10-15,

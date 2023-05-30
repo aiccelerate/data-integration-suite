@@ -1,0 +1,10 @@
+procedureId,pid,date,code,description
+pr1,p1,2011-03-05,WW500,"Blood transfusion"
+pr2,p1,2011-05-05,WW500,"Blood transfusion"
+pr3,p1,2014-10-15,WF002,"Radical radiotherapy"
+pr4,p1,2014-11-15,WF002,"Radical radiotherapy"
+pr5,p1,2014-12-15,WF002,"Radical radiotherapy"
+pr6,p2,2012-11-11,AX099,"Radiotherapy of whole central nervous system"
+pr7,p2,2012-12-11,AX099,"Radiotherapy of whole central nervous system"
+pr8,p2,2013-01-11,AX099,"Radiotherapy of whole central nervous system"
+pr9,p3,2009-11-06,AAB00,"Extirpation of intractranial lesion"

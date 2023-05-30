@@ -1,0 +1,8 @@
+pid,startTime,code,description,route
+p1,2011-01-10T10:00:00.000Z,L01CA02,vinkristiini,IV
+p1,2011-01-15T10:00:00.000Z,L01XA02,karboplatiini,IV
+p1,2011-02-10T10:00:00.000Z,L01CA02,vinkristiini,IV
+p1,2011-02-15T10:00:00.000Z,L01XA02,karboplatiini,IV
+p1,2011-03-10T10:00:00.000Z,L01CA02,vinkristiini,IV
+p1,2011-04-10T10:00:00.000Z,L01CA02,vinkristiini,IV
+p1,2011-05-10T10:00:00.000Z,L01CA02,vinkristiini,IV
