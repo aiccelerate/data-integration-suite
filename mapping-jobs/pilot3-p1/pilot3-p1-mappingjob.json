@@ -1,5 +1,5 @@
 {
-  "id": "pilot3-p2-mapping-job",
+  "id": "pilot3-p1-mapping-job",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",
@@ -39,6 +39,15 @@
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "organizations.csv"
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/hospitalUnit-mapping",
+      "sourceContext": {
+        "source": {
+          "jsonClass": "FileSystemSource",
+          "path":  "hospitalUnits.csv"
         }
       }
     },

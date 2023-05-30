@@ -1,0 +1,107 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-hospitalUnit",
+  "name": "Ext-plt3-p1-hospitalUnit",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt3-p1-hospitalUnit",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt3-p1-hospitalUnit",
+        "path": "Ext-plt3-p1-hospitalUnit",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-hospitalUnit.lid",
+        "path": "Ext-plt3-p1-hospitalUnit.lid",
+        "short": "Id of the hospital unit.",
+        "definition": "Unique identifier assigned to the hospital unit/location by your system",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-hospitalUnit.name",
+        "path": "Ext-plt3-p1-hospitalUnit.name",
+        "short": "Name of the hospital unit",
+        "definition": "Name of the hospital unit",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-hospitalUnit.type",
+        "path": "Ext-plt3-p1-hospitalUnit.type",
+        "short": "Type of the hospital unit. ",
+        "definition": "Type of the hospital unit.",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-hospitalUnit.partOf",
+        "path": "Ext-plt3-p1-hospitalUnit.partOf",
+        "short": "Reference to the parent hospital unit/location.",
+        "definition": "If there is parent location (ward room in a ward), reference to the parent hospital unit.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p1-hospitalUnit.organization",
+        "path": "Ext-plt3-p1-hospitalUnit.organization",
+        "short": "Department/organization to which this unit belongs.",
+        "definition": "The identifier of the department/organization that is managing the unit/location.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

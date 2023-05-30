@@ -5,7 +5,7 @@
   "title": "Mapping of schema practitioner  to AIC-Practitioner profile",
   "source": [{
     "alias": "source",
-    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-practitioner"
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-practitioner"
   }],
   "context": {
     "practitionerConceptMap":  {

@@ -1,0 +1,57 @@
+{
+  "id": "hospitalUnit-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/hospitalUnit-mapping",
+  "name": "hospitalUnit-mapping",
+  "title": "Mapping of Hospital Unit schema for pilots to AIC-HospitalUnit profile",
+  "source": [
+    {
+      "alias": "source",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p1-hospitalUnit"
+    }
+  ],
+  "context": {
+    "hospitalUnitTypeConceptMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot3-p1/hospital-unit-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Location",
+          "id": "{{mpp:getHashedId('Location',lid)}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-HospitalUnit"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{lid}}"
+            }
+          ],
+          "name": "{{name}}",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{type}}",
+                  "display": "{{mpp:getConcept(%hospitalUnitTypeConceptMap, type, 'source_display')}}"
+                }
+              ]
+            }
+          ],
+          "managingOrganization": "{{? mpp:createFhirReferenceWithHashedId('Organization', organization)}}",
+          "partOf": "{{? mpp:createFhirReferenceWithHashedId('Location', partOf)}}"
+        }
+      }
+    }
+  ]
+}

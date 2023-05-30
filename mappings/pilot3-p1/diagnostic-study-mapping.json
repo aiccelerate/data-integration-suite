@@ -53,7 +53,7 @@
             "text" : "{{description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "authoredOn": "{{orderTime}}",
+          "authoredOn": "{{orderTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')}}",
           "performer": "{{* mpp:createFhirReferenceWithHashedId('Organization', organization)}}"
         }
       }
@@ -71,7 +71,7 @@
           },
           "status": "final",
           "basedOn": "{{* mpp:createFhirReferenceWithHashedId('ServiceRequest', studyId)}}",
-          "issued": "{{endTime}}",
+          "issued": "{{endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'  | 'yyyy-MM-dd')}}",
           "category": [
             {
               "coding": [
@@ -96,8 +96,8 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', procedureId)}}",
           "effectivePeriod": {
-            "start": "{{startTime}}",
-            "end": "{{? endTime}}"
+            "start": "{{startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'  | 'yyyy-MM-dd')}}",
+            "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'  | 'yyyy-MM-dd')}}"
           },
           "performer": {
             "{{#prf}}": "{{performer}}",

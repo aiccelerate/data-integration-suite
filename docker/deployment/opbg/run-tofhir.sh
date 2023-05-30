@@ -10,4 +10,4 @@ docker run -d \
     --env DATA_FOLDER_PATH=data \
     --env FHIR_REPO_URL=http://onfhir:8080/fhir \
     --name tofhir srdc/tofhir:latest \
-    run --job /usr/local/tofhir/conf/mapping-jobs/pilot1-hsjd/pilot1-hsjd.json
+    run --job /usr/local/tofhir/conf/mapping-jobs/pilot3-p1/pilot3-p1-mappingjob-deploy.json

@@ -62,8 +62,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "period": {
-            "start": "{{startTime}}",
-            "end": "{{? endTime}}"
+            "start": "{{startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSSSSS' | 'yyyy-MM-dd HH:mm:ss')}}",
+            "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss')}}"
           },
           "participant": {
             "{{#prid}}": "{{participant}}",
@@ -83,8 +83,8 @@
             "{{*}}": {
               "location": "{{mpp:createFhirReferenceWithHashedId('Location', %loc)}}",
               "period": {
-                "start": "{{startTime}}",
-                "end": "{{? endTime}}"
+                "start": "{{startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSSSSS' | 'yyyy-MM-dd HH:mm:ss'))}}",
+                "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'))}}"
               }
             }
           }

@@ -1,29 +1,29 @@
 {
-  "id": "pilot2-mapping-job-deploy",
+  "id": "pilot3-p1-mapping-job-deploy",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",
-      "name": "pilot2-source",
-      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot2-data",
+      "name": "pilot3-p1-source",
+      "sourceUri": "https://aiccelerate.eu/data-integration-suite/pilot3-p1-data",
       "dataFolderPath": "${DATA_FOLDER_PATH}"
     }
   },
   "sinkSettings": {
     "jsonClass": "FhirRepositorySinkSettings",
     "fhirRepoUrl": "${FHIR_REPO_URL}",
-    "writeErrorHandling": "continue"
+    "writeErrorHandling": "halt"
   },
-  "mappingErrorHandling": "continue",
+  "mappingErrorHandling": "halt",
   "mappings": [
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/patient-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/patient-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "Patient.csv",
+          "path": "1_Patient.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -31,14 +31,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/encounter-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/condition-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "Encounter.csv",
+          "path": "2_Condition.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -46,14 +46,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/condition-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/encounter-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "Condition.csv",
+          "path": "3_Encounter.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -61,14 +61,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/medication-used-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "MedicationUsed.csv",
+          "path": "4_DiagnosticStudy.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -76,14 +76,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/device-used-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/procedure-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "DeviceUsed.csv",
+          "path": "5_Procedure.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -91,14 +91,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-existence-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/practitioner-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "ParkinsonSymptomExistence_from_texts.csv",
+          "path": "6_Practitioner.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -106,14 +106,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-existence-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/organization-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "ParkinsonSymptomExistence_Terveyskyla.csv",
+          "path": "7_HospitalDepartment.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }
@@ -121,44 +121,14 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-assessment-mapping",
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/hospitalUnit-mapping",
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "ParkinsonSymptomAssessment.csv",
+          "path": "8_HospitalUnit.csv",
           "fileFormat": "csv",
           "options": {
-            "sep": ";",
-            "ignoreLeadingWhiteSpace": "true",
-            "ignoreTrailingWhiteSpace": "true"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/other-assessments-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "OtherAssessment.csv",
-          "fileFormat": "csv",
-          "options": {
-            "sep": ";",
-            "ignoreLeadingWhiteSpace": "true",
-            "ignoreTrailingWhiteSpace": "true"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/clinical-note-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "ClinicalNote.csv",
-          "fileFormat": "csv",
-          "options": {
-            "sep": ";",
+            "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }

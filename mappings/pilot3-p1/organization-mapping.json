@@ -16,7 +16,7 @@
           "resourceType": "Organization",
           "id": "{{mpp:getHashedId('Organization',did)}}",
           "meta": {
-            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Patient"],
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-HospitalDepartment"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
           "identifier": [

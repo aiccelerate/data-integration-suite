@@ -1,0 +1,6 @@
+source_code,source_system,source_display
+73588009,http://snomed.info/sct,"Hospital-based laboratory facility"
+225746001,http://snomed.info/sct,"Ward"
+225738002,http://snomed.info/sct,"Operating room"
+309904001,http://snomed.info/sct,"Intensive care unit"
+73770003,http://snomed.info/sct,"Hospital-based outpatient emergency care center"
