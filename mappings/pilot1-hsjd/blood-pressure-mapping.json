@@ -70,7 +70,7 @@
                 ]
               },
               "valueQuantity":{
-                "{{#sysBp}}": "{{systolic}}",
+                "{{#sysBp}}": "{{systolic.replace(',', '.').toDecimal()}}",
                 "{{?}}": {
                   "value": "{{%sysBp}}",
                   "unit": "mmHg",
@@ -102,7 +102,7 @@
                 ]
               },
               "valueQuantity":{
-                "{{#diasBp}}": "{{diastolic}}",
+                "{{#diasBp}}": "{{diastolic.replace(',', '.').toDecimal()}}",
                 "{{?}}": {
                   "value": "{{%diasBp}}",
                   "unit": "mmHg",

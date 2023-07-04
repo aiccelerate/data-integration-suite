@@ -32,3 +32,4 @@ source_code,source_unit,target_unit,conversion_function
 6298-4,"mmol/L","mmol/L","$this"
 718-7,"g/dl","g/dL","$this"
 770-8,"%","%","$this"
+6690-2,"Mil/mmcc","10*6/mm3","$this"

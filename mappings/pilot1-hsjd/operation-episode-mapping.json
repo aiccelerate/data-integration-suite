@@ -15,6 +15,12 @@
       "joinOn": ["episodeId"]
     }
   ],
+  "context": {
+    "episodeTypesConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot1-hsjd/episode-types-map.csv"
+    }
+  },
   "mapping": [
     {
 
@@ -41,6 +47,16 @@
                   "display": "Surgery care"
                 }
               ]
+            },
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{mpp:getConcept(%episodeTypesConceptMap, type.trim(), 'target_code')}}",
+                  "display": "{{mpp:getConcept(%episodeTypesConceptMap, type.trim(), 'target_display')}}"
+                }
+              ],
+              "text": "{{type.trim()}}"
             }
           ],
           "diagnosis": {

@@ -107,7 +107,7 @@
         "path": "Ext-plt1-hsjd-lab-results.unit",
         "short": "Unit of measurement",
         "definition": "Unit of the measurement",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -140,6 +140,22 @@
         "short": "Episode identifier",
         "definition": "Reference to the episode of care that this observation is performed",
         "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-lab-results.requestCode",
+        "path": "Ext-plt1-hsjd-lab-results.requestCode",
+        "short": "Identifer for lab request",
+        "definition": "Identifer for lab request",
+        "min": 1,
         "max": "1",
         "type": [
           {

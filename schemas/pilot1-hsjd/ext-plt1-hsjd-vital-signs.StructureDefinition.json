@@ -117,6 +117,22 @@
             ]
           }
         ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-vital-signs.codedisplay",
+        "path": "Ext-plt1-hsjd-vital-signs.codedisplay",
+        "short": "Vital sign name",
+        "definition": "Vital sign name",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
       }
     ]
   }

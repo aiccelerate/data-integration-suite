@@ -25,7 +25,7 @@
     {
       "name": "relatedEncounter",
       "language": "text/fhirpath",
-      "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm')).first()"
+      "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')).first()"
     },
     {
       "name": "eventCode",
@@ -54,7 +54,7 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', %relatedEncounter.encounterId)}}",
-          "date": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm', 'Europe/Madrid')}}",
+          "date": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
           "extension": {
             "{{#eps}}": "{{episodeId}}",
             "{{*}}": {

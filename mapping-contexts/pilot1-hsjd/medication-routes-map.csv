@@ -1,0 +1,16 @@
+source_code,target_code,target_display
+EV,47625008,Intravenous route
+IM,78421000,Intramuscular route
+INH,447694001,Inhalation route
+IRRIG,46713006,Nasal route
+NEBUL,447694001,Inhalation route
+OFT,54485002,Ophthalmic route
+OR,26643006,Oral route
+OTI,10547007,Otic route
+PAR,447202000,Parenteral route
+R,37161004,Per rectum
+SC,34206005,Subcutaneous route
+SUB,37839007,Sublingual route
+TOP,6064005,Topical route
+TR,45890007,Transdermal route
+VAG,16857009,Per vagina

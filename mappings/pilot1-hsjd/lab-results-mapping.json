@@ -34,25 +34,33 @@
       "name": "relatedEncounter",
       "language": "text/fhirpath",
       "expression": "%encounters.where(startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') <= %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd') and endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss') > %context.time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')).first()"
+    },
+    {
+      "name": "numericValue",
+      "language": "text/fhirpath",
+      "expression": "value.replace(',','.').toDecimal()"
     }
   ],
   "mapping": [
     {
-      "precondition": {
-        "name": "hasNumericValue",
-        "language": "text/fhirpath",
-        "expression": "value.exists() and value.utl:isFhirQuantityExpression()"
-      },
       "expression": {
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Observation",
-          "id": "{{mpp:getHashedId('Observation', pid & code.toString() & time.toString())}}",
+          "id": "{{mpp:getHashedId('Observation', pid & code.toString() & time.toString() & requestCode)}}",
           "meta": {
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-LabResultWithinSurgicalWorkflow"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
+          "basedOn": [
+            {
+              "identifier": {
+                "system": "{{%sourceSystem.sourceUri}}/labrequests",
+                "value": "{{requestCode}}"
+              }
+            }
+          ],
           "status": "final",
           "category": [
             {
@@ -76,7 +84,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', %relatedEncounter.encounterId)}}",
           "effectiveDateTime": "{{time.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd', 'Europe/Madrid')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%labResultUnitConversion, code.trim(), value, unit.trim().orElse('-'))}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%labResultUnitConversion, code.trim(), %numericValue, unit.trim().orElse('-'))}}",
           "interpretation": {
             "{{#intp}}": "{{interpretation.trim()}}",
             "{{*}}": {

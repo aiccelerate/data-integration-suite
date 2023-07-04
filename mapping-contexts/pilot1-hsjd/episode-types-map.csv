@@ -1,0 +1,9 @@
+source_code,target_code,target_display
+Acute Hospitalization,386227003,"Cardiac care, acute"
+Emergencies,182813001,"Emergency care"
+Emergency intervention,73994005,"Emergency procedure"
+External,4563007,"Hospital admission, transfer from other hospital or health care facility"
+External Consultations,698314001,"Consultation for treatment"
+Newborn,8390008,"Newborn care"
+Scheduled intervention,112689000,"Hospital admission, elective, with complete pre-admission work-up"
+Waiting list,15584006,"Hospital admission, elective, with partial pre-admission work-up"

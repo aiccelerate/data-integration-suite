@@ -20,7 +20,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "PatientX.csv",
+          "path": "Patient.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -33,14 +33,14 @@
       "sourceContext": {
         "episodes": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeX.csv",
+          "path": "OperationEpisode.csv",
           "options": {
             "sep": ";"
           }
         },
         "conditions": {
           "jsonClass": "FileSystemSource",
-          "path": "ConditionX.csv",
+          "path": "Condition.csv",
           "options": {
             "sep": ";"
           }
@@ -52,7 +52,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeEncounterX.csv",
+          "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
           }
@@ -64,7 +64,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "ConditionX.csv",
+          "path": "Condition.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -77,7 +77,7 @@
       "sourceContext": {
         "labResults": {
           "jsonClass": "FileSystemSource",
-          "path": "LabResultsX.csv",
+          "path": "LabResults.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -85,7 +85,7 @@
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeEncounterX.csv",
+          "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
           }
@@ -97,14 +97,14 @@
       "sourceContext": {
         "surgeryDetails": {
           "jsonClass": "FileSystemSource",
-          "path": "SurgeryDetailsX.csv",
+          "path": "SurgeryDetails.csv",
           "options": {
             "sep": ";"
           }
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeEncounterX.csv",
+          "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
           }
@@ -116,7 +116,7 @@
       "sourceContext": {
         "vitalSigns": {
           "jsonClass": "FileSystemSource",
-          "path": "VitalSignsX.csv",
+          "path": "VitalSignsWard.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -124,7 +124,27 @@
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeEncounterX.csv",
+          "path": "OperationEpisodeEncounter.csv",
+          "options": {
+            "sep": ";"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/vital-signs-mapping",
+      "sourceContext": {
+        "vitalSigns": {
+          "jsonClass": "FileSystemSource",
+          "path": "VitalSignsICU.csv",
+          "options": {
+            "sep": ";",
+            "distinct": "true"
+          }
+        },
+        "encounters": {
+          "jsonClass": "FileSystemSource",
+          "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
           }
@@ -136,15 +156,37 @@
       "sourceContext": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
-          "path": "VitalSignsX.csv",
+          "path": "VitalSignsWard.csv",
           "options": {
-            "sep": ";"
+            "sep": ";",
+            "distinct": "true"
           },
-          "preprocessSql": "SELECT * FROM (SELECT * FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))"
+          "preprocessSql": "SELECT * FROM (SELECT pid,time,code,value,unit,episodeId FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeEncounterX.csv",
+          "path": "OperationEpisodeEncounter.csv",
+          "options": {
+            "sep": ";"
+          }
+        }
+      }
+    },
+    {
+      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
+      "sourceContext": {
+        "vitalsigns": {
+          "jsonClass": "FileSystemSource",
+          "path": "VitalSignsICU.csv",
+          "options": {
+            "sep": ";",
+            "distinct": "true"
+          },
+          "preprocessSql": "SELECT * FROM (SELECT pid,time,code,value,unit,episodeId FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))"
+        },
+        "encounters": {
+          "jsonClass": "FileSystemSource",
+          "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
           }
@@ -156,7 +198,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "MedicationAdministrationX.csv",
+          "path": "MedicationAdministration.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -169,14 +211,14 @@
       "sourceContext": {
         "complications": {
           "jsonClass": "FileSystemSource",
-          "path": "ComplicationX.csv",
+          "path": "Complication.csv",
           "options": {
             "sep": ";"
           }
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
-          "path": "OperationEpisodeEncounterX.csv",
+          "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
           }

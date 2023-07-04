@@ -59,7 +59,7 @@
         "path": "Ext-plt1-hsjd-medication-administration.code",
         "short": "Medication ATC code",
         "definition": "The ATC code for the medication",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -71,8 +71,8 @@
         ]
       },
       {
-        "id": "Ext-plt1-hsjd-medication-administration.ndc",
-        "path": "Ext-plt1-hsjd-medication-administration.ndc",
+        "id": "Ext-plt1-hsjd-medication-administration.nationalCode",
+        "path": "Ext-plt1-hsjd-medication-administration.nationalCode",
         "short": "National drug code",
         "definition": "The national drug code for the medication",
         "min": 0,
@@ -87,8 +87,8 @@
         ]
       },
       {
-        "id": "Ext-plt1-hsjd-medication-administration.display",
-        "path": "Ext-plt1-hsjd-medication-administration.display",
+        "id": "Ext-plt1-hsjd-medication-administration.codeDisplay",
+        "path": "Ext-plt1-hsjd-medication-administration.codeDisplay",
         "short": "Medication name",
         "definition": "Medication name",
         "min": 1,
@@ -111,9 +111,73 @@
         "max": "1",
         "type": [
           {
-            "code": "decimal",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.doseUnit",
+        "path": "Ext-plt1-hsjd-medication-administration.doseUnit",
+        "short": "Dose unit",
+        "definition": "Dose unit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.weight",
+        "path": "Ext-plt1-hsjd-medication-administration.weight",
+        "short": "Patient weight",
+        "definition": "Patient weight",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.doseWeight",
+        "path": "Ext-plt1-hsjd-medication-administration.doseWeight",
+        "short": "Dose/Weight",
+        "definition": "Dose divided by body weight",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-medication-administration.via",
+        "path": "Ext-plt1-hsjd-medication-administration.via",
+        "short": "Medication route",
+        "definition": "Medication route",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
             ]
           }
         ]

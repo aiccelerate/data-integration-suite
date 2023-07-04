@@ -119,8 +119,40 @@
         ]
       },
       {
+        "id": "Ext-plt1-hsjd-surgery-details.mainProcedureCodeInternal",
+        "path": "Ext-plt1-hsjd-surgery-details.mainProcedureCodeInternal",
+        "short": "Internal Surgical procedure code",
+        "definition": "Code for the main procedure for the operation in source system. ",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt1-hsjd-surgery-details.mainProcedureDescription",
         "path": "Ext-plt1-hsjd-surgery-details.mainProcedureDescription",
+        "short": "Name of surgical procedure",
+        "definition": "Description/name of the main surgical procedure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.mainProcedureDescriptionInternal",
+        "path": "Ext-plt1-hsjd-surgery-details.mainProcedureDescriptionInternal",
         "short": "Name of surgical procedure",
         "definition": "Description/name of the main surgical procedure",
         "min": 0,
@@ -183,6 +215,22 @@
         ]
       },
       {
+        "id": "Ext-plt1-hsjd-surgery-details.cancellationDate",
+        "path": "Ext-plt1-hsjd-surgery-details.cancellationDate",
+        "short": "Cancellation date",
+        "definition": "Date of cancellation",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt1-hsjd-surgery-details.location",
         "path": "Ext-plt1-hsjd-surgery-details.location",
         "short": "Operating room",
@@ -203,6 +251,22 @@
         "path": "Ext-plt1-hsjd-surgery-details.estimatedDuration",
         "short": "Estimated duration of surgery",
         "definition": "Estimated duration (in minutes) of surgery by the surgeon",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.actualDuration",
+        "path": "Ext-plt1-hsjd-surgery-details.actualDuration",
+        "short": "Actual duration of surgery",
+        "definition": "Actual duration (in minutes) of surgery",
         "min": 0,
         "max": "1",
         "type": [
@@ -255,9 +319,233 @@
         "max": "1",
         "type": [
           {
-            "code": "id",
+            "code": "code",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/id"
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.classOfSurgery",
+        "path": "Ext-plt1-hsjd-surgery-details.classOfSurgery",
+        "short": "Classification of surgical operation",
+        "definition": "Classification of surgical operation (Diagnostic Catherization, Surgery, etc)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.originSurgery",
+        "path": "Ext-plt1-hsjd-surgery-details.originSurgery",
+        "short": "Admission type for the surgery",
+        "definition": "Admission type for the surgery (Waiting List, Hospitilizations, Emergency)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.extubatedInOR",
+        "path": "Ext-plt1-hsjd-surgery-details.extubatedInOR",
+        "short": "Whether patient extubated during operation",
+        "definition": "Whether patient extubated during operation",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.aristotleScore",
+        "path": "Ext-plt1-hsjd-surgery-details.aristotleScore",
+        "short": "Aristotle Score about surgery complexity",
+        "definition": "Aristotle complexity score for congenital heart disease surgeries (from 1.5 to 15)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.STSScore",
+        "path": "Ext-plt1-hsjd-surgery-details.STSScore",
+        "short": "STS Score about surgery complexity",
+        "definition": "STAT risk score for congenital heart disease surgeries (from 1 to 5)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.RACHS1Score",
+        "path": "Ext-plt1-hsjd-surgery-details.RACHS1Score",
+        "short": "RACHS1 Score about risk after surgery",
+        "definition": "RACHS-1 risk score for congenital heart disease surgeries (from 1 to 6)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.cecTime",
+        "path": "Ext-plt1-hsjd-surgery-details.cecTime",
+        "short": "Duration of extracorporeal circulation",
+        "definition": "Duration of extracorporeal circulation in minutes during cardiac surgery",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.clampTime",
+        "path": "Ext-plt1-hsjd-surgery-details.clampTime",
+        "short": "Duration of clamp time in minutes during operation",
+        "definition": "Duration of clamp time in minutes during operation",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.arrestTime",
+        "path": "Ext-plt1-hsjd-surgery-details.arrestTime",
+        "short": "Duration of circulatory arrest time in minutes during operation",
+        "definition": "Duration of circulatory arrest time in minutes during operation",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.desfibrillationInOR",
+        "path": "Ext-plt1-hsjd-surgery-details.desfibrillationInOR",
+        "short": "Is defribilliated during the surgery",
+        "definition": "Whether the patient needed to be desfribilliated during the surgery or not",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.minTemperature",
+        "path": "Ext-plt1-hsjd-surgery-details.minTemperature",
+        "short": "Minimum temperature of the patient during surgery",
+        "definition": "Minimum temperature of the patient during surgery",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.visScore",
+        "path": "Ext-plt1-hsjd-surgery-details.visScore",
+        "short": "VIS Score",
+        "definition": "The vasoactive-inotropic score (VIS). A weighted sum of all administered inotropes and vasoconstrictors, reflecting pharmacological support of the cardiovascular system within the OR.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.visScore24h",
+        "path": "Ext-plt1-hsjd-surgery-details.visScore24h",
+        "short": "VIS Score after 24 hour",
+        "definition": "The vasoactive-inotropic score (VIS). A weighted sum of all administered inotropes and vasoconstrictors, reflecting pharmacological support of the cardiovascular system during the first 24h after surgery.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.visScore48h",
+        "path": "Ext-plt1-hsjd-surgery-details.visScore48h",
+        "short": "VIS Score after 48 hour",
+        "definition": "The vasoactive-inotropic score (VIS). A weighted sum of all administered inotropes and vasoconstrictors, reflecting pharmacological support of the cardiovascular system during the first 48h after surgery.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]

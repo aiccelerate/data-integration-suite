@@ -27,6 +27,10 @@
     "icd9to10ConceptMap":{
       "category": "concept-map",
       "url": "$CONTEXT_REPO/pilot1-hsjd/icd9-to-icd10-pcs.csv"
+    },
+    "surgeryClassMap":{
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot1-hsjd/surgery-service-type-map.csv"
     }
   },
   "variable": [
@@ -74,10 +78,20 @@
       "name": "otherProcedureCcs",
       "language": "text/fhirpath",
       "expression": "mpp:getConcept(%ccsConceptMap, %mappedOtherICD10pcs.approximation.utl:split(',').first().orElse(otherProcedureCodes))"
+    },
+    {
+      "name": "surgeryClass",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%surgeryClassMap, classOfSurgery.nav:orElse('Surgery'))"
     }
   ],
   "mapping": [
     {
+      "precondition": {
+        "name": "hasSurgeryData",
+        "language": "text/fhirpath",
+        "expression": "status!='CONFIRM'"
+      },
       "expression": {
         "name": "surgeryEncounterMapping",
         "language": "application/fhir-template+json",
@@ -112,16 +126,40 @@
               ]
             }
           ],
-          "serviceType": "{{? utl:createFhirCodeableConcept('http://snomed.info/sct', '394603008', 'Cardiothoracic surgery')}}",
+          "serviceType":{
+            "{{#sc}}": "{{%surgeryClass}}",
+            "{{?}}": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{%sc.target_code}}",
+                  "display": "{{%sc.target_display}}"
+                }
+              ],
+              "text": "{{? classOfSurgery}}"
+            }
+          },
           "priority": "{{? utl:createFhirCodeableConcept('http://snomed.info/sct', typeOfSurgery, iif(typeOfSurgery = '274075007', 'Elective surgery', 'Emergency surgery'))}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "episodeOfCare": ["{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"],
           "period": {
-            "start": "{{%encounterStartTime}}",
-            "end": "{{? %encounterEndTime}}"
+            "start": "{{? %encounterStartTime}}",
+            "end": "{{? iif(status='finished', %encounterEndTime, cancellationDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid'))}}"
+          },
+          "reasonCode": {
+            "{{#crc}}": "{{reasonCode.replace(',0','')}}",
+            "{{*}}": {
+              "coding": [
+                {
+                  "system": "{{%sourceSystem.sourceUri}}/fhir/CodeSystem/surgery-cancellation-reasons",
+                  "code": "{{%crc}}",
+                  "display": "{{mpp:getConcept(%surgeryCancellationReasonsConceptMap,crc,'target_display')}}"
+                }
+              ]
+            }
           },
           "location": {
-            "{{#loc}}": "{{location}}",
+            "{{#loc}}": "{{iif(%encounterStartTime.exists(),location,{})}}",
             "{{*}}": {
               "location": {
                 "identifier": {
@@ -136,7 +174,6 @@
             }
           },
           "length": "{{? utl:getDurationAsQuantityObject(%encounterStartTime.toDateTime(), %encounterEndTime.toDateTime())}}",
-          "reasonCode": "{{* utl:createFhirCodeableConcept('https://aiccelerate.eu/fhir/CodeSystem/operation-cancellation-reasons', mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'target_code'), mpp:getConcept(%surgeryCancellationReasonsConceptMap, reasonForCancelling, 'target_display'))}}",
           "serviceProvider": {
             "{{#sp}}": "{{%encounterForSurgery.nurseUnit}}",
             "{{?}}": {
@@ -196,6 +233,14 @@
                   "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures",
                   "code": "{{%icd10pcs}}"
                 }
+              },
+              {
+                "{{#internalCode}}": "{{mainProcedureCodeInternal}}",
+                "{{?}}": {
+                  "system": "{{%sourceSystem.sourceUri}}/fhir/CodeSystem/surgery-procedure-codes",
+                  "code": "{{%internalCode}}",
+                  "display": "{{? mainProcedureDescriptionInternal}}"
+                }
               }
             ],
             "text": "{{? mainProcedureDescription}}"
@@ -206,13 +251,36 @@
             "start": "{{%surgeryStartTime.orElse(%encounterStartTime)}}",
             "end": "{{? %surgeryEndTime.orElse(%encounterEndTime)}}"
           },
-          "extension": {
-            "{{#eps}}": "{{episodeId}}",
-            "{{*}}": {
-              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
-              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+          "extension": [
+            {
+              "{{#eps}}": "{{episodeId}}",
+              "{{?}}": {
+                "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+                "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+              }
+            },
+            {
+              "{{#arstScore}}": "{{aristotleScore.replace(',','.').toDecimal()}}",
+              "{{?}}": {
+                "url": "https://aiccelerate.eu/fhir/StructureDefinition/aristotle-score",
+                "valueDecimal": "{{%arstScore}}"
+              }
+            },
+            {
+              "{{#stsScore}}": "{{STSScore.replace(',','.').toDecimal().toInteger()}}",
+              "{{?}}": {
+                "url": "https://aiccelerate.eu/fhir/StructureDefinition/sts-score",
+                "valueInteger": "{{%stsScore}}"
+              }
+            },
+            {
+              "{{#rachs1Score}}": "{{RACHS1Score.replace(',','.').toDecimal().toInteger()}}",
+              "{{?}}": {
+                "url": "https://aiccelerate.eu/fhir/StructureDefinition/rachs1-score",
+                "valueInteger": "{{%rachs1Score}}"
+              }
             }
-          }
+          ]
         }
       }
     },
@@ -220,7 +288,7 @@
       "precondition": {
         "name": "hasOtherProcedures",
         "language": "text/fhirpath",
-        "expression": "otherProcedureCodes.exists() and (otherProcedureCodes.length()=7 or (otherProcedureCodes.contains('.') and otherProcedureCodes.isLetter().not()))"
+        "expression": "status='finished' and otherProcedureCodes.exists() and (otherProcedureCodes.length()=7 or (otherProcedureCodes.contains('.') and otherProcedureCodes.isLetter().not()))"
       },
       "expression": {
         "name": "otherProceduresMapping",
@@ -246,14 +314,14 @@
             "code": {
               "coding": [
                 {
-                  "system": "{{iif(otherProcedureCodes.length()!=7, 'http://hl7.org/fhir/sid/ex-icd-9-procedure', 'http://hl7.org/fhir/sid/ex-icd-10-procedure')}}",
+                  "system": "{{iif(otherProcedureCodes.length()!=7, 'http://hl7.org/fhir/sid/ex-icd-9-procedures', 'http://hl7.org/fhir/sid/ex-icd-10-procedures')}}",
                   "code": "{{otherProcedureCodes}}",
                   "display": "{{? mpp:getConcept(%ccsConceptMap, otherProcedureCodes, 'ICD-10-PCS CODE DESCRIPTION')}}"
                 },
                 {
                   "{{#icd10pcs}}": "{{%mappedOtherICD10pcs.where(target_code.trim().exists()).target_code.trim().utl:split(',')}}",
                   "{{*}}": {
-                    "system": "http://hl7.org/fhir/sid/ex-icd-10-procedure",
+                    "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures",
                     "code": "{{%icd10pcs}}"
                   }
                 }
@@ -275,6 +343,406 @@
                 "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
               }
             }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "extubationInfo",
+        "language": "text/fhirpath",
+        "expression": "extubatedInOR.exists()"
+      },
+      "expression": {
+        "name": "extubationProceduresMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', surgeryId & 'extubation')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ProcedureRelatedWithSurgicalWorkflow"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "{{iif(extubatedInOR, 'completed', 'not-done')}}",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "271280005",
+                "display": "Endotracheal extubation"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "partOf": [
+            "{{utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}"
+          ],
+          "performedDateTime": "{{%surgeryEndTime.toDate()}}",
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "extracorporealCirculationInfo",
+        "language": "text/fhirpath",
+        "expression": "cecTime.exists() and cecTime != '0,0'"
+      },
+      "expression": {
+        "name": "extracorporealCirculationProcedureMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', surgeryId & 'ExtracorporealCirculation')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ProcedureRelatedWithSurgicalWorkflow"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "182744004",
+                "display": "Extracorporeal circulation procedure"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "partOf": [
+            "{{utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}"
+          ],
+          "performedPeriod": {
+            "start": "{{%surgeryStartTime}}",
+            "end": "{{%surgeryStartTime + cecTime.replace(',','.').toDecimal().toQuantity('min')}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "clampInfo",
+        "language": "text/fhirpath",
+        "expression": "clampTime.exists() and clampTime != '0,0'"
+      },
+      "expression": {
+        "name": "clampingProcedureMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', surgeryId & 'ClampProcedure')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ProcedureRelatedWithSurgicalWorkflow"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "301881006",
+                "display": "Arterial clamp procedures"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "partOf": [
+            "{{utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}"
+          ],
+          "performedPeriod": {
+            "start": "{{%surgeryStartTime}}",
+            "end": "{{%surgeryStartTime + clampTime.replace(',','.').toDecimal().toQuantity('min')}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "circulatoryArrestInfo",
+        "language": "text/fhirpath",
+        "expression": "arrestTime.exists() and arrestTime != '0,0'"
+      },
+      "expression": {
+        "name": "circulatoryArrestProcedureMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', surgeryId & 'CirculatoryArrest')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ProcedureRelatedWithSurgicalWorkflow"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "1197761000",
+                "display": "Hypothermic circulatory arrest"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "partOf": [
+            "{{utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}"
+          ],
+          "performedPeriod": {
+            "start": "{{%surgeryStartTime}}",
+            "end": "{{%surgeryStartTime + arrestTime.replace(',','.').toDecimal().toQuantity('min')}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "defibrilationInfo",
+        "language": "text/fhirpath",
+        "expression": "desfibrillationInOR.exists()"
+      },
+      "expression": {
+        "name": "defibrilationProcedureMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Procedure",
+          "id": "{{mpp:getHashedId('Procedure', surgeryId & 'defibrilation')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ProcedureRelatedWithSurgicalWorkflow"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "{{iif(desfibrillationInOR, 'completed', 'not-done')}}",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "308842001",
+                "display": "Direct current defibrillation"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "partOf": [
+            "{{utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}"
+          ],
+          "performedDateTime": "{{%surgeryEndTime.toDate()}}",
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasMinTemperature",
+        "language": "text/fhirpath",
+        "expression": "minTemperature.exists()"
+      },
+      "expression": {
+        "name": "minTemperatureObservationMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', surgeryId & 'MinTemperature')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-IntraOperativeObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "276885007",
+                "display": "Core Body Temperature"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "effectivePeriod": {
+            "start": "{{%surgeryStartTime}}",
+            "end": "{{? %surgeryEndTime}}"
+          },
+          "valueQuantity": {
+            "system": "{{%ucum}}",
+            "code": "Cel",
+            "value": "{{minTemperature.replace(',','.').toDecimal()}}",
+            "comparator": ">="
+          },
+          "partOf": "{{* utl:createFhirReference('Procedure', %surgeryPhaseMapping.id)}}",
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasVisScore",
+        "language": "text/fhirpath",
+        "expression": "visScore.exists() and visScore != '0,0'"
+      },
+      "expression": {
+        "name": "visScoreObservationMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', surgeryId & 'VisScore')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-IntraOperativeObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/intra-operative-observations",
+                "code": "vis",
+                "display": "Vasoactive-inotropic score (VIS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "effectiveDateTime": "{{%surgeryEndTime}}",
+          "valueQuantity": {
+            "system": "{{%ucum}}",
+            "code": "{ScoreOf}",
+            "value": "{{visScore.replace(',','.').toDecimal()}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasVisScore24h",
+        "language": "text/fhirpath",
+        "expression": "visScore24h.exists() and visScore24h != '0,0'"
+      },
+      "expression": {
+        "name": "visScore24hObservationMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', surgeryId & 'VisScore24h')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-IntraOperativeObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/intra-operative-observations",
+                "code": "vis",
+                "display": "Vasoactive-inotropic score (VIS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "effectiveDateTime": "{{%surgeryEndTime + 24 'h'}}",
+          "valueQuantity": {
+            "system": "{{%ucum}}",
+            "code": "{ScoreOf}",
+            "value": "{{visScore24h.replace(',','.').toDecimal()}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasVisScore48h",
+        "language": "text/fhirpath",
+        "expression": "visScore48h.exists() and visScore48h != '0,0'"
+      },
+      "expression": {
+        "name": "visScore48hObservationMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', surgeryId & 'VisScore48h')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-IntraOperativeObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/intra-operative-observations",
+                "code": "vis",
+                "display": "Vasoactive-inotropic score (VIS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', surgeryId)}}",
+          "effectiveDateTime": "{{%surgeryEndTime + 48 'h'}}",
+          "valueQuantity": {
+            "system": "{{%ucum}}",
+            "code": "{ScoreOf}",
+            "value": "{{visScore48h.replace(',','.').toDecimal()}}"
+          },
+          "extension": {
+            "{{#eps}}": "{{episodeId}}",
+            "{{*}}": {
+              "url": "http://hl7.org/fhir/StructureDefinition/workflow-episodeOfCare",
+              "valueReference": "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"
+            }
+          }
         }
       }
     }

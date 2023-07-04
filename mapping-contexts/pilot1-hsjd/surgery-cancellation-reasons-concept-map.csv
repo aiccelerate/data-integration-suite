@@ -1,7 +1,7 @@
 source_code,target_code,target_display
-"2,0",300,Patient unfit for surgery
-"8,0",305,Change in treatment plan (no surgery)
-"10,0",306,Patient treated for another reason
-"14,0",307,Day surgery patient does not have an adult at home
-"17,0",308,Patient dead
-"22,0",309,Procedure done elsewhere
+"2",300,Patient unfit for surgery
+"8",305,Change in treatment plan (no surgery)
+"10",306,Patient treated for another reason
+"14",307,Day surgery patient does not have an adult at home
+"17",308,Patient dead
+"22",309,Procedure done elsewhere

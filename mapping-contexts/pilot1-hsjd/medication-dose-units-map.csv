@@ -1,0 +1,16 @@
+source_code,target_code
+aplic,{Dose}
+g,g
+g/Kg,g
+gts,[drp]
+mcg,ug
+mcq,ug
+mEq,meq
+mg,mg
+mg/Kg,mg
+ml,mL
+ml/h,mL/h
+MU,10*6.[iU]
+puls,{spray}
+u,{Dose}
+UI,[IU]

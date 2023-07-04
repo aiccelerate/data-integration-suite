@@ -11,23 +11,51 @@
     "atcConceptMap": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/pilot1-hsjd/medication-to-atc.csv"
+    },
+    "unitConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot1-hsjd/medication-dose-units-map.csv"
+    },
+    "routeCodesConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot1-hsjd/medication-routes-map.csv"
     }
   },
   "variable": [
     {
       "name": "atcCode",
       "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%atcConceptMap, display.trim())"
+      "expression": "mpp:getConcept(%atcConceptMap, codeDisplay.trim())"
+    },
+    {
+      "name": "doseNumerical",
+      "language": "text/fhirpath",
+      "expression": "dose.replace(',','.').toDecimal()"
+    },
+    {
+      "name": "weightNumerical",
+      "language": "text/fhirpath",
+      "expression": "weight.replace(',','.').toDecimal()"
+    },
+    {
+      "name": "doseWeightNumerical",
+      "language": "text/fhirpath",
+      "expression": "doseWeight.replace(',','.').toDecimal()"
     }
   ],
   "mapping": [
     {
+      "precondition": {
+        "name": "hasCode",
+        "language": "text/fhirpath",
+        "expression": "code.exists()"
+      },
       "expression": {
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "MedicationAdministration",
-          "id": "{{mpp:getHashedId('MedicationAdministration', pid & display & startTime.toString())}}",
+          "id": "{{mpp:getHashedId('MedicationAdministration', pid & codeDisplay & startTime.toString())}}",
           "meta": {
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationAdministration"],
             "source": "{{%sourceSystem.sourceUri}}"
@@ -45,10 +73,11 @@
           "medicationCodeableConcept": {
             "coding": [
               {
-                "{{#drugCode}}": "{{ndc}}",
+                "{{#drugCode}}": "{{nationalCode}}",
                 "{{?}}": {
                   "system": "https://cima.aemps.es",
-                  "code": "{{%drugCode}}"
+                  "code": "{{%drugCode}}",
+                  "display": "{{codeDisplay}}"
                 }
               },
               {
@@ -57,13 +86,39 @@
                 "display": "{{? %atcCode.target_display}}"
               }
             ],
-            "text": "{{display}}"
+            "text": "{{codeDisplay}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "context": "{{? mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}",
           "effectiveDateTime": "{{startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
           "dosage": {
-            "dose": "{{? utl:createFhirQuantity(dose, %ucum, 'mg')}}"
+            "{{#isDosageExists}}": "{{iif(dose.exists() and doseUnit.exists(), true, {})}}",
+            "{{?}}": {
+              "dose": "{{? utl:createFhirQuantity(iif((doseUnit='mg/Kg' and dose.length() > 4), (%doseNumerical * %weightNumerical).round(3), %doseNumerical), %ucum, mpp:getConcept(%unitConceptMap, doseUnit.trim(), 'target_code'))}}",
+              "route": {
+                "{{#rc}}": "{{mpp:getConcept(%routeCodesConceptMap, via.trim())}}",
+                "{{?}}": {
+                  "coding": [
+                    {
+                      "system": "{{%sourceSystem.sourceUri}}/CodeSystem/medication-routes",
+                      "code": "{{via}}"
+                    },
+                    {
+                      "system": "http://snomed.info/sct",
+                      "code": "{{%rc.target_code}}",
+                      "display": "{{%rc.target_display}}"
+                    }
+                  ]
+                }
+              },
+              "extension": {
+                "{{#dosePerBodyWeight}}": "{{iif(doseUnit='mg/Kg' and dose.length() > 4, %doseNumerical, %doseWeightNumerical)}}",
+                "{{*}}": {
+                  "url": "{{%sourceSystem.sourceUri}}/StructureDefinition/dose-per-body-weight",
+                  "valueQuantity":  "{{? utl:createFhirQuantity(%dosePerBodyWeight, %ucum, mpp:getConcept(%unitConceptMap, doseUnit.trim(), 'target_code'))}}"
+                }
+              }
+            }
           }
         }
       }

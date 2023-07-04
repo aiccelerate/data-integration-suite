@@ -1,6 +1,10 @@
 source_code,target_code,target_display
-ICU,305351004,ICU stay
-WARD,305354007,Ward stay
-OR,305408004,Operation
-Admission,8715000,Elective Hospital Admission
+ICU,305351004,"Admission to intensive care unit"
+NICU,830077005,"Admission to neonatal intensive care unit"
+NSICU,830077005,"Admission to neonatal intensive care unit"
+PICU,305353001,"Admission to pediatric intensive care unit"
+SICU,305353001,"Admission to pediatric intensive care unit"
+WARD,305342007,"Admission to ward"
+OR,305408004,"Admission to surgical department"
+Admission,32485007,Hospital Admission
 DeliveryRoom,133905007,Delivery Room Care (for new born)

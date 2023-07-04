@@ -47,7 +47,7 @@
             "coding":
             [
               {
-                "{{#icd9Code}}": "{{iif(code.exists() and code.utl:isLetter().not(), code, {})}}",
+                "{{#icd9Code}}": "{{iif(code.exists() and code.trim()!='0' and code.trim().utl:isLetter().not(), code, {})}}",
                 "{{?}}": {
                   "system": "http://hl7.org/fhir/sid/icd-9-cm",
                   "code": "{{%icd9Code}}",
@@ -55,18 +55,18 @@
                 }
               },
               {
-                "{{#icd10Code}}": "{{code}}",
+                "{{#icd10Code}}": "{{code.trim()}}",
                 "{{?}}": {
                   "system": "http://hl7.org/fhir/sid/icd-10",
                   "code": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_code')}}",
-                  "display": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_display')}}"
+                  "display": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_display').orElse(codeDisplay)}}"
                 }
               }
             ],
-            "text": "{{codeDisplay}}"
+            "text": "{{codeDisplayInternal}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "onsetDateTime": "{{onsetDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
+          "onsetDateTime": "{{onsetDateTime.orElse('2000-01-01 00:00:00').utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
           "abatementDateTime": "{{? abatementDateTime.trim().utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss', 'Europe/Madrid')}}",
           "extension": {
             "{{#eps}}": "{{episodeId}}",

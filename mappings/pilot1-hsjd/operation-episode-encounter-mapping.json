@@ -59,6 +59,10 @@
             {
               "coding": [
                 {
+                  "system": "{{%sourceSystem.sourceUri}}/encounter-types",
+                  "code": "{{location.trim()}}"
+                },
+                {
                   "system": "http://snomed.info/sct",
                   "code": "{{mpp:getConcept(%encounterTypeConceptMap, location.trim(), 'target_code')}}",
                   "display": "{{mpp:getConcept(%encounterTypeConceptMap, location.trim(), 'target_display')}}"
