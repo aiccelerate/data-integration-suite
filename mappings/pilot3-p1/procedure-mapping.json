@@ -11,6 +11,11 @@
   ],
   "mapping": [
     {
+      "precondition": {
+        "name": "isNotCancelled",
+        "language": "text/fhirpath",
+        "expression": "endTime != 'null' and (isCancelled.exists().not() or isCancelled.not())"
+      },
       "expression": {
         "name": "surgery_encounter",
         "language": "application/fhir-template+json",
@@ -23,7 +28,7 @@
             ],
             "source": "{{%sourceSystem.sourceUri}}"
           },
-          "status": "{{iif(isCancelled, 'cancelled', 'finished')}}",
+          "status": "finished",
           "class": {
             "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
             "code": "IMP",
@@ -42,13 +47,18 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "period": {
-            "start": "{{startTime.nav:orElse(plannedTime).utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
-            "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{iif(startTime='null', plannedTime, startTime)}}",
+            "end": "{{? endTime}}"
           }
         }
       }
     },
     {
+      "precondition": {
+        "name": "isPlanned",
+        "language": "text/fhirpath",
+        "expression": "false"
+      },
       "expression": {
         "name": "surgery_plan",
         "language": "application/fhir-template+json",
@@ -85,8 +95,8 @@
             "text" : "{{description}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "authoredOn": "{{procedureRequestDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')}}",
-          "occurrenceDateTime": "{{plannedTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+          "authoredOn": "{{? procedureRequestDate}}",
+          "occurrenceDateTime": "{{plannedTime}}"
         }
       }
     },
@@ -94,7 +104,7 @@
       "precondition": {
         "name": "isNotCancelled",
         "language": "text/fhirpath",
-        "expression": "isCancelled.not()"
+        "expression": "endTime != 'null' and (isCancelled.exists().not() or isCancelled.not())"
       },
       "expression": {
         "name": "surgery",
@@ -139,8 +149,8 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', procedureId)}}",
           "performedPeriod": {
-            "start": "{{startTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
-            "end": "{{? endTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{iif(startTime='null', plannedTime, startTime)}}",
+            "end": "{{? endTime}}"
           }
         }
       }

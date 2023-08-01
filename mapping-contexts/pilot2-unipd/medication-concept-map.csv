@@ -1,0 +1,11 @@
+column,target_code,target_display
+st_ter_comti_bin,N04BX02,"entacapone"
+st_ter_maobi_bin,N04BD02,"rasagiline"
+st_ter_achi_bin,N06DA03,"rivastigmine"
+st_ter_ssri_bin,N06AB04,"citalopram"
+st_ter_nsri_bin,N06AX23,"desvenlafaxine"
+st_ter_nassa_bin,N06AX11,"mirtazapine"
+st_ter_bzd_bin,N05CD03,"flunitrazepam"
+st_ter_oadep_bin,N06AG02,"moclobemide"
+st_ter_apsych_bin,N05AA01,"chlorpromazine"
+st_ter_psychostim_bin,N06BA01,"amfetamine"

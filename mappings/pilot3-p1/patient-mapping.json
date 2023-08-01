@@ -28,7 +28,7 @@
           ],
           "active": true,
           "gender": "{{gender}}",
-          "birthDate": "{{birthDate}}"
+          "birthDate": "{{birthDate.utl:toFhirDate('M/d/yyyy')}}"
         }
       }
     }

@@ -1,0 +1,172 @@
+{
+  "id": "other-assessments-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/other-assessments-mapping",
+  "name": "other-assessments-mapping",
+  "title": "Mapping of other assessment data in UNIPD schema for pilots to AIC Smoking Status and Education",
+  "source": [{
+    "alias": "unipd_export",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (clv_visit_date.orElse(2) - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isPatientRow",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'patient_registry_arm_1'"
+      },
+      "expression": {
+        "name": "smokingStatus",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'smoking-status')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-SmokingStatus"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "social-history",
+                  "display": "Social History"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "72166-2",
+                "display": "Smoking Status"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime":"{{%visitDate}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "{{iif(mh_cofact___1 = 1, '449868002', iif(mh_cofact___4 = 1, '8517006', '266919005'))}}",
+                "display": "{{iif(mh_cofact___1 = 1, 'Current Smoker', iif(mh_cofact___4 = 1, 'Former Smoker', 'Never Smoker'))}}"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isPatientRow",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'patient_registry_arm_1'"
+      },
+      "expression": {
+        "name": "alcoholConsumption",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'alcohol-consumption')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-HealthBehaviourAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "social-history",
+                  "display": "Social History"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "11331-6",
+                "display": "Alcohol use"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime":"{{%visitDate}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "{{iif(mh_cofact___2 = 1, 'LA28391-3', iif(mh_cofact___5 = 1, 'LA28393-9', 'LA4519-0'))}}",
+                "display": "{{iif(mh_cofact___2 = 1, 'Current every day user', iif(mh_cofact___5 = 1, 'Former user', 'Never used'))}}"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasPhysicalActivity",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'patient_registry_arm_1' and mh_cofact_3.exists()"
+      },
+      "expression": {
+        "name": "physicalActivity",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'physical-activity')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-PatientObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "social-history",
+                  "display": "Social History"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "106020009",
+                "display": "Activity exercise pattern"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime":"{{%visitDate}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "{{iif(mh_cofact___3 = 1, '228447005', iif(mh_cofact___3 = 2, '102533007', '228446001'))}}",
+                "display": "{{iif(mh_cofact___3 = 1, 'Physically active', iif(mh_cofact___3 = 1, 'Intensive exercise', 'Gets little exercise'))}}"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

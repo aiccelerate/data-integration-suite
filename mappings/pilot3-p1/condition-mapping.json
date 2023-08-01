@@ -26,14 +26,6 @@
               "value": "{{conditionID}}"
             }
           ],
-          "clinicalStatus": {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                "code": "{{clinicalStatus.nav:orElse(iif(abatementDateTime.exists(), 'inactive', 'active'))}}"
-              }
-            ]
-          },
           "code": {
             "coding": [
               {
@@ -44,8 +36,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "onsetDateTime": "{{onsetDateTime}}",
-          "abatementDateTime": "{{? abatementDateTime}}"
+          "onsetDateTime": "{{onsetDateTime}}"
         }
       }
     }

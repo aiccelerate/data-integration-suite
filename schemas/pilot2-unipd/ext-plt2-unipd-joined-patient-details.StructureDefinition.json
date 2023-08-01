@@ -1,0 +1,155 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details-joined-patient-details",
+  "name": "Ext-plt2-unipd-joined-patient-details-joined-patient-details",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt2-unipd-joined-patient-details",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details",
+        "path": "Ext-plt2-unipd-joined-patient-details",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details.record_id",
+        "path": "Ext-plt2-unipd-joined-patient-details.record_id",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details.reg_sex",
+        "path": "Ext-plt2-unipd-joined-patient-details.reg_sex",
+        "short": "Gender of patient",
+        "definition": "Gender of patient (only exist in patient_registry_arm_1 type rows) (1: M | 2: F | 3: other)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details.patient_reg_death",
+        "path": "Ext-plt2-unipd-joined-patient-details.patient_reg_death",
+        "short": "Whether patient is dead or not",
+        "definition": "Whether patient is dead or not (0:No |  1: yes | 2: missing)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details.patient_reg_death_age",
+        "path": "Ext-plt2-unipd-joined-patient-details.patient_reg_death_age",
+        "short": "Age when patient is dead",
+        "definition": "Age when patient is dead",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details.clv_visit_date",
+        "path": "Ext-plt2-unipd-joined-patient-details.clv_visit_date",
+        "short": "Visit date",
+        "definition": "Visit date (only given for visit type rows)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd-joined-patient-details.clv_age_v",
+        "path": "Ext-plt2-unipd-joined-patient-details.clv_age_v",
+        "short": "Age at visit",
+        "definition": "Age at visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.npsid_data_npsi",
+        "path": "Ext-plt2-unipd.npsid_data_npsi",
+        "short": "NPSI Visit date",
+        "definition": "NPSI Visit date",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.npsid_age_v",
+        "path": "Ext-plt2-unipd.npsid_age_v",
+        "short": "Age at visit",
+        "definition": "Age at visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

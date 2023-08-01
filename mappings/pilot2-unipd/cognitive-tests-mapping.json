@@ -1,0 +1,760 @@
+{
+  "id": "cognitive-tests-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/cognitive-tests-mapping",
+  "name": "cognitive-tests-mapping",
+  "title": "Mapping of UNIPD's data schema with cognitive/behavioral test data for pilot 2 to AIC-ParkinsonCognitiveBehavioralProblemObservation and its children profiles",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "context": {
+    "assessmentConceptMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot2-unipd/other-assessments-concept-map.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (npsid_data_npsi - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "hasMMSE",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and npsid_rep_mmse_r.exists()"
+      },
+      "expression": {
+        "name": "mmseScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'MMSE' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "72106-8",
+                "display": "MMSE total score"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{npsid_rep_mmse_r}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasMoCA",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and npsid_rep_moca_r.exists()"
+      },
+      "expression": {
+        "name": "mocaScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'MoCA' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "72172-0",
+                "display": "Montreal Cognitive Assessment- MoCA"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{npsid_rep_moca_r}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          },
+          "component": [
+            {
+              "{{#score}}": "{{attent_z_comp}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/moca-domains",
+                      "code": "attention",
+                      "display": "Attention"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{Zscore}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{Zscore}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{exec_z_comp}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/moca-domains",
+                      "code": "executive-functioning",
+                      "display": "Executive functioning"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{Zscore}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{Zscore}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{visuosp_z_comp}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/moca-domains",
+                      "code": "visuospatial",
+                      "display": "Visuospatial"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{Zscore}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{Zscore}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{memory_z_comp}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/moca-domains",
+                      "code": "memory",
+                      "display": "Memory"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{Zscore}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{Zscore}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{language_z_comp}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/moca-domains",
+                      "code": "language",
+                      "display": "Language"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{Zscore}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{Zscore}"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isNPSVisit",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists()"
+      },
+      "expression": {
+        "name": "otherScores",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#colName}}": "{{ 'ins_reyci_z' | 'ins_reycd_z' | 'ins_fluf_z' | 'ins_flus_z' | 'ins_flua_z' | 'ins_flucsi_z' | 'ins_wpat_z' | 'ins_sdmt_z' | 'ins_babts_z' | 'ins_vosp_z' | 'ins_bent_z' | 'ins_bnt_z' | 'ins_tmta_z' | 'ins_tmtb_z' | 'ins_tmtba_z' | 'ins_cdt_z' | 'ins_strt_z' | 'ins_stre_z' }}",
+          "{{*}}": {
+            "{{#zscore}}": "{{utl:evaluateExpression('' & %colName)}}",
+            "{{?}}": {
+              "resourceType": "Observation",
+              "id": "{{mpp:getHashedId('Observation', record_id & %colName & npsid_data_npsi.toString())}}",
+              "meta": {
+                "profile": [
+                  "https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"
+                ],
+                "source": "{{%sourceSystem.sourceUri}}"
+              },
+              "status": "final",
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                    "code": "{{mpp:getConcept(%assessmentConceptMap, %colName, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%assessmentConceptMap, %colName, 'target_display')}}"
+                  }
+                ]
+              },
+              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+              "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+              "effectiveDateTime": "{{%visitDate}}",
+              "valueQuantity": {
+                "value": "{{%zscore}}",
+                "unit": "{Zscore}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{Zscore}"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasPDCFRS",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and pdcfrs.exists($this!='NASK' and $this!='NAVU')"
+      },
+      "expression": {
+        "name": "pdcfrsScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'PD-CFRS' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "pd-cfrs",
+                "display": "The Parkinson's Disease - Cognitive Functional Rating Scale (PD-CFRS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{pdcfrs.toDecimal()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasADL",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and adl.exists($this != 'NAV')"
+      },
+      "expression": {
+        "name": "adlScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'ADL' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "273547007",
+                "display": "Katz activities of daily living (ADL) index"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{adl.toInteger()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasIADL",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and iadl.exists()"
+      },
+      "expression": {
+        "name": "iadlScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'InstrumentalADL' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "273534002",
+                "display": "Instrumental ADL (iADL) scale"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{iadl}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasPDQ8",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and pdq8.exists($this != 'NASK')"
+      },
+      "expression": {
+        "name": "pdq8Score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'PDQ8' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "pdq-8",
+                "display": "Parkinson Disease Questionnaire - 8 Questions"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{pdq8.toInteger()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasSAS",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and (apathys_tot_no_subsc.exists($this!='NAVU') or apathys_tot.exists())"
+      },
+      "expression": {
+        "name": "sasScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'StarksteinApathyScale' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "sas",
+                "display": "Starkstein Apathy Scale (SAS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{(apathys_tot_no_subsc.toInteger() | apathys_tot).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasSTAIY1",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and (staiy1_tot_no_subsc.exists() or staiy1tot.exists())"
+      },
+      "expression": {
+        "name": "staiy1Score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'STAI-Y1' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "stai-y1",
+                "display": "The State-Trait Anxiety Inventory - Y1 Form"
+              },
+              {
+                "system": "http://snomed.info/sc",
+                "code": "273830002",
+                "display": "The State-Trait Anxiety Inventory"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{(staiy1_tot_no_subsc | staiy1tot).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasSTAIY2",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and (staiy2_tot_no_subsc.exists() or staiy2tot.exists())"
+      },
+      "expression": {
+        "name": "staiy2Score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'STAI-Y2' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "stai-y2",
+                "display": "The State-Trait Anxiety Inventory - Y2 Form"
+              },
+              {
+                "system": "http://snomed.info/sc",
+                "code": "273830002",
+                "display": "The State-Trait Anxiety Inventory"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{(staiy2_tot_no_subsc | staiy2tot).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasBDI",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and bdi.exists($this != 'NASK')"
+      },
+      "expression": {
+        "name": "bdiScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'BDI' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "89209-1",
+                "display": "Beck Depression Inventory II"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{bdi.toInteger()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasBIS11",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and (bis_tot_no_subsc.exists($this!= 'NASK' and $this!='NAVU') or bisstot.exists())"
+      },
+      "expression": {
+        "name": "bis11Score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'BIS11' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "bis-11",
+                "display": "Barratt Impulsiveness Scale-11"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{(bis_tot_no_subsc.toInteger() | bisstot).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasSOGS",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and sogs.exists($this!='NAVU')"
+      },
+      "expression": {
+        "name": "sogsScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'SOGS' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "sogs",
+                "display": "The South Oaks Gambling Screen (SOGS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{sogs.toInteger()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasQUIPRS",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and quiprs_tot.exists()"
+      },
+      "expression": {
+        "name": "quiprsScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'QUIP-RS' & npsid_data_npsi.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCognitiveBehavioralAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-cognitive-behavioral-assessments",
+                "code": "quip-rs",
+                "display": "Impulsive-Compulsive Disorders in PD-Rating Scale (QUIP-RS)"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueQuantity": {
+            "value": "{{quiprs_tot}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasYearsOfEducation",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_yearsed.exists() and redcap_repeat_instance = 1"
+      },
+      "expression": {
+        "name": "education",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'years-of-education')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-PatientObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "social-history",
+                  "display": "Social History"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "82590-1",
+                "display": "Years of education"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime": "{{? @1900-01-01 + (npsid_data_npsi-2).toQuantity('d')}}",
+          "valueInteger": "{{npsid_yearsed}}"
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasCognitiveStatus",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and npsid_cog_status.exists($this!='NA' and $this!='NAVU')"
+      },
+      "expression": {
+        "name": "cognitiveStatus",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & npsid_data_npsi.toString() & 'cognitive-status')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-PatientObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "407628009",
+                "display": "Global deterioration scale finding for assessment of primary degenerative dementia"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "{{mpp:getConcept(%assessmentConceptMap, npsid_cog_status, 'target_code')}}",
+                "display": "{{mpp:getConcept(%assessmentConceptMap, npsid_cog_status, 'target_display')}}"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

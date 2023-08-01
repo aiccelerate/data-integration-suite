@@ -1,0 +1,182 @@
+{
+  "id": "symptom-existence-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/symptom-existence-mapping",
+  "name": "symptom-existence-mapping",
+  "title": "Mapping of symptom existence schema for pilot 2 to AIC-ParkinsonMotorObservation profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "context": {
+    "symptomMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot2-unipd/symptom-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isClinicalVisitAndHasMotorSymptoms",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and clv_s_onset_mot_features___26 = 0"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#colName}}": "{{utl:indices(1, 25).exclude(7 | 8 | 20).select('clv_s_onset_mot_features___' & $this.toString())}}",
+          "{{*}}": {
+            "{{#hasSymptom}}": "{{utl:evaluateExpression('' & %colName) = 1}}",
+            "{{?}}": {
+              "resourceType": "Observation",
+              "id": "{{mpp:getHashedId('Observation', record_id & redcap_repeat_instance.toString() & %colName)}}",
+              "meta": {
+                "profile": [
+                  "{{mpp:getConcept(%symptomMap, %colName, 'target_profile_existence')}}"
+                ],
+                "source": "{{%sourceSystem.sourceUri}}"
+              },
+              "status": "final",
+              "code": {
+                "coding": [
+                  {
+                    "system": "{{mpp:getConcept(%symptomMap,  %colName, 'target_system')}}",
+                    "code": "{{mpp:getConcept(%symptomMap,  %colName, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%symptomMap,  %colName, 'target_display')}}"
+                  }
+                ]
+              },
+              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+              "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "valueBoolean": "{{%hasSymptom}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isClinicalVisitAndHasCognitiveSymptoms",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and cl_clinica_es_sint_cog___13 = 0"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#colName}}": "{{(utl:indices(1, 5) | 12).select('cl_clinica_es_sint_cog___' & $this.toString())}}",
+          "{{*}}": {
+            "{{#hasSymptom}}": "{{utl:evaluateExpression('' & %colName) = 1}}",
+            "{{?}}": {
+              "resourceType": "Observation",
+              "id": "{{mpp:getHashedId('Observation', record_id & redcap_repeat_instance.toString() & %colName)}}",
+              "meta": {
+                "profile": [
+                  "{{mpp:getConcept(%symptomMap, %colName, 'target_profile_existence')}}"
+                ],
+                "source": "{{%sourceSystem.sourceUri}}"
+              },
+              "status": "final",
+              "code": {
+                "coding": [
+                  {
+                    "system": "{{mpp:getConcept(%symptomMap,  %colName, 'target_system')}}",
+                    "code": "{{mpp:getConcept(%symptomMap,  %colName, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%symptomMap,  %colName, 'target_display')}}"
+                  }
+                ]
+              },
+              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+              "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "valueBoolean": "{{%hasSymptom}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isClinicalVisitAndHasNonMotorSymptoms",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and cl_non_mot_simpt = 1"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#colName}}": "{{utl:indices(1, 10).select('clv_nnmot_auton___' & $this.toString()) | utl:indices(1, 5).select('clv_nnmot_auton_sl_dis___' & $this.toString()) | utl:indices(1, 9).select('clv_nnmot_auton_n_dis___' & $this.toString()) | 'clv_nnmot_auton_sens_dis___1'}}",
+          "{{*}}": {
+            "{{#hasSymptom}}": "{{utl:evaluateExpression('' & %colName) = 1}}",
+            "{{?}}": {
+              "resourceType": "Observation",
+              "id": "{{mpp:getHashedId('Observation', record_id & redcap_repeat_instance.toString() & %colName)}}",
+              "meta": {
+                "profile": [
+                  "{{mpp:getConcept(%symptomMap, %colName, 'target_profile_existence')}}"
+                ],
+                "source": "{{%sourceSystem.sourceUri}}"
+              },
+              "status": "final",
+              "code": {
+                "coding": [
+                  {
+                    "system": "{{mpp:getConcept(%symptomMap,  %colName, 'target_system')}}",
+                    "code": "{{mpp:getConcept(%symptomMap,  %colName, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%symptomMap,  %colName, 'target_display')}}"
+                  }
+                ]
+              },
+              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+              "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "valueBoolean": "{{%hasSymptom}}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasOtherMotorSymptoms",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists()"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#colName}}": "{{'st_ter_incl_crit2' | 'st_ter_incl_crit3' | 'st_ter_incl_crit8___1' | 'st_ter_incl_crit7' }}",
+          "{{*}}": {
+            "{{#hasSymptom}}": "{{utl:evaluateExpression('' & %colName) = iif( %colName = 'st_ter_incl_crit8___1', 0, 1)}}",
+            "{{?}}": {
+              "resourceType": "Observation",
+              "id": "{{mpp:getHashedId('Observation', record_id & redcap_repeat_instance.toString() & %colName)}}",
+              "meta": {
+                "profile": [
+                  "{{mpp:getConcept(%symptomMap, %colName, 'target_profile_existence')}}"
+                ],
+                "source": "{{%sourceSystem.sourceUri}}"
+              },
+              "status": "final",
+              "code": {
+                "coding": [
+                  {
+                    "system": "{{mpp:getConcept(%symptomMap,  %colName, 'target_system')}}",
+                    "code": "{{mpp:getConcept(%symptomMap,  %colName, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%symptomMap,  %colName, 'target_display')}}"
+                  }
+                ]
+              },
+              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+              "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "valueBoolean": "{{%hasSymptom}}"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

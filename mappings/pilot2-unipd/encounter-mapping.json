@@ -1,0 +1,66 @@
+{
+  "id": "encounter-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/encounter-mapping",
+  "name": "encounter-mapping",
+  "title": "Mapping of encounter schema for pilot 2 to AIC-ParkinsonCareEncounter",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "context": {
+    "encounterConceptMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot2/encounter-concept-map.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (iif(redcap_event_name = 'clinical_visit_arm_1', clv_visit_date, npsid_data_npsi) - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isAVisitRow",
+        "language": "text/fhirpath",
+        "expression": "(redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists()) or (redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists())"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Encounter",
+          "id": "{{mpp:getHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonCareEncounter"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "finished",
+          "class": {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code": "AMB",
+            "display": "Ambulatory"
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "system":"http://snomed.info/sct",
+                  "code": "{{iif(redcap_event_name = 'clinical_visit_arm_1', '225398001', '307808008')}}",
+                  "display": "{{iif(redcap_event_name = 'clinical_visit_arm_1', 'Neurological Assessment', 'Neuropsychological Assessment')}}"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "period": {
+            "start": "{{%visitDate}}",
+            "end": "{{? %visitDate}}"
+          }
+        }
+      }
+    }
+  ]
+}

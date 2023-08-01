@@ -1,0 +1,195 @@
+{
+  "id": "medication-used-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/medication-used-mapping",
+  "name": "medication-used-mapping",
+  "title": "Mapping of schema MedicationUsed to AIC-MedicationUsed FHIR profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "context": {
+    "medicationConceptMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot2-unipd/medication-concept-map.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "LEED",
+      "language": "text/fhirpath",
+      "expression": "(st_ter_no_calc_leed.where($this != 'NAV').toDecimal() | st_ter_leed.where($this != 'NAV').toDecimal()).first()"
+    },
+    {
+      "name": "DAED",
+      "language": "text/fhirpath",
+      "expression": "(st_ter_no_calc_daed.where($this != 'NAV').toDecimal() | st_ter_daed.where($this != 'NAV').toDecimal()).first()"
+    },
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (iif(redcap_event_name = 'clinical_visit_arm_1', clv_visit_date, npsid_data_npsi) - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isUsingLevodopa",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and (%LEED.exists() or st_ter_incl_crit1 = 1 or st_ter_lev_bin = 1)"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "MedicationStatement",
+          "id": "{{mpp:getHashedId('MedicationStatement', record_id & 'Levodopa' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationUsed"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.whocc.no/atc",
+                "code": "N04BA01",
+                "display": "Levodopa"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectivePeriod": {
+            "start": "{{%visitDate - iif(clv_prev_visit_distance = 0 or clv_prev_visit_distance.exists().not(), 1, clv_prev_visit_distance).toQuantity('mo')}}",
+            "end": "{{%visitDate}}"
+          },
+          "dosage": [
+            {
+              "sequence": 1,
+              "timing": {
+                "repeat": {
+                  "frequency": "{{iif(st_ter_incl_crit1 = 1, 5, 2)}}",
+                  "periodUnit": "d",
+                  "period": 1
+                }
+              },
+              "doseAndRate": [
+                {
+                  "{{#doseExists}}": "{{iif(%LEED.exists(), true, {})}}",
+                  "{{?}}": {
+                    "doseQuantity": {
+                      "value": "{{%LEED}}",
+                      "system": "http://unitsofmeasure.org",
+                      "code": "mg",
+                      "unit": "mg"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isUsingDopamine",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and (%DAED.exists() or st_ter_da_bin = 1)"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "MedicationStatement",
+          "id": "{{mpp:getHashedId('MedicationStatement', record_id & 'Dopamine' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationUsed"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.whocc.no/atc",
+                "code": "N04BC01",
+                "display": "Bromocriptine"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectivePeriod": {
+            "start": "{{%visitDate - iif(clv_prev_visit_distance = 0 or clv_prev_visit_distance.exists().not(), 1, clv_prev_visit_distance).toQuantity('mo')}}",
+            "end": "{{%visitDate}}"
+          },
+          "dosage": [
+            {
+              "sequence": 1,
+              "timing": {
+                "repeat": {
+                  "frequency": 1,
+                  "periodUnit": "d",
+                  "period": 1
+                }
+              },
+              "doseAndRate": [
+                {
+                  "{{#doseExists}}": "{{iif(%DAED.exists(), true, {})}}",
+                  "{{?}}": {
+                    "doseQuantity": {
+                      "value": "{{%DAED}}",
+                      "system": "http://unitsofmeasure.org",
+                      "code": "mg",
+                      "unit": "mg"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasOtherMedications",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists()"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#colName}}": "{{'st_ter_comti_bin' | 'st_ter_maobi_bin' | 'st_ter_achi_bin' | 'st_ter_ssri_bin' | 'st_ter_nsri_bin' | 'st_ter_nassa_bin' | 'st_ter_bzd_bin' | 'st_ter_oadep_bin' | 'st_ter_apsych_bin' | 'st_ter_psychostim_bin'}}",
+          "{{*}}": {
+            "{{#hasMed}}": "{{iif(utl:evaluateExpression('' & %colName) = 1, true, {})}}",
+            "{{?}}": {
+              "resourceType": "MedicationStatement",
+              "id": "{{mpp:getHashedId('MedicationStatement', record_id & %colName & clv_visit_date.toString())}}",
+              "meta": {
+                "profile": [
+                  "https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationUsed"
+                ],
+                "source": "{{%sourceSystem.sourceUri}}"
+              },
+              "status": "completed",
+              "medicationCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://www.whocc.no/atc",
+                    "code": "{{mpp:getConcept(%medicationConceptMap, %colName, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%medicationConceptMap, %colName, 'target_display')}}"
+                  }
+                ]
+              },
+              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+              "effectivePeriod": {
+                "start": "{{%visitDate - 1.toQuantity('mo')}}",
+                "end": "{{%visitDate}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

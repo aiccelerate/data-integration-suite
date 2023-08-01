@@ -1,0 +1,109 @@
+{
+  "id": "device-used-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/device-used-mapping",
+  "name": "device-used-mapping",
+  "title": "Mapping of schema DeviceUsed to AIC-MedicationUsed FHIR profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isUsingApomorpine",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and apomorph_filter = 'apomorphine'"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "DeviceUseStatement",
+          "id": "{{mpp:getHashedId('DeviceUseStatement', record_id & clv_visit_date.toString() & 'apomorphine')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonRelatedDeviceUsed"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "active",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "device": {
+            "identifier": {
+              "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-related-devices",
+              "value": "apomorfine-pump"
+            }
+          },
+          "timingPeriod": {
+            "start": "{{iif(st_adv_apom_date.exists(), @1900-01-01 + (st_adv_apom_date-2).toQuantity('d'), %visitDate - 1 months)}}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isUsingDBS",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and dbs_filter = 'dbs'"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "DeviceUseStatement",
+          "id": "{{mpp:getHashedId('DeviceUseStatement', record_id & clv_visit_date.toString() & 'deep-brain-stimulator')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonRelatedDeviceUsed"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "active",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "device": {
+            "identifier": {
+              "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-related-devices",
+              "value": "deep-brain-stimulator"
+            }
+          },
+          "timingPeriod": {
+            "start": "{{iif(dbs_data_int.exists(), @1900-01-01 + (dbs_data_int-2).toQuantity('d'), %visitDate - 1 months)}}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isUsingDuodopa",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and duodopa_filter = 'duodopa'"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "DeviceUseStatement",
+          "id": "{{mpp:getHashedId('DeviceUseStatement', record_id & clv_visit_date.toString() & 'levodopa-infusion-pump')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonRelatedDeviceUsed"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "active",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "device": {
+            "identifier": {
+              "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-related-devices",
+              "value": "levodopa-infusion-pump"
+            }
+          },
+          "timingPeriod": {
+            "start": "{{iif(st_adv_lcig_first_date.exists(), @1900-01-01 + (st_adv_lcig_first_date-2).toQuantity('d'), %visitDate - 1 months)}}"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -71,22 +71,6 @@
         ]
       },
       {
-        "id": "Ext-plt3-p1-condition.codeDisplay",
-        "path": "Ext-plt3-p1-condition.codeDisplay",
-        "short": "Condition name",
-        "definition": "Name of the diagnosis",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ]
-      },
-      {
         "id": "Ext-plt3-p1-condition.clinicalStatus",
         "path": "Ext-plt3-p1-condition.clinicalStatus",
         "short": "Condition status",
@@ -103,6 +87,22 @@
         ]
       },
       {
+        "id": "Ext-plt3-p1-condition.severity",
+        "path": "Ext-plt3-p1-condition.severity",
+        "short": "Severity",
+        "definition": "Severity",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt3-p1-condition.onsetDateTime",
         "path": "Ext-plt3-p1-condition.onsetDateTime",
         "short": "Condition start date",
@@ -111,9 +111,9 @@
         "max": "1",
         "type": [
           {
-            "code": "dateTime",
+            "code": "date",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/dateTime"
+              "http://hl7.org/fhir/StructureDefinition/date"
             ]
           }
         ]
@@ -127,9 +127,9 @@
         "max": "1",
         "type": [
           {
-            "code": "dateTime",
+            "code": "date",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/dateTime"
+              "http://hl7.org/fhir/StructureDefinition/date"
             ]
           }
         ]

@@ -1,0 +1,348 @@
+{
+  "id": "nms-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/nms-mapping",
+  "name": "nms-mapping",
+  "title": "Mapping of UNIPD's data schema with NMS data for pilot 2 to AIC-ParkinsonNonMotorSymptomAssessment and its children profiles",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "hasNms",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and mds_status = 1"
+      },
+      "expression": {
+        "name": "nmsScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation',record_id & 'NMS' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptoms",
+                "code": "non-motor-symptoms",
+                "display": "Non motor symptom assessment"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "method": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
+                "code": "mds-nms",
+                "display": "MDS Non-Motor Rating Scale (NMS)"
+              }
+            ]
+          },
+          "valueQuantity": {
+            "value": "{{mds_nms_170}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          },
+          "component": [
+            {
+              "{{#score}}":  "{{mds_nms_16}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "A",
+                      "display": "Depression"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_29}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "B",
+                      "display": "Anxiety"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_39}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "C",
+                      "display": "Apathy"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_52}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "D",
+                      "display": "Psychosis"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_65}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "E",
+                      "display": "Impulse Control and Related Disorders"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_84}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "F",
+                      "display": "Cognition"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_91}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "G",
+                      "display": "Orthostatic Hypotension"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_101}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "H",
+                      "display": "Urinary"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_108}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "I",
+                      "display": "Sexual"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_121}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "J",
+                      "display": "Gastrointestinal"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_140}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "K",
+                      "display": "Sleep and Wakefulness"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{mds_nms_140}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_153}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "L",
+                      "display": "Pain"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}": "{{mds_nms_169}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "M",
+                      "display": "Other"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            },
+            {
+              "{{#score}}":  "{{mds_nms_182}}",
+              "{{?}}":  {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://aiccelerate.eu/fhir/CodeSystem/nms-sections",
+                      "code": "NMF",
+                      "display": "Non-Motor Fluctuations"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{%score}}",
+                  "unit": "{score}",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

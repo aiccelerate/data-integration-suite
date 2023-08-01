@@ -87,27 +87,11 @@
         ]
       },
       {
-        "id": "Ext-plt3-p1-procedure.procedureRequestDate",
-        "path": "Ext-plt3-p1-procedure.procedureRequestDate",
-        "short": "Time surgery is requested first",
-        "definition": "Time surgery is requested first",
-        "min": 1,
-        "max": "1",
-        "type": [
-          {
-            "code": "dateTime",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/dateTime"
-            ]
-          }
-        ]
-      },
-      {
         "id": "Ext-plt3-p1-procedure.plannedTime",
         "path": "Ext-plt3-p1-procedure.plannedTime",
         "short": "Planned time for the procedure",
         "definition": "Planned time for the procedure",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -123,7 +107,7 @@
         "path": "Ext-plt3-p1-procedure.isCancelled",
         "short": "Whether procedure is cancelled",
         "definition": "Whether procedure is cancelled",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {

@@ -1,0 +1,221 @@
+{
+  "id": "nmss-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/nmss-mapping",
+  "name": "nmss-mapping",
+  "title": "Mapping of UNIPD's data schema with NMSS data for pilot 2 to AIC-ParkinsonNonMotorSymptomAssessment and its children profiles",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "hasNmss",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and nms_subscore = 1"
+      },
+      "expression": {
+        "name": "nmssScore",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation',record_id & 'nmss' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonNonMotorSymptomAssessment"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptoms",
+                "code": "non-motor-symptoms",
+                "display": "Non motor symptom assessment"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "method": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
+                "code": "mds-nmss",
+                "display": "MDS Non-Motor Symptoms Scale for Parkinson’s Disease (NMSS)"
+              }
+            ]
+          },
+          "valueQuantity": {
+            "value": "{{nmss_card_2 + nmss_sf2 + nmss_cog_2 + nmss_hall3 + nmss_mem2 + nmss_gastro2 + nmss_urinary2 + nmss_sex + nmss_misc_2}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          },
+          "component": [
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain1",
+                    "display": "Cardiovascular including falls"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_card_2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain2",
+                    "display": "Sleep/Fatigue"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_sf2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain3",
+                    "display": "Mood/Cognition"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_cog_2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain4",
+                    "display": "Perceptual problems halicunations"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_hall3}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain5",
+                    "display": "Attention/Memory"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_mem2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain6",
+                    "display": "Gastrointestinal tract"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_gastro2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain7",
+                    "display": "Urinary"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_urinary2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain8",
+                    "display": "Sexual function"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_sex}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://aiccelerate.eu/fhir/CodeSystem/nmss-domains",
+                    "code": "domain8",
+                    "display": "Miscellaneous"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{nmss_misc_2}}",
+                "unit": "{score}",
+                "system": "http://unitsofmeasure.org",
+                "code": "{score}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

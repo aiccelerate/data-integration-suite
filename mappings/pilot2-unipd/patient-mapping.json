@@ -1,0 +1,37 @@
+{
+  "id": "patient-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/patient-mapping",
+  "name": "patient-mapping",
+  "title": "Mapping of patient schema for pilots to AIC-Patient and AIC- FHIR profile",
+  "source": [{
+    "alias": "unipd_export",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details-joined-patient-details"
+  }],
+  "mapping": [
+    {
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Patient",
+          "id": "{{mpp:getHashedId('Patient', record_id)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Patient"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{record_id}}"
+            }
+          ],
+          "active": true,
+          "gender": "{{iif(reg_sex=1, 'male', 'female')}}",
+          "birthDate": "{{iif(clv_visit_date.exists(), @1900-01-01 + (clv_visit_date - 2).toQuantity('d') - clv_age_v.toQuantity('a'), @1900-01-01 + (npsid_data_npsi - 2).toQuantity('d') - npsid_age_v.toQuantity('a'))}}",
+          "deceasedDateTime": "{{? iif(clv_visit_date.exists(), @1900-01-01 + (clv_visit_date - 2).toQuantity('d') + (patient_reg_death_age - clv_age_v).toQuantity('a'), @1900-01-01 + (npsid_data_npsi - 2).toQuantity('d') + (patient_reg_death_age - npsid_age_v).toQuantity('a'))}}"
+        }
+      }
+    }
+  ]
+}

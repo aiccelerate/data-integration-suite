@@ -65,7 +65,7 @@
       "sourceContext": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "4_DiagnosticStudy.csv",
+          "path": "4_DiagStd.csv",
           "fileFormat": "csv",
           "options": {
             "sep": ",",

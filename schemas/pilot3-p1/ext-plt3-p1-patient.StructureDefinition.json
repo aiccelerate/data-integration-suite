@@ -63,9 +63,9 @@
         "max": "1",
         "type": [
           {
-            "code": "date",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]

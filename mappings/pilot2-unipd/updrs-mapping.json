@@ -1,0 +1,772 @@
+{
+  "id": "symptom-assessment-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/updrs-mapping",
+  "name": "updrs-mapping",
+  "title": "Mapping of UNIPD's data schema with UPDRS data for pilot 2 to AIC-ParkinsonMotorObservation and its children profiles",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd"
+  }],
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+    }
+  ],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "hasUpdrsDetailed",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and ma_updrs_subscore_on > 0 and (ma_subit_updrs3_on.exists() or ma_subit_updrs4_on.exists())"
+      },
+      "expression": {
+        "name": "updrsResponse",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "QuestionnaireResponse",
+          "id": "{{mpp:getHashedId('QuestionnaireResponse', record_id & clv_visit_date.toString())}}",
+          "status": "completed",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "authored": "{{%visitDate}}",
+          "item": [
+            {
+              "{{#hasUpdrs3Section}}": "{{iif(ma_subit_updrs3_on.exists(), true, {})}}",
+              "{{?}}": {
+                "linkId": "3",
+                "item": [
+                  {
+                    "linkId": "3a",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs3a_on}}",
+                      "{{*}}": {
+                        "valueBoolean": "{{%ans = 1}}"
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3b",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs3b_on}}",
+                      "{{*}}": {
+                        "valueBoolean": "{{%ans = 1}}"
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3c",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs3c_on}}",
+                      "{{*}}": {
+                        "valueBoolean": "{{%ans = 1}}"
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.1",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs31_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.1-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.2",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs32_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.2-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.3-Neck",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs33a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.3-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.3-RUE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs33b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.3-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.3-LUE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs33c_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.3-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.3-RLE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs33d_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.3-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.3-LLE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs33e_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.3-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.4-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs34a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.4-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.4-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs34b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.4-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.5-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs35a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.5-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.5-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs35b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.5-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.6-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs36a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.6-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.6-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs36b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.6-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.7-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs37a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.7-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.7-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs37b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.7-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.8-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs38a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.8-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.8-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs38b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.8-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.9",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs39_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.9-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.10",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs310_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.10-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.11",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs311_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.11-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.12",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs312_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.12-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.13",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs313_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.13-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.14",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs314_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.14-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.15-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs315a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.15-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.15-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs315b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.15-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.16-R",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs316a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.16-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.16-L",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs316b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.16-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.17-RUE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs17a_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.17-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.17-LUE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs317b_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.17-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.17-RLE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs317c_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.17-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.17-LLE",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs317d_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.17-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.17-LipJaw",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs317e_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.17-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3.18",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs318_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-3.18-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "3d",
+                    "item": [
+                      {
+                        "linkId": "3d.1",
+                        "answer": {
+                          "{{#ans}}": "{{ma_subit_updrs318a_on}}",
+                          "{{*}}": {
+                            "valueBoolean": "{{%ans = 1}}"
+                          }
+                        }
+                      },
+                      {
+                        "linkId": "3d.2",
+                        "answer": {
+                          "{{#ans}}": "{{ma_subit_updrs318b_on}}",
+                          "{{*}}": {
+                            "valueBoolean": "{{%ans = 1}}"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "linkId": "3hys",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_hy_on}}",
+                      "{{*}}": {
+                        "valueDecimal": "{{%ans}}"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "{{#hasUpdrs3Section}}": "{{iif(ma_subit_updrs4_on.exists(), true, {})}}",
+              "{{?}}":  {
+                "linkId": "4",
+                "item": [
+                  {
+                    "linkId": "4.1",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs41_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-4.1-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "4.2",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs42_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-4.2-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "4.3",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs43_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-4.3-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "4.4",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs44_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-4.4-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "4.5",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs45_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-4.5-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "linkId": "4.6",
+                    "answer": {
+                      "{{#ans}}": "{{ma_subit_updrs46_on}}",
+                      "{{*}}": {
+                        "valueCoding": {
+                          "system": "https://aiccelerate.eu/fhir/CodeSystem/mds-updrs-4.6-answers",
+                          "code": "{{'' & %ans.toString()}}"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasUpdrs3",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and ma_subit_updrs3_on.exists() or updrs_3_on.exists()"
+      },
+      "expression": {
+        "name": "updrs3Score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation',record_id & 'updrs3' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonMotorObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "77720-1",
+                "display": "UPDRS - Motor examination panel (Part 3) Total score"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "derivedFrom": "{{* mpp:createFhirReferenceWithHashedId('QuestionnaireResponse', %updrsResponse.id)}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "method": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
+                "code": "mds-updrs",
+                "display": "MDS UPDRS"
+              }
+            ]
+          },
+          "valueQuantity": {
+            "value": "{{(ma_subit_updrs3_on | updrs_3_on).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasUpdrs4",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and ma_subit_updrs4_on.exists() or updrs_4_on.exists()"
+      },
+      "expression": {
+        "name": "updrs4score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation',record_id & 'updrs4' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonMotorObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "77721-9",
+                "display": "UPDRS - Complications of therapy (Part 4) Total score"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "derivedFrom": "{{* mpp:createFhirReferenceWithHashedId('QuestionnaireResponse', %updrsResponse.id)}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "method": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
+                "code": "mds-updrs",
+                "display": "MDS UPDRS"
+              }
+            ]
+          },
+          "valueQuantity": {
+            "value": "{{(ma_subit_updrs4_on | updrs_4_on).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasUpdrs3",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and ma_subit_updrs1_on.exists() or updrs_1_on.exists()"
+      },
+      "expression": {
+        "name": "updrs1score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation',record_id & 'updrs1' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonMotorObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "77718-5",
+                "display": "UPDRS - Mentation, Behavior and Mood (Part 1) Total score"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "method": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
+                "code": "mds-updrs",
+                "display": "MDS UPDRS"
+              }
+            ]
+          },
+          "valueQuantity": {
+            "value": "{{(ma_subit_updrs1_on | updrs_1_on).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasUpdrs2",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and ma_subit_updrs2_on.exists() or updrs_2_on.exists()"
+      },
+      "expression": {
+        "name": "updrs2score",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation',record_id & 'updrs2' & clv_visit_date.toString())}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonMotorObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "https://loinc.org",
+                "code": "77719-3",
+                "display": "UPDRS - Activities of Daily Living (Part 4) Total score"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
+          "effectiveDateTime": "{{%visitDate}}",
+          "method": {
+            "coding": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
+                "code": "mds-updrs",
+                "display": "MDS UPDRS"
+              }
+            ]
+          },
+          "valueQuantity": {
+            "value": "{{(ma_subit_updrs2_on | updrs_2_on).first()}}",
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org",
+            "code": "{score}"
+          }
+        }
+      }
+    }
+  ]
+}
