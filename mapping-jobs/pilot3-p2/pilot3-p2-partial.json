@@ -11,7 +11,7 @@
   "sinkSettings": {
     "jsonClass": "FhirRepositorySinkSettings",
     "fhirRepoUrl": "${FHIR_REPO_URL}",
-    "writeErrorHandling": "continue"
+    "errorHandling": "continue"
   },
   "mappingErrorHandling": "continue",
   "mappings": [
