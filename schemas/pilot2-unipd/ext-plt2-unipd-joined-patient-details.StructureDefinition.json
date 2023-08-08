@@ -135,8 +135,8 @@
         ]
       },
       {
-        "id": "Ext-plt2-unipd.npsid_data_npsi",
-        "path": "Ext-plt2-unipd.npsid_data_npsi",
+        "id": "Ext-plt2-unipd-joined-patient-details.npsid_data_npsi",
+        "path": "Ext-plt2-unipd-joined-patient-details.npsid_data_npsi",
         "short": "NPSI Visit date",
         "definition": "NPSI Visit date",
         "min": 0,
@@ -151,8 +151,8 @@
         ]
       },
       {
-        "id": "Ext-plt2-unipd.npsid_age_v",
-        "path": "Ext-plt2-unipd.npsid_age_v",
+        "id": "Ext-plt2-unipd-joined-patient-details.npsid_age_v",
+        "path": "Ext-plt2-unipd-joined-patient-details.npsid_age_v",
         "short": "Age at visit",
         "definition": "Age at visit",
         "min": 0,
