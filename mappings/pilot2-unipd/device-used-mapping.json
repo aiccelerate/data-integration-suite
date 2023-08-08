@@ -11,7 +11,7 @@
     {
       "name": "visitDate",
       "language": "text/fhirpath",
-      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+      "expression": "clv_visit_date.utl:toFhirDate('dd/MM/yyyy')"
     }
   ],
   "mapping": [
@@ -40,7 +40,7 @@
             }
           },
           "timingPeriod": {
-            "start": "{{iif(st_adv_apom_date.exists(), @1900-01-01 + (st_adv_apom_date-2).toQuantity('d'), %visitDate - 1 months)}}"
+            "start": "{{iif(st_adv_apom_date.exists(), st_adv_apom_date.utl:toFhirDate('dd/MM/yyyy'), %visitDate - 1 days)}}"
           }
         }
       }
@@ -70,7 +70,7 @@
             }
           },
           "timingPeriod": {
-            "start": "{{iif(dbs_data_int.exists(), @1900-01-01 + (dbs_data_int-2).toQuantity('d'), %visitDate - 1 months)}}"
+            "start": "{{iif(dbs_data_int.exists(), dbs_data_int.utl:toFhirDate('dd/MM/yyyy'), %visitDate - 1 days)}}"
           }
         }
       }
@@ -100,7 +100,7 @@
             }
           },
           "timingPeriod": {
-            "start": "{{iif(st_adv_lcig_first_date.exists(), @1900-01-01 + (st_adv_lcig_first_date-2).toQuantity('d'), %visitDate - 1 months)}}"
+            "start": "{{iif(st_adv_lcig_first_date.exists(), st_adv_lcig_first_date.utl:toFhirDate('dd/MM/yyyy'), %visitDate - 1 days)}}"
           }
         }
       }

@@ -11,7 +11,7 @@
     {
       "name": "visitDate",
       "language": "text/fhirpath",
-      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+      "expression": "clv_visit_date.utl:toFhirDate('dd/MM/yyyy')"
     }
   ],
   "mapping": [
@@ -29,6 +29,7 @@
           "id": "{{mpp:getHashedId('QuestionnaireResponse', record_id & clv_visit_date.toString())}}",
           "status": "completed",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "questionnaire": "https://aiccelerate.eu/fhir/Questionnaire/mds-updrs",
           "authored": "{{%visitDate}}",
           "item": [
             {
@@ -676,7 +677,7 @@
     },
     {
       "precondition": {
-        "name": "hasUpdrs3",
+        "name": "hasUpdrs1",
         "language": "text/fhirpath",
         "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and ma_subit_updrs1_on.exists() or updrs_1_on.exists()"
       },
@@ -743,7 +744,7 @@
               {
                 "system": "https://loinc.org",
                 "code": "77719-3",
-                "display": "UPDRS - Activities of Daily Living (Part 4) Total score"
+                "display": "UPDRS - Activities of Daily Living (Part 2) Total score"
               }
             ]
           },

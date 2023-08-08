@@ -87,6 +87,22 @@
         ]
       },
       {
+        "id": "Ext-plt2-unipd.mh_age_at_s_onset",
+        "path": "Ext-plt2-unipd.mh_age_at_s_onset",
+        "short": "Age at symtoms onset",
+        "definition": "Age at symtoms onset",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt2-unipd-joined-patient-details.clv_visit_date",
         "path": "Ext-plt2-unipd-joined-patient-details.clv_visit_date",
         "short": "Visit date",

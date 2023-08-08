@@ -11,7 +11,7 @@
     {
       "name": "visitDate",
       "language": "text/fhirpath",
-      "expression": "@1900-01-01 + (clv_visit_date.orElse(2) - 2).toQuantity('d')"
+      "expression": "clv_visit_date.utl:toFhirDate('dd/MM/yyyy')"
     }
   ],
   "mapping": [
@@ -19,7 +19,7 @@
       "precondition": {
         "name": "isPatientRow",
         "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'patient_registry_arm_1'"
+        "expression": "redcap_event_name = 'patient_registry_arm_1' and %visitDate.exists()"
       },
       "expression": {
         "name": "smokingStatus",
@@ -70,7 +70,7 @@
       "precondition": {
         "name": "isPatientRow",
         "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'patient_registry_arm_1'"
+        "expression": "redcap_event_name = 'patient_registry_arm_1' and %visitDate.exists()"
       },
       "expression": {
         "name": "alcoholConsumption",
@@ -121,7 +121,7 @@
       "precondition": {
         "name": "hasPhysicalActivity",
         "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'patient_registry_arm_1' and mh_cofact_3.exists()"
+        "expression": "redcap_event_name = 'patient_registry_arm_1' and mh_cofact_3.exists() and %visitDate.exists()"
       },
       "expression": {
         "name": "physicalActivity",

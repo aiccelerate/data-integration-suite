@@ -7,8 +7,20 @@
     "alias": "unipd_export",
     "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details-joined-patient-details"
   }],
+  "variable": [
+    {
+      "name": "birthDate",
+      "language": "text/fhirpath",
+      "expression": "iif(clv_visit_date.exists(), clv_visit_date.utl:toFhirDate('dd/MM/yyyy') - clv_age_v.toQuantity('a'), npsid_data_npsi.utl:toFhirDate('dd/MM/yyyy') - npsid_age_v.toQuantity('a'))"
+    }
+  ],
   "mapping": [
     {
+      "precondition": {
+        "name": "canIdentifyBirthDate",
+        "language": "text/fhirpath",
+        "expression": "%birthDate.exists()"
+      },
       "expression": {
         "name": "result",
         "language": "application/fhir-template+json",
@@ -28,8 +40,40 @@
           ],
           "active": true,
           "gender": "{{iif(reg_sex=1, 'male', 'female')}}",
-          "birthDate": "{{iif(clv_visit_date.exists(), @1900-01-01 + (clv_visit_date - 2).toQuantity('d') - clv_age_v.toQuantity('a'), @1900-01-01 + (npsid_data_npsi - 2).toQuantity('d') - npsid_age_v.toQuantity('a'))}}",
-          "deceasedDateTime": "{{? iif(clv_visit_date.exists(), @1900-01-01 + (clv_visit_date - 2).toQuantity('d') + (patient_reg_death_age - clv_age_v).toQuantity('a'), @1900-01-01 + (npsid_data_npsi - 2).toQuantity('d') + (patient_reg_death_age - npsid_age_v).toQuantity('a'))}}"
+          "birthDate": "{{%birthDate}}",
+          "deceasedDateTime": "{{? iif(clv_visit_date.exists(), clv_visit_date.utl:toFhirDate('dd/MM/yyyy') + (patient_reg_death_age - clv_age_v).toQuantity('a'), npsid_data_npsi.utl:toFhirDate('dd/MM/yyyy') + (patient_reg_death_age - npsid_age_v).toQuantity('a'))}}"
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasMotorSymptomOnset",
+        "language": "text/fhirpath",
+        "expression": "%birthDate.exists() and mh_age_at_s_onset.exists()"
+      },
+      "expression": {
+        "name": "motorSymptomOnset",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'motor-symptom-onset')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-ParkinsonMotorObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "267082004",
+                "display": "Motor Symptoms"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime": "{{%birthDate + mh_age_at_s_onset.toQuantity('a')}}",
+          "valueBoolean": true
         }
       }
     }

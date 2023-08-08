@@ -11,7 +11,7 @@
     {
       "name": "visitDate",
       "language": "text/fhirpath",
-      "expression": "@1900-01-01 + (clv_visit_date - 2).toQuantity('d')"
+      "expression": "clv_visit_date.utl:toFhirDate('dd/MM/yyyy')"
     }
   ],
   "mapping": [
@@ -48,7 +48,7 @@
             "coding": [
               {
                 "system": "https://aiccelerate.eu/fhir/CodeSystem/parkinson-symptom-assessment-methods",
-                "code": "mds-nms",
+                "code": "nms",
                 "display": "MDS Non-Motor Rating Scale (NMS)"
               }
             ]

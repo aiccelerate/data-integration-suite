@@ -135,6 +135,23 @@
           }
         ]
       },
+      {
+        "id": "Ext-plt2-unipd.mh_diagnosis_pd",
+        "path": "Ext-plt2-unipd.mh_diagnosis_pd",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+
 
       {
         "id": "Ext-plt2-unipd.mh_age_at_s_onset",
@@ -2241,6 +2258,22 @@
           }
         ]
       },
+      {
+        "id": "Ext-plt2-unipd.mh_years_from_onset_d",
+        "path": "Ext-plt2-unipd.mh_years_from_onset_d",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
 
       {
         "id": "Ext-plt2-unipd.clv_visit_date",
@@ -2251,9 +2284,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -7951,6 +7984,168 @@
           }
         ]
       },
+
+      {
+        "id": "Ext-plt2-unipd.nmss_card",
+        "path": "Ext-plt2-unipd.nmss_card",
+        "short": "NMSS Cardiovascular",
+        "definition": "NMSS Cardiovascular",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_sf",
+        "path": "Ext-plt2-unipd.nmss_sf",
+        "short": "NMSS Sleep Fatigue",
+        "definition": "NMSS Sleep Fatigue",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_cog",
+        "path": "Ext-plt2-unipd.nmss_cog",
+        "short": "Mood Cognition",
+        "definition": "Mood Cognition",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_hall",
+        "path": "Ext-plt2-unipd.nmss_hall",
+        "short": "Percep.problemsHallucinations",
+        "definition": "Percep.problemsHallucinations",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_mem",
+        "path": "Ext-plt2-unipd.nmss_mem",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_gastro",
+        "path": "Ext-plt2-unipd.nmss_gastro",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_ur",
+        "path": "Ext-plt2-unipd.nmss_ur",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_sex2",
+        "path": "Ext-plt2-unipd.nmss_sex2",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_misc",
+        "path": "Ext-plt2-unipd.nmss_misc",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.nmss_tot",
+        "path": "Ext-plt2-unipd.nmss_tot",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+
       {
         "id": "Ext-plt2-unipd.nmss_card_2",
         "path": "Ext-plt2-unipd.nmss_card_2",
@@ -8353,22 +8548,7 @@
         ]
       },
 
-      {
-        "id": "Ext-plt2-unipd.npsid_visits",
-        "path": "Ext-plt2-unipd.npsid_visits",
-        "short": "NPSI current visit",
-        "definition": "NPSI current visit",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ]
-      },
+
       {
         "id": "Ext-plt2-unipd.npsi_cl_visit_n",
         "path": "Ext-plt2-unipd.npsi_cl_visit_n",
@@ -8394,9 +8574,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -9847,6 +10027,617 @@
           }
         ]
       },
+
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___1",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___1",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___2",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___2",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___3",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___3",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___4",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___4",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___5",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___5",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___6",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___6",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___7",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___7",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___8",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___8",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___9",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___9",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___10",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___10",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___11",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___11",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___12",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___12",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___na",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___na",
+        "short": "Comorbidity -X system (choice=Not applicable)",
+        "definition": "Comorbidity -X system (choice=Not applicable) (0:not-exist | 1:exists)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___navu",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___navu",
+        "short": "Comorbidity X system (choice=Not available)",
+        "definition": "Comorbidity X system (choice=Not available)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___nask",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___nask",
+        "short": "Comorbidity -X system (choice=Not asked)",
+        "definition": "Comorbidity -X system (choice=Not asked)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___nav",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___nav",
+        "short": "Comorbidity -X system (choice=Temporarily unavailable)",
+        "definition": "Comorbidity -X system (choice=Temporarily unavailable)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___nami",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___nami",
+        "short": "Comorbidity -X system (choice=Not available due to motor impairment))",
+        "definition": "Comorbidity -X system (choice=Not available due to motor impairment)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___nacf",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___nacf",
+        "short": "Comorbidity -X system (choice=Not available due task comprehension failure)",
+        "definition": "Comorbidity -X system (choice=Not available due task comprehension failure)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___naaf",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___naaf",
+        "short": "Comorbidity -X system (choice=Not available due to assignment failure,+))",
+        "definition": "Comorbidity -X system (choice=Not available due to assignment failure,+)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_features_t1watrophy___ur",
+        "path": "Ext-plt2-unipd.vr_features_t1watrophy___ur",
+        "short": "Comorbidity -X system (choice=MDS-NMS code)",
+        "definition": "Comorbidity -X system (choice=MDS-NMS code)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___1",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___1",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___2",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___2",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___3",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___3",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___4",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___4",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___5",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___5",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___6",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___6",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___7",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___7",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___8",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___8",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___9",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___9",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___10",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___10",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___na",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___na",
+        "short": "Comorbidity -X system (choice=Not applicable)",
+        "definition": "Comorbidity -X system (choice=Not applicable) (0:not-exist | 1:exists)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___navu",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___navu",
+        "short": "Comorbidity X system (choice=Not available)",
+        "definition": "Comorbidity X system (choice=Not available)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___nask",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___nask",
+        "short": "Comorbidity -X system (choice=Not asked)",
+        "definition": "Comorbidity -X system (choice=Not asked)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___nav",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___nav",
+        "short": "Comorbidity -X system (choice=Temporarily unavailable)",
+        "definition": "Comorbidity -X system (choice=Temporarily unavailable)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___nami",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___nami",
+        "short": "Comorbidity -X system (choice=Not available due to motor impairment))",
+        "definition": "Comorbidity -X system (choice=Not available due to motor impairment)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___nacf",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___nacf",
+        "short": "Comorbidity -X system (choice=Not available due task comprehension failure)",
+        "definition": "Comorbidity -X system (choice=Not available due task comprehension failure)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___naaf",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___naaf",
+        "short": "Comorbidity -X system (choice=Not available due to assignment failure,+))",
+        "definition": "Comorbidity -X system (choice=Not available due to assignment failure,+)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_swi_hypo___ur",
+        "path": "Ext-plt2-unipd.vr_swi_hypo___ur",
+        "short": "Comorbidity -X system (choice=MDS-NMS code)",
+        "definition": "Comorbidity -X system (choice=MDS-NMS code)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+
       {
         "id": "Ext-plt2-unipd.vr_fazekas",
         "path": "Ext-plt2-unipd.vr_fazekas",
@@ -9859,6 +10650,167 @@
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_gca",
+        "path": "Ext-plt2-unipd.vr_gca",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_mtal",
+        "path": "Ext-plt2-unipd.vr_mtal",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_mtar",
+        "path": "Ext-plt2-unipd.vr_mtar",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_pa_kl",
+        "path": "Ext-plt2-unipd.vr_pa_kl",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.vr_pa_kr",
+        "path": "Ext-plt2-unipd.vr_pa_kr",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "Ext-plt2-unipd.npsid_visits",
+        "path": "Ext-plt2-unipd.npsid_visits",
+        "short": "NPSI current visit",
+        "definition": "NPSI current visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.npsi_firstdiag",
+        "path": "Ext-plt2-unipd.npsi_firstdiag",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.adv_st_cand",
+        "path": "Ext-plt2-unipd.adv_st_cand",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.st_dementia",
+        "path": "Ext-plt2-unipd.st_dementia",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.st_ter_cog_status",
+        "path": "Ext-plt2-unipd.st_ter_cog_status",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]

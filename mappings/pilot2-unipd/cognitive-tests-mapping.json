@@ -17,7 +17,7 @@
     {
       "name": "visitDate",
       "language": "text/fhirpath",
-      "expression": "@1900-01-01 + (npsid_data_npsi - 2).toQuantity('d')"
+      "expression": "npsid_data_npsi.utl:toFhirDate('dd/MM/yyyy')"
     }
   ],
   "mapping": [
@@ -711,7 +711,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
-          "effectiveDateTime": "{{? @1900-01-01 + (npsid_data_npsi-2).toQuantity('d')}}",
+          "effectiveDateTime": "{{? %visitDate}}",
           "valueInteger": "{{npsid_yearsed}}"
         }
       }

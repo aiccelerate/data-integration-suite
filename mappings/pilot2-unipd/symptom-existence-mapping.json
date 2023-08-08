@@ -13,6 +13,13 @@
       "url": "$CONTEXT_REPO/pilot2-unipd/symptom-concept-map.csv"
     }
   },
+  "variable": [
+    {
+      "name": "visitDate",
+      "language": "text/fhirpath",
+      "expression": "clv_visit_date.utl:toFhirDate('dd/MM/yyyy')"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
@@ -48,7 +55,7 @@
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
               "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
-              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "effectiveDateTime": "{{%visitDate}}",
               "valueBoolean": "{{%hasSymptom}}"
             }
           }
@@ -89,7 +96,7 @@
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
               "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
-              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "effectiveDateTime": "{{%visitDate}}",
               "valueBoolean": "{{%hasSymptom}}"
             }
           }
@@ -130,7 +137,7 @@
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
               "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
-              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "effectiveDateTime": "{{%visitDate}}",
               "valueBoolean": "{{%hasSymptom}}"
             }
           }
@@ -147,9 +154,9 @@
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
-          "{{#colName}}": "{{'st_ter_incl_crit2' | 'st_ter_incl_crit3' | 'st_ter_incl_crit8___1' | 'st_ter_incl_crit7' }}",
+          "{{#colName}}": "{{'st_ter_incl_crit2' | 'st_ter_incl_crit3' | 'st_ter_incl_crit8___5' | 'st_ter_incl_crit7' }}",
           "{{*}}": {
-            "{{#hasSymptom}}": "{{utl:evaluateExpression('' & %colName) = iif( %colName = 'st_ter_incl_crit8___1', 0, 1)}}",
+            "{{#hasSymptom}}": "{{utl:evaluateExpression('' & %colName) = 1}}",
             "{{?}}": {
               "resourceType": "Observation",
               "id": "{{mpp:getHashedId('Observation', record_id & redcap_repeat_instance.toString() & %colName)}}",
@@ -171,7 +178,7 @@
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
               "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
-              "effectiveDateTime": "{{@1900-01-01 + (clv_visit_date - 2).toQuantity('d')}}",
+              "effectiveDateTime": "{{%visitDate}}",
               "valueBoolean": "{{%hasSymptom}}"
             }
           }

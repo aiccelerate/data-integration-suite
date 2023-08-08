@@ -1,6 +1,6 @@
 {
-  "id": "condition-mapping",
-  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/condition-mapping",
+  "id": "initial-condition-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/initial-condition-mapping",
   "name": "condition-mapping",
   "title": "Mapping of condition schema for pilots to AIC-Condition FHIR profile",
   "source": [{
@@ -23,20 +23,20 @@
   "mapping": [
     {
       "precondition": {
-        "name": "isVisitRow",
+        "name": "isPatientRow",
         "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists()"
+        "expression": "redcap_event_name = 'patient_registry_arm_1' and clv_visit_date.exists()"
       },
       "expression": {
-        "name": "result2",
+        "name": "result1",
         "language": "application/fhir-template+json",
         "value": {
-          "{{#colName}}": "{{utl:indices(1, 10).exclude(8).select('clv_comorb_card___' & $this.toString()) | 'clv_comorb_resp___1' | utl:indices(1, 13).exclude(10).select('clv_comorb_int___' & $this.toString()) |  utl:indices(1, 7).exclude(5).select('clv_comorb_neuro___' & $this.toString()) | utl:indices(1,4).select('clv_comorb_tum___' & $this.toString()) | utl:indices(1,10).exclude(9).select('clv_comorb_sist_end___' & $this.toString()) | utl:indices(1,5).select('clv_comorb_psich___' & $this.toString())}}",
+          "{{#colName}}": "{{utl:indices(1, 10).exclude(8).select('mh_comorbidit_card___' & $this.toString()) | 'mh_comorbidit_resp___1' | utl:indices(1, 13).exclude(10).select('mh_comorbidit_int___' & $this.toString()) |  utl:indices(1, 7).exclude(5).select('mh_comorb_neuro___' & $this.toString()) | utl:indices(1,4).select('mh_comorb_tum___' & $this.toString()) | utl:indices(1,10).exclude(9).select('mh_comorb_sist_end___' & $this.toString()) | utl:indices(1,5).select('mh_comorb_psich___' & $this.toString())}}",
           "{{*}}": {
             "{{#hasCondition}}": "{{iif(utl:evaluateExpression('' & %colName) = 1, true, {})}}",
             "{{?}}": {
               "resourceType": "Condition",
-              "id": "{{mpp:getHashedId('Condition', 'VR' & clv_visit_date.toString() & record_id & mpp:getConcept(%diagnosisConceptMap, %colName, 'target_code'))}}",
+              "id": "{{mpp:getHashedId('Condition', 'PC' & record_id &  mpp:getConcept(%diagnosisConceptMap, %colName, 'target_code'))}}",
               "meta": {
                 "profile": [
                   "https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"
@@ -61,7 +61,7 @@
                 ]
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
-              "onsetDateTime": "{{%visitDate}}"
+              "onsetDateTime": "{{%visitDate - 6.toQuantity('mo') }}"
             }
           }
         }
@@ -69,56 +69,16 @@
     },
     {
       "precondition": {
-        "name": "isFirstVisit",
+        "name": "isPatientRow",
         "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and redcap_repeat_instance = 1"
+        "expression": "redcap_event_name = 'patient_registry_arm_1'  and clv_visit_date.exists()"
       },
       "expression": {
-        "name": "parkinsonDiagnosis",
-        "language": "application/fhir-template+json",
-        "value": {
-          "resourceType": "Condition",
-          "id": "{{mpp:getHashedId('Condition', record_id & 'Parkinson')}}",
-              "meta": {
-                "profile": [
-                  "https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"
-                ],
-                "source": "{{%sourceSystem.sourceUri}}"
-              },
-              "clinicalStatus": {
-                "coding": [
-                  {
-                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
-                    "code": "active"
-                  }
-                ]
-              },
-              "code": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/sid/icd-10",
-                    "code": "G20",
-                    "display": "Parkinson Disease"
-                  }
-                ]
-              },
-              "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
-              "onsetDateTime": "{{%visitDate - (clv_years_from_onset.orElse(0)).toQuantity('a')}}"
-        }
-      }
-    },
-    {
-      "precondition": {
-        "name": "isVisitRow",
-        "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and clv_comorbidity_index.exists()"
-      },
-      "expression": {
-        "name": "csi",
+        "name": "csip",
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Observation",
-          "id": "{{mpp:getHashedId('Observation', record_id & 'CCI' & clv_visit_date.toString())}}",
+          "id": "{{mpp:getHashedId('Observation', record_id & 'PAST CCI')}}",
           "meta": {
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-PatientObservation"],
             "source": "{{%sourceSystem.sourceUri}}"
@@ -134,9 +94,9 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
-          "effectiveDateTime": "{{%visitDate}}",
+          "effectiveDateTime": "{{%visitDate - 6.toQuantity('mo') }}",
           "valueQuantity": {
-            "value": "{{clv_comorbidity_index}}",
+            "value": "{{mh_comorbidiy_index}}",
             "unit": "{score}",
             "system": "http://unitsofmeasure.org",
             "code": "{score}"
