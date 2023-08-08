@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: mongo
+    restart: always
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - aic
+    volumes:
+      - fhirdb:/data/db
+  onfhir:
+    image: srdc/onfhir:r4
+    container_name: onfhir
+    restart: always
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - APP_CONF_FILE=/usr/local/onfhir/conf/onfhir.conf
+      - SERVER_BASE_URI=unipd-fhir
+      - FHIR_ROOT_URL=https://127.0.0.1:8080/unipd-fhir
+      - DB_EMBEDDED=false
+      - DB_HOST=mongo:27017
+    ports:
+      - "8080:8080"
+    networks:
+      - aic
+    volumes:
+      - ./common-data-model:/usr/local/onfhir/conf
+
+networks:
+  aic:
+    name: aic_net
+
+volumes:
+  fhirdb: {}
