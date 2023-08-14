@@ -46,21 +46,6 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/encounter-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "3_Encounter.csv",
-          "fileFormat": "csv",
-          "options": {
-            "sep": ",",
-            "ignoreLeadingWhiteSpace": "true",
-            "ignoreTrailingWhiteSpace": "true"
-          }
-        }
-      }
-    },
-    {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
       "sourceContext": {
         "source": {
@@ -81,51 +66,6 @@
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "5_Procedure.csv",
-          "fileFormat": "csv",
-          "options": {
-            "sep": ",",
-            "ignoreLeadingWhiteSpace": "true",
-            "ignoreTrailingWhiteSpace": "true"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/practitioner-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "6_Practitioner.csv",
-          "fileFormat": "csv",
-          "options": {
-            "sep": ",",
-            "ignoreLeadingWhiteSpace": "true",
-            "ignoreTrailingWhiteSpace": "true"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/organization-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "7_HospitalDepartment.csv",
-          "fileFormat": "csv",
-          "options": {
-            "sep": ",",
-            "ignoreLeadingWhiteSpace": "true",
-            "ignoreTrailingWhiteSpace": "true"
-          }
-        }
-      }
-    },
-    {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/hospitalUnit-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path": "8_HospitalUnit.csv",
           "fileFormat": "csv",
           "options": {
             "sep": ",",

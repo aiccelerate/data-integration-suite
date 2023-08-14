@@ -1,0 +1,91 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p3-blood-pressure",
+  "name": "Ext-plt3-p3-blood-pressure",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt3-p3-blood-pressure",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt3-p3-blood-pressure",
+        "path": "Ext-plt3-p3-blood-pressure",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p3-blood-pressure.pid",
+        "path": "Ext-plt3-p3-blood-pressure.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p3-blood-pressure.observationDateTime",
+        "path": "Ext-plt3-p3-blood-pressure.observationDateTime",
+        "short": "Observation time",
+        "definition": "Time that this measurement is done",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p3-blood-pressure.systolic",
+        "path": "Ext-plt3-p3-blood-pressure.systolic",
+        "short": "Systolic blood pressure",
+        "definition": "Systolic blood pressure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p3-blood-pressure.diastolic",
+        "path": "Ext-plt3-p3-blood-pressure.diastolic",
+        "short": "Diastolic blood pressure",
+        "definition": "Diastolic blood pressure",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

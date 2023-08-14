@@ -52,15 +52,6 @@
       }
     },
     {
-      "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/encounter-mapping",
-      "sourceContext": {
-        "source": {
-          "jsonClass": "FileSystemSource",
-          "path":  "encounters.csv"
-        }
-      }
-    },
-    {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/procedure-mapping",
       "sourceContext": {
         "source": {

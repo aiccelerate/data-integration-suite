@@ -23,6 +23,22 @@
         ]
       },
       {
+        "id": "Ext-plt3-p3-assessment-observation.sourceID",
+        "path": "Ext-plt3-p3-assessment-observation.sourceID",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt3-p3-assessment-observation.observationID",
         "path": "Ext-plt3-p3-assessment-observation.observationID",
         "short": "Unique identifier for this assessment observation",
@@ -95,9 +111,9 @@
         "max": "1",
         "type": [
           {
-            "code": "decimal",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]

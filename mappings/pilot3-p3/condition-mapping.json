@@ -14,7 +14,7 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Condition",
-          "id": "{{mpp:getHashedId('Condition', conditionID & pid & code & onsetDateTime.toString())}}",
+          "id": "{{mpp:getHashedId('Condition', conditionID & pid)}}",
           "meta": {
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"],
             "source": "{{%sourceSystem.sourceUri}}"
@@ -23,7 +23,7 @@
             {
               "use": "official",
               "system": "{{%sourceSystem.sourceUri}}",
-              "value": "{{conditionID & pid & code & onsetDateTime.toString()}}"
+              "value": "{{conditionID}}"
             }
           ],
           "clinicalStatus": {
@@ -39,8 +39,9 @@
             "{{?}}": {
               "coding": [
                 {
-                  "system": "http://www.snomed.org/",
-                  "code": "{{%svt}}"
+                  "system": "http://www.snomed.org",
+                  "code": "{{iif(%svt = 'severe', '24484000', iif(%svt='moderate', '6736007', '255604002'))}}",
+                  "display": "{{%svt}}"
                 }
               ]
             }
@@ -49,7 +50,7 @@
             "coding": [
               {
                 "system": "http://hl7.org/fhir/sid/icd-10",
-                "code": "{{code}}",
+                "code": "{{code.trim()}}",
                 "display": "{{? codeDisplay}}"
               }
             ]

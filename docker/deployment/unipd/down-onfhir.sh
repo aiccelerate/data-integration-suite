@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker compose -p aic down
+docker-compose -f ./docker-compose-onfhir.yml -p aic down

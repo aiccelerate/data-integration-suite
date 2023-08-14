@@ -1,0 +1,49 @@
+source_code,target_code,target_display
+BUCAL,54471007,Buccal use
+ENDOC,372450004,Endocervical use
+ENDOTRA,372452007,Endotracheopulmonary use
+EV,47625008,Intravenous route
+EVS,47625008,Intravenous route
+IM,78421000,Intramuscular route
+IMP,827107003,Implant (administration method)
+INH,447694001,Inhalation route
+INT,447121004,Intramammary route
+INTAPERI,38239002,Intraperitoneal use
+INTRAPER,38239002,Intraperitoneal use
+INTRADER,372464004,Intradermal use
+INTRANAS,260617000,Intranasal
+INTRAOC,372468001,Intraocular use
+INTRAPLE,372469009,Intrapleural
+INTRART,58100008,Intra-arterial route
+INTRATEC,72607000,Intrathecal route
+IT,72607000,Intrathecal route
+IN1,62226000,Intrauterine route
+IN2,447694001,Inhalation route
+IRRIG,93571000001107,Irrigation - method of drug administration
+NAS,46713006,Nasal use
+NEBUL,71791000001107,Nebulise - method of drug administration
+OFT,54485002,Ophthalmic route
+OR,26643006,Oral route
+ORA,26643006,Oral route
+OTI,10547007,Otic route
+PAR,447202000,Parenteral route
+PERID,447080003,Peridural route
+PERINEUR,372475000,Perineural use
+PUL,420201002,Intrapulmonary route
+R,37161004,Per rectum
+REC,37161004,Per rectum
+SC,34206005,Subcutaneous route
+SUB,37839007,Sublingual route
+TOP,6064005,Topical route
+TR,45890007,Transdermal route
+URE,90028008,Urethral use
+VAG,16857009,Per vagina
+1,26643006,Oral
+2,447202000,Parenteral
+3,447694001,Respiratory
+4,34206005,Subcutaneous
+5,6064005,Topical
+6,72607000,Intrathecal
+7,420254004,Intracavitary
+8,37161004,Rectal
+9,74964007,Other

@@ -75,7 +75,7 @@
         "path": "Ext-plt3-p3-patient.postalCode",
         "short": "Postal code",
         "definition": "The postal code of the address of the patient",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -91,7 +91,23 @@
         "path": "Ext-plt3-p3-patient.country",
         "short": "Country code",
         "definition": "The country code of the patient",
-        "min": 1,
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p3-patient.deceasedDateTime",
+        "path": "Ext-plt3-p3-patient.deceasedDateTime",
+        "short": "Date of death",
+        "definition": "Date of death",
+        "min": 0,
         "max": "1",
         "type": [
           {

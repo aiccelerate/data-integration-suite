@@ -8,9 +8,9 @@
     "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p3-medication-used"
   }],
   "context": {
-    "medsConceptMap": {
+    "medRoutesConceptMap": {
       "category": "concept-map",
-      "url": "$CONTEXT_REPO/pilot3-p3/medications-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot3-p3/medication-routes-map.csv"
     }
   },
   "mapping": [
@@ -19,26 +19,61 @@
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
-          "resourceType": "MedicationStatement",
-          "id": "{{mpp:getHashedId('MedicationStatement', medicationUseID)}}",
+          "resourceType": "MedicationAdministration",
+          "id": "{{mpp:getHashedId('MedicationAdministration', medicationUseID)}}",
           "meta": {
-            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationUsed"],
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationAdministration"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
-          "status": "{{iif(endDate.exists(),'completed','active')}}",
+          "status": "completed",
           "medicationCodeableConcept": {
             "coding": [
               {
                 "system": "http://www.whocc.no/atc",
-                "code": "{{code}}",
-                "display": "{{mpp:getConcept(%medsConceptMap, code, 'source_display')}}"
+                "code": "{{iif(nationalCode='780627', 'M03BX01', iif(nationalCode='604504' ,'J01MA02', code.substring(%context.code.indexOf('-') + 1)))}}"
+              },
+              {
+                "{{#nc}}": "{{nationalCode.trim()}}",
+                "{{?}}": {
+                  "system": "{{%sourceSystem.sourceUri}}/medications",
+                  "code": "{{%nc}}",
+                  "display": "{{codeDisplay}}"
+                }
               }
-            ]
+            ],
+            "text": "{{codeDisplay}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "effectivePeriod": {
-            "start": "{{startDate}}",
-            "end": "{{? endDate}}"
+          "effectiveDateTime": "{{startDate}}",
+          "dosage": {
+            "route": {
+              "{{#rt}}": "{{iif(way!='NE', way, {})}}",
+              "{{?}}": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "{{mpp:getConcept(%medRoutesConceptMap, way, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%medRoutesConceptMap, way, 'target_display')}}"
+                  }
+                ]
+              }
+            },
+            "method": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{mpp:getConcept(%medRoutesConceptMap, wayclass.orElse('9'), 'target_code')}}",
+                  "display": "{{mpp:getConcept(%medRoutesConceptMap, wayclass.orElse('9'), 'target_display')}}"
+                }
+              ]
+            },
+            "dose": {
+              "{{#ds}}": "{{dose.nav:orElse('0')}}",
+              "{{?}}": {
+                "value": "{{iif(%ds.startsWith(','), ('0.' & %ds.substring(1)).toDecimal(), %ds.replace(',','.').toDecimal())}}",
+                "unit": "{{? doseUnit}}"
+              }
+            }
           }
         }
       }

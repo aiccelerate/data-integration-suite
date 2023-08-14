@@ -24,8 +24,8 @@ services:
         condition: service_healthy
     environment:
       - APP_CONF_FILE=/usr/local/onfhir/conf/onfhir.conf
-      - SERVER_BASE_URI=unipd-fhir
-      - FHIR_ROOT_URL=https://127.0.0.1:8080/unipd-fhir
+      - SERVER_BASE_URI=fhir
+      - FHIR_ROOT_URL=https://127.0.0.1:8080/fhir
       - DB_EMBEDDED=false
       - DB_HOST=mongo:27017
     ports:

@@ -17,6 +17,11 @@
   },
   "mapping": [
     {
+      "precondition": {
+        "name": "isNotNull",
+        "language": "text/fhirpath",
+        "expression": "code != 'null'"
+      },
       "expression": {
         "name": "study-order",
         "language": "application/fhir-template+json",
@@ -59,6 +64,11 @@
       }
     },
     {
+      "precondition": {
+        "name": "isNotNull",
+        "language": "text/fhirpath",
+        "expression": "code != 'null'"
+      },
       "expression": {
         "name": "study-result",
         "language": "application/fhir-template+json",

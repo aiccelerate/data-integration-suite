@@ -33,14 +33,16 @@
           ],
           "gender": "{{gender}}",
           "birthDate": "{{birthDate}}",
-          "address": [
-            {
+          "address": {
+            "{{#infExists}}": "{{ postalCode | country }}",
+            "{{*}}": {
               "use": "home",
               "type": "both",
-              "postalCode": "{{postalCode}}",
-              "country": "{{country}}"
+              "postalCode": "{{? postalCode}}",
+              "country": "{{? country}}"
             }
-          ]
+          },
+          "deceasedDateTime": "{{? deceasedDateTime}}"
         }
       }
     }
