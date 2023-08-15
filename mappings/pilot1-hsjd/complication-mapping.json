@@ -30,7 +30,7 @@
     {
       "name": "eventCode",
       "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%complicationConceptMap,code.trim().nav:orElse(codeDisplay.trim()))"
+      "expression": "mpp:getConcept(%complicationConceptMap,code.trim().nav:orElse(codeDisplay.trim()).nav:orElse('Other'))"
     }
   ],
   "mapping": [

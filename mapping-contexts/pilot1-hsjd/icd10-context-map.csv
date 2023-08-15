@@ -44,8 +44,12 @@ A41.50,,A41.50,"Gram-negative sepsis, unspecified"
 A41.8,,A41.8,Other specified sepsis
 A41.89,,A41.89,Other specified sepsis
 A41.9,,A41.9,"Sepsis, unspecified organism"
+A49.2,,A49.2,"Hemophilus influenzae infection, unspecified site"
 A68.9,,A68.9,"Relapsing fever, unspecified"
 B01.9,,B01.9,Varicella without complication
+B34.0,,B34.0,"Adenovirus infection, unspecified"
+B37.9,,B37.9,"Candidiasis, unspecified"
+B95.8,,B95.8,"Unspecified staphylococcus as the cause of diseases classified elsewhere"
 B96.5,,B96.5,"Pseudomonas (aeruginosa) (mallei) (pseudomallei) as the cause of diseases classified elsewhere"
 C71.9,,C71.9,"Malignant neoplasm of brain, unspecified"
 C80.1,,C80.1,"Malignant (primary) neoplasm, unspecified"
@@ -55,8 +59,10 @@ D18.09,,D18.09,Hemangioma of other sites
 D55,,D55,Anemia due to enzyme disorders
 D55.2,,D55.2,Anemia due to disorders of glycolytic enzymes
 D58.0,,D58.0,Hereditary spherocytosis
+D61.09,,D61.09,Other constitutional aplastic anemia
 D62,,D62,Acute posthemorrhagic anemia
 D64.9,,D64.9,"Anemia, unspecified"
+D68.4,,D68.4,"Acquired coagulation factor deficiency"
 D68.8,,D68.8,Other specified coagulation defects
 D68.9,,D68.9,"Coagulation defect, unspecified"
 D69.1,,D69.1,Qualitative platelet defects
@@ -65,10 +71,14 @@ D80.9,,D80.9,"Immunodeficiency with predominantly antibody defects, unspecified"
 D84.9,,D84.9,"Immunodeficiency, unspecified"
 D89.9,,D89.9,"Disorder involving the immune mechanism, unspecified"
 E16.2,,E16.2,"Hypoglycemia, unspecified"
+E23.0,,E23.0,Hypopituitarism
 E46,,E46,Unspecified protein-calorie malnutrition
+E83.39,,E83.39,"Other disorders of phosphorus metabolism"
 E83.51,,E83.51,Hypocalcemia
+E87.0,,E87.0,"Hyperosmolality and hypernatremia"
 E87.1,,E87.1,Hypo-osmolality and hyponatremia
 E87.2,,E87.2,Acidosis
+E87.5,,E87.5,Hyperkalemia
 E87.6,,E87.6,Hypokalemia
 F05,,F05,Delirium due to known physiological condition
 F13.23,,F13.23,"Sedative, hypnotic or anxiolytic dependence with withdrawal"
@@ -84,11 +94,16 @@ G71.2,,G71.20,"Congenital myopathy, unspecified"
 G71.9,,G71.9,"Primary disorder of muscle, unspecified"
 G97.82,,G97.82,Other postprocedural complications and disorders of nervous system
 H10.9,,H10.9,Unspecified conjunctivitis
+H26.019,,H26.019,"Infantile and juvenile cortical, lamellar, or zonular cataract, unspecified eye"
+H35.109,,H35.109,"Retinopathy of prematurity, unspecified, unspecified eye"
 H35.52,,H35.52,Pigmentary retinal dystrophy
 I05.2,,I05.2,Rheumatic mitral stenosis with insufficiency
+I05.8,,I05.8,Other rheumatic mitral valve diseases
+I08,,I08,"Multiple valve diseases"
 I09.2,,I09.2,Chronic rheumatic pericarditis
 I15,,I15,Secondary hypertension
 I15.8,,I15.8,Other secondary hypertension
+I15.9,,I15.9,"Secondary hypertension, unspecified"
 I24.1,,I24.1,Dressler's syndrome
 I25.41,,I25.41,Coronary artery aneurysm
 I27.0,,I27.0,Primary pulmonary hypertension
@@ -110,6 +125,7 @@ I34.8,,I34.8,Other nonrheumatic mitral valve disorders
 I34.9,,I34.9,"Nonrheumatic mitral valve disorder, unspecified"
 I35.0,,I35.0,Nonrheumatic aortic (valve) stenosis
 I35.1,,I35.1,Nonrheumatic aortic (valve) insufficiency
+I35.8,,I35.8,"Other nonrheumatic aortic valve disorders"
 I36,,I36,Nonrheumatic tricuspid valve disorders
 I36.0,,I36.0,Nonrheumatic tricuspid (valve) stenosis
 I36.1,,I36.1,Nonrheumatic tricuspid (valve) insufficiency
@@ -120,6 +136,7 @@ I38,,I38,"Endocarditis, valve unspecified"
 I40,,I40,Acute myocarditis
 I40.9,,I40.9,"Acute myocarditis, unspecified"
 I42.0,,I42.0,Dilated cardiomyopathy
+I42.1,,I42.1,"Obstructive hypertrophic cardiomyopathy"
 I42.2,,I42.2,Other hypertrophic cardiomyopathy
 I42.5,,I42.5,Other restrictive cardiomyopathy
 I42.7,,I42.7,Cardiomyopathy due to drug and external agent
@@ -134,10 +151,12 @@ I45.81,,I45.81,Long QT syndrome
 I45.89,,I45.89,Other specified conduction disorders
 I45.9,,I45.9,"Conduction disorder, unspecified"
 I46,,I46,Cardiac arrest
+I46.9,,I46.9,"Cardiac arrest, cause unspecified"
 I47.1,,I47.1,Supraventricular tachycardia
 I47.2,,I47.2,Ventricular tachycardia
 I47.9,,I47.9,"Paroxysmal tachycardia, unspecified"
 I48,,I48,Atrial fibrillation and flutter
+I48.2,,I48.2,"Chronic atrial fibrillation"
 I48.3,,I48.3,Typical atrial flutter
 I48.4,,I48.4,Atypical atrial flutter
 I48.91,,I48.91,Unspecified atrial fibrillation
@@ -146,15 +165,18 @@ I49.01,,I49.01,Ventricular fibrillation
 I49.1,,I49.1,Atrial premature depolarization
 I49.3,,I49.3,Ventricular premature depolarization
 I49.40,,I49.40,Unspecified premature depolarization
+I49.49,,I49.49,"Other premature depolarization"
 I49.5,,I49.5,Sick sinus syndrome
 I49.8,,I49.8,Other specified cardiac arrhythmias
 I49.9,,I49.9,"Cardiac arrhythmia, unspecified"
 I50.1,,I50.1,"Left ventricular failure, unspecified"
 I50.9,,I50.9,"Heart failure, unspecified"
 I51.9,,I51.9,"Heart disease, unspecified"
+I62.00,,I62.00,"Nontraumatic subdural hemorrhage, unspecified"
 I62.01,,I62.01,Nontraumatic acute subdural hemorrhage
 I77.1,,I77.1,Stricture of artery
 I82.411,,I82.411,Acute embolism and thrombosis of right femoral vein
+I82.9,,I82.9,"Embolism and thrombosis of unspecified vein"
 I82.91,,I82.91,Chronic embolism and thrombosis of unspecified vein
 I89.8,,I89.8,Other specified noninfective disorders of lymphatic vessels and lymph nodes
 I95,,I95,Hypotension
@@ -164,7 +186,9 @@ I97.88,,I97.88,"Other intraoperative complications of the circulatory system, no
 I99.9,,I99.9,Unspecified disorder of circulatory system
 J02.9,,J02.9,"Acute pharyngitis, unspecified"
 J05.0,,J05.0,Acute obstructive laryngitis [croup]
+J06,,J06,"Acute upper respiratory infections of multiple and unspecified sites"
 J06.9,,J06.9,"Acute upper respiratory infection, unspecified"
+J11.1,,J11.1,"Influenza due to unidentified influenza virus with other respiratory manifestations"
 J15.9,,J15.9,Unspecified bacterial pneumonia
 J16,,J16,"Pneumonia due to other infectious organisms, not elsewhere classified"
 J18,,J18,"Pneumonia, unspecified organism"
@@ -174,6 +198,7 @@ J21,,J21,Acute bronchiolitis due to respiratory syncytial virus
 J21.0,,J21.0,Acute bronchiolitis due to respiratory syncytial virus
 J21.1,,J21.1,Acute bronchiolitis due to human metapneumovirus
 J22,,J22,Unspecified acute lower respiratory infection
+J38.4,,J38.4,"Edema of larynx"
 J81.0,,J81.0,Acute pulmonary edema
 J90,,J90,"Pleural effusion, not elsewhere classified"
 J91.8,,J91.8,Pleural effusion in other conditions classified elsewhere
@@ -198,10 +223,13 @@ K55.3,,K55.3,Necrotizing enterocolitis
 K55.9,,K55.9,"Vascular disorder of intestine, unspecified"
 K56.0,,K56.0,Paralytic ileus
 K61.4,,K61.4,Intrasphincteric abscess
+K72.0,,K72.0,"Acute and subacute hepatic failure"
+K72.90,,K72.90,"Hepatic failure, unspecified without coma"
 K72.91,,K72.91,"Hepatic failure, unspecified with coma"
 K76.9,,K76.9,"Liver disease, unspecified"
 K83.0,,K83.0,Cholangitis
 K90.89,,K90.89,Other intestinal malabsorption
+K92.2,,K92.2,"Gastrointestinal hemorrhage, unspecified"
 L03.90,,L03.90,"Cellulitis, unspecified"
 L08.9,,L08.9,"Local infection of the skin and subcutaneous tissue, unspecified"
 M04.8,,M04.8,Other autoinflammatory syndromes
@@ -223,10 +251,13 @@ P13.4,,P13.4,Fracture of clavicle due to birth injury
 P14.0,,P14.0,Erb's paralysis due to birth injury
 P14.2,,P14.2,Phrenic nerve paralysis due to birth injury
 P24.31,,P24.31,Neonatal aspiration of milk and regurgitated food with respiratory symptoms
+P25.1,,P25.1,"Pneumothorax originating in the perinatal period"
 P27.8,,P27.8,Other chronic respiratory diseases originating in the perinatal period
 P28.0,,P28.0,Primary atelectasis of newborn
 P28.5,,P28.5,Respiratory failure of newborn
+P28.89,,P28.89,"Other specified respiratory conditions of newborn"
 P29.0,,P29.0,Neonatal cardiac failure
+P29.2,,P29.2,Neonatal hypertension
 P29.30,,P29.30,Pulmonary hypertension of newborn
 P29.38,,P29.38,Other persistent fetal circulation
 P29.89,,P29.89,Other cardiovascular disorders originating in the perinatal period
@@ -238,7 +269,9 @@ P36.9,,P36.9,"Bacterial sepsis of newborn, unspecified"
 P37.5,,P37.5,Neonatal candidiasis
 P39.8,,P39.8,Other specified infections specific to the perinatal period
 P61.0,,P61.0,Transient neonatal thrombocytopenia
+P61.1,,P61.1,"Polycythemia neonatorum"
 P61.3,,P61.3,Congenital anemia from fetal blood loss
+P61.4,,P61.4,"Other congenital anemias, not elsewhere classified"
 P70.8,,P70.8,Other transitory disorders of carbohydrate metabolism of newborn
 P74.22,,P74.22,Hyponatremia of newborn
 P74.32,,P74.32,Hypokalemia of newborn
@@ -250,10 +283,13 @@ P91.4,,P91.4,Neonatal cerebral depression
 P91.88,,P91.88,Other specified disturbances of cerebral status of newborn
 P92.6,,P92.6,Failure to thrive in newborn
 P92.8,,P92.8,Other feeding problems of newborn
+P96.0,,P96.0,Congenital renal failure
 P96.1,,P96.1,Neonatal withdrawal symptoms from maternal use of drugs of addiction
 P96.89,,P96.89,Other specified conditions originating in the perinatal period
 Q02,,Q02,Microcephaly
 Q03.1,,Q03.1,Atresia of foramina of Magendie and Luschka
+Q04.0,,Q04.0,Congenital malformations of corpus callosum
+Q10.0,,Q10.0,"Congenital ptosis"
 Q17.2,,Q17.2,Microtia
 Q20.0,,Q20.0,Common arterial trunk
 Q20.1,,Q20.1,Double outlet right ventricle
@@ -285,7 +321,9 @@ Q23.2,,Q23.2,Congenital mitral stenosis
 Q23.3,,Q23.3,Congenital mitral insufficiency
 Q23.4,,Q23.4,Hypoplastic left heart syndrome
 Q23.8,,Q23.8,Other congenital malformations of aortic and mitral valves
+Q24,,Q24,"Other congenital malformations of heart"
 Q24.0,,Q24.0,Dextrocardia
+Q24.2,,Q24.2,"Cor triatriatum"
 Q24.3,,Q24.3,Pulmonary infundibular stenosis
 Q24.4,,Q24.4,Congenital subaortic stenosis
 Q24.5,,Q24.5,Malformation of coronary vessels
@@ -321,13 +359,23 @@ Q34.9,,Q34.9,"Congenital malformation of respiratory system, unspecified"
 Q35.1,,Q35.1,Cleft hard palate
 Q38.1,,Q38.1,Ankyloglossia
 Q39.1,,Q39.1,"Atresia of esophagus with tracheo-esophageal fistula"
+Q42.8,,Q42.8,"Congenital absence, atresia and stenosis of other parts of large intestine"
 Q43.1,,Q43.1,Hirschsprung's disease
 Q45.1,,Q45.1,Annular pancreas
+Q45.9,,Q45.9,"Congenital malformation of digestive system, unspecified"
+Q54.2,,Q54.2,"Hypospadias, penoscrotal"
+Q60.0,,Q60.0,"Renal agenesis, unilateral"
+Q60.1,,Q60.1,"Renal agenesis, bilateral"
 Q61.19,,Q61.19,"Other polycystic kidney, infantile type"
+Q62.39,,Q62.39,"Other obstructive defects of renal pelvis and ureter"
 Q63.0,,Q63.0,Accessory kidney
+Q64.0,,Q64.0,Epispadias
+Q76.49,,Q76.49,"Other congenital malformations of spine, not associated with scoliosis"
+Q78.9,,Q78.9,"Osteochondrodysplasia, unspecified"
 Q79.0,,Q79.0,Congenital diaphragmatic hernia
 Q79.6,,Q79.6,Ehlers-Danlos syndromes
 Q85.1,,Q85.1,Tuberous sclerosis
+Q85.8,,Q85.8,"Other phakomatoses, not elsewhere classified"
 Q87.2,,Q87.2,Congenital malformation syndromes predominantly involving limbs
 Q87.3,,Q87.3,Congenital malformation syndromes involving early overgrowth
 Q89.01,,Q89.01,Asplenia (congenital)
@@ -338,21 +386,29 @@ Q90.2,,Q90.2,"Trisomy 21, translocation"
 Q90.9,,Q90.9,"Down syndrome, unspecified"
 Q92.5,,Q92.5,Duplications with other complex rearrangements
 Q93.2,,Q93.2,"Chromosome replaced with ring, dicentric or isochromosome"
+Q93.59,,Q93.59,"Other deletions of part of a chromosome"
 Q93.81,,Q93.81,Velo-cardio-facial syndrome
 Q93.82,,Q93.82,Williams syndrome
 Q96.9,,Q96.9,"Turner's syndrome, unspecified"
 Q99.9,,Q99.9,"Chromosomal abnormality, unspecified"
+R00.0,,R00.0,"Tachycardia, unspecified"
 R00.1,,R00.1,"Bradycardia, unspecified"
 R00.2,,R00.2,Palpitations
 R03.0,,R03.0,"Elevated blood-pressure reading, without diagnosis of hypertension"
+R04,,R04,"Hemorrhage from respiratory passages"
+R06.1,,R06.1,Stridor
 R06.02,,R06.02,Shortness of breath
 R06.89,,R06.89,Other abnormalities of breathing
 R06.9,,R06.9,Unspecified abnormalities of breathing
 R07.89,,R07.89,Other chest pain
 R07.9,,R07.9,"Chest pain, unspecified"
+R09.02,,R09.02,Hypoxemia
+R11.1,,R11.1,"Vomiting"
+R11.10,,R11.10,"Vomiting, unspecified"
 R11.11,,R11.11,Vomiting without nausea
 R13.1,,R13.1,Dysphagia
 R13.10,,R13.10,"Dysphagia, unspecified"
+R18.8,,R18.8,"Other ascites"
 R23.0,,R23.0,Cyanosis
 R40.0,,R40.0,Somnolence
 R42,,R42,Dizziness and giddiness
@@ -368,6 +424,7 @@ R62.51,,R62.51,Failure to thrive (child)
 R63.3,,R63.3,Feeding difficulties
 R65.2,,R65.2,Severe sepsis
 R69,,R69,"Illness, unspecified"
+R78.81,,R78.81,Bacteremia
 S27.80,,S27.80,Injury of diaphragm
 S27.808S,,S27.808S,"Other injury of diaphragm, sequela"
 T80.21,,T80.21,Infection due to central venous catheter
@@ -414,8 +471,11 @@ T82.857,,T82.857,"Stenosis of other cardiac prosthetic devices, implants and gra
 T82.86,,T82.86,"Thrombosis of cardiac and vascular prosthetic devices, implants and grafts"
 V15.1,,V15.1,Pedal cycle passenger injured in collision with railway train or railway vehicle in nontraffic accident
 Y84.0,,Y84.0,"Cardiac catheterization as the cause of abnormal reaction of the patient, or of later complication, without mention of misadventure at the time of the procedure"
+Z22.322,,Z22.322,"Carrier or suspected carrier of Methicillin resistant Staphylococcus aureus"
 Z38.00,,Z38.00,"Single liveborn infant, delivered vaginally"
 Z48.81,,Z48.81,Encounter for surgical aftercare following surgery on specified body systems
+Z86.74,,Z86.74,Personal history of sudden cardiac arrest
+Z92.81,,Z92.81,"Personal history of extracorporeal membrane oxygenation (ECMO)"
 Z93.0,,Z93.0,Tracheostomy status
 Z94.81,,Z94.81,Bone marrow transplant status
 Z98.89,,Z98.89,Other specified postprocedural states

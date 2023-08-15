@@ -745,6 +745,47 @@
           }
         }
       }
+    },
+    {
+      "precondition": {
+        "name": "hasInotropicUse",
+        "language": "text/fhirpath",
+        "expression": "inotropics.exists() and inotropics.replace(',','.').toDecimal() = 1"
+      },
+      "expression": {
+        "name": "inotropicsMapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "MedicationAdministration",
+          "id": "{{mpp:getHashedId('MedicationAdministration', surgeryId & 'inotropics')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationAdministration"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "completed",
+          "category": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medication-admin-category",
+                "code": "inpatient",
+                "display": "Inpatient"
+              }
+            ]
+          },
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "111139005",
+                "display": "Inotropics agents"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "context": "{{? mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}",
+          "effectiveDateTime": "{{%surgeryEndTime}}"
+        }
+      }
     }
   ]
 }

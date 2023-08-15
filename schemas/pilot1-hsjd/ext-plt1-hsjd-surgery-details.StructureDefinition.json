@@ -549,6 +549,22 @@
             ]
           }
         ]
+      },
+      {
+        "id": "Ext-plt1-hsjd-surgery-details.inotropics",
+        "path": "Ext-plt1-hsjd-surgery-details.inotropics",
+        "short": "Use of vasoactive-inotropics during the surgical intervention",
+        "definition": "Use of vasoactive-inotropics during the surgical intervention",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
       }
     ]
   }
