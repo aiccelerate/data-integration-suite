@@ -17,17 +17,22 @@
     {
       "name": "LEED",
       "language": "text/fhirpath",
-      "expression": "(st_ter_no_calc_leed.where($this != 'NAV').toDecimal() | st_ter_leed.where($this != 'NAV').toDecimal()).first()"
+      "expression": "(st_ter_no_calc_leed.where($this != 'NAV').toDecimal() | st_ter_leed.where($this != 'NAV' and $this.convertsToDecimal()).toDecimal()).first()"
     },
     {
       "name": "DAED",
       "language": "text/fhirpath",
-      "expression": "(st_ter_no_calc_daed.where($this != 'NAV').toDecimal() | st_ter_daed.where($this != 'NAV').toDecimal()).first()"
+      "expression": "(st_ter_no_calc_daed.where($this != 'NAV').toDecimal() | st_ter_daed.where($this != 'NAV' and $this.convertsToDecimal()).toDecimal()).first()"
     },
     {
       "name": "visitDate",
       "language": "text/fhirpath",
-      "expression": "iif(redcap_event_name = 'clinical_visit_arm_1', clv_visit_date, npsid_data_npsi).utl:toFhirDate('dd/MM/yyyy')"
+      "expression": "clv_visit_date.utl:toFhirDate('dd/MM/yyyy')"
+    },
+    {
+      "name": "nextVisitDate",
+      "language": "text/fhirpath",
+      "expression": "npsid_data_npsi.utl:toFhirDate('dd/MM/yyyy')"
     }
   ],
   "mapping": [
@@ -59,8 +64,8 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
           "effectivePeriod": {
-            "start": "{{%visitDate - iif(clv_prev_visit_distance = 0 or clv_prev_visit_distance.exists().not(), 1, clv_prev_visit_distance).toQuantity('mo')}}",
-            "end": "{{%visitDate}}"
+            "start": "{{%visitDate + 1.toQuantity('wk')}}",
+            "end": "{{? %nextVisitDate}}"
           },
           "dosage": [
             {
@@ -118,8 +123,8 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
           "effectivePeriod": {
-            "start": "{{%visitDate - iif(clv_prev_visit_distance = 0 or clv_prev_visit_distance.exists().not(), 1, clv_prev_visit_distance).toQuantity('mo')}}",
-            "end": "{{%visitDate}}"
+            "start": "{{%visitDate + 1.toQuantity('wk')}}",
+            "end": "{{? %nextVisitDate}}"
           },
           "dosage": [
             {
@@ -183,8 +188,8 @@
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
               "effectivePeriod": {
-                "start": "{{%visitDate - 1.toQuantity('mo')}}",
-                "end": "{{%visitDate}}"
+                "start": "{{%visitDate + 1.toQuantity('wk')}}",
+                "end": "{{? %nextVisitDate}}"
               }
             }
           }

@@ -93,6 +93,7 @@
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "preprocessSql": "SELECT V1.*, V2.clv_visit_date as npsid_data_npsi FROM source AS V1 LEFT JOIN (SELECT * FROM source S WHERE S.redcap_event_name='clinical_visit_arm_1') AS V2 ON V1.record_id = V2.record_id AND V1.redcap_repeat_instance + 1 = V2.redcap_repeat_instance WHERE V1.redcap_event_name='clinical_visit_arm_1'",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
