@@ -13,7 +13,9 @@
     "fhirRepoUrl": "${FHIR_REPO_URL}",
     "writeErrorHandling": "continue"
   },
-  "mappingErrorHandling": "continue",
+  "dataProcessingSettings": {
+    "mappingErrorHandling": "continue"
+  },
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/patient-mapping",
