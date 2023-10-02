@@ -17,12 +17,12 @@
     {
       "name": "LEED",
       "language": "text/fhirpath",
-      "expression": "(st_ter_no_calc_leed.where($this != 'NAV').toDecimal() | st_ter_leed.where($this != 'NAV' and $this.convertsToDecimal()).toDecimal()).first()"
+      "expression": "(st_ter_no_calc_leed.where($this != 'NAV' and $this != 'NAVU' and $this.convertsToDecimal()).toDecimal() | st_ter_leed.where($this != 'NAV' and $this!='NaN' and $this.convertsToDecimal()).toDecimal()).first()"
     },
     {
       "name": "DAED",
       "language": "text/fhirpath",
-      "expression": "(st_ter_no_calc_daed.where($this != 'NAV').toDecimal() | st_ter_daed.where($this != 'NAV' and $this.convertsToDecimal()).toDecimal()).first()"
+      "expression": "(st_ter_no_calc_daed.where($this != 'NAV' and $this != 'NAVU' and $this.convertsToDecimal()).toDecimal() | st_ter_daed.where($this != 'NAV' and $this!='NaN' and $this.convertsToDecimal()).toDecimal()).first()"
     },
     {
       "name": "visitDate",
@@ -64,7 +64,7 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
           "effectivePeriod": {
-            "start": "{{%visitDate + 1.toQuantity('wk')}}",
+            "start": "{{iif((%visitDate + 1.toQuantity('wk')) > %nextVisitDate, %visitDate, %visitDate + 1.toQuantity('wk'))}}",
             "end": "{{? %nextVisitDate}}"
           },
           "dosage": [
@@ -123,7 +123,7 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
           "effectivePeriod": {
-            "start": "{{%visitDate + 1.toQuantity('wk')}}",
+            "start": "{{iif((%visitDate + 1.toQuantity('wk')) > %nextVisitDate, %visitDate, %visitDate + 1.toQuantity('wk'))}}",
             "end": "{{? %nextVisitDate}}"
           },
           "dosage": [
@@ -188,7 +188,7 @@
               },
               "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
               "effectivePeriod": {
-                "start": "{{%visitDate + 1.toQuantity('wk')}}",
+                "start": "{{iif((%visitDate + 1.toQuantity('wk')) > %nextVisitDate, %visitDate, %visitDate + 1.toQuantity('wk'))}}",
                 "end": "{{? %nextVisitDate}}"
               }
             }

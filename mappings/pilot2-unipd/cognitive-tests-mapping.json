@@ -401,7 +401,7 @@
       "precondition": {
         "name": "hasSAS",
         "language": "text/fhirpath",
-        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and (apathys_tot_no_subsc.exists($this!='NAVU') or apathys_tot.exists())"
+        "expression": "redcap_event_name = 'npsi_arm_1' and npsid_data_npsi.exists() and (apathys_tot_no_subsc.exists($this!='NAVU' and $this!='NASK') or apathys_tot.exists())"
       },
       "expression": {
         "name": "sasScore",
@@ -427,7 +427,7 @@
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', record_id & redcap_event_name & redcap_repeat_instance.toString())}}",
           "effectiveDateTime": "{{%visitDate}}",
           "valueQuantity": {
-            "value": "{{(apathys_tot_no_subsc.toInteger() | apathys_tot).first()}}",
+            "value": "{{iif(apathys_tot_no_subsc.convertsToDecimal(), apathys_tot_no_subsc.toInteger(), apathys_tot)}}",
             "unit": "{score}",
             "system": "http://unitsofmeasure.org",
             "code": "{score}"

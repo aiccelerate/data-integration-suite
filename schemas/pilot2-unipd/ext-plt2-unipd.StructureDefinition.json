@@ -1519,6 +1519,22 @@
         ]
       },
       {
+        "id": "Ext-plt2-unipd.mh_comorb_sist_end___13",
+        "path": "Ext-plt2-unipd.mh_comorb_sist_end___13",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt2-unipd.mh_comorb_sist_end___4",
         "path": "Ext-plt2-unipd.mh_comorb_sist_end___4",
         "short": "Comorbidity- endocrinology (choice=Obesity (BMI>30))",
@@ -2761,6 +2777,22 @@
         "path": "Ext-plt2-unipd.clv_s_onset_mot_features___24",
         "short": "Motor symptoms at visit (choice=Camptocormia)",
         "definition": "Motor symptoms at visit (choice=Camptocormia)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.clv_s_onset_mot_features___27",
+        "path": "Ext-plt2-unipd.clv_s_onset_mot_features___27",
+        "short": "?",
+        "definition": "?",
         "min": 0,
         "max": "1",
         "type": [
@@ -4556,6 +4588,22 @@
         ]
       },
       {
+        "id": "Ext-plt2-unipd.clv_comorb_card___10",
+        "path": "Ext-plt2-unipd.clv_comorb_card___10",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Ext-plt2-unipd.clv_comorb_card___8",
         "path": "Ext-plt2-unipd.clv_comorb_card___8",
         "short": " (choice=Essential (primary) hypertension)",
@@ -5058,6 +5106,22 @@
         "path": "Ext-plt2-unipd.clv_comorb_int___13",
         "short": " (choice=Essential (primary) hypertension)",
         "definition": " (choice=Essential (primary) hypertension)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.clv_comorb_int___15",
+        "path": "Ext-plt2-unipd.clv_comorb_int___15",
+        "short": "?",
+        "definition": "?",
         "min": 0,
         "max": "1",
         "type": [
@@ -5733,6 +5797,22 @@
         "path": "Ext-plt2-unipd.clv_comorb_sist_end___3",
         "short": " (choice=Essential (primary) hypertension)",
         "definition": " (choice=Essential (primary) hypertension)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.clv_comorb_sist_end___13",
+        "path": "Ext-plt2-unipd.clv_comorb_sist_end___13",
+        "short": "?",
+        "definition": "?",
         "min": 0,
         "max": "1",
         "type": [
@@ -10811,6 +10891,22 @@
             "code": "integer",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt2-unipd.st_ter_lev_freq_day",
+        "path": "Ext-plt2-unipd.st_ter_lev_freq_day",
+        "short": "?",
+        "definition": "?",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]

@@ -73,7 +73,7 @@
                   "{{?}}": {
                     "doseQuantity": {
                       "unit": "{{? doseUnit.trim()}}",
-                      "value": "{{? dose.toDecimal() * iif(strength.trim().exists(), strength.toDecimal(), 1)}}"
+                      "value": "{{? iif(doseUnit.trim()='mg' or doseUnit.trim()='MG', dose.toDecimal(), dose.toDecimal() * iif(strength.trim().exists(), strength.toDecimal(), 1))}}"
                     }
                   }
                 }
