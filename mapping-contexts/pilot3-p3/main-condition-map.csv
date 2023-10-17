@@ -1,0 +1,102 @@
+source_code,target_code,target_display
+35,E71.121,Propionic acidemia
+43,E71.52,X-linked adrenoleukodystrophy
+46,E79.8,Adenylosuccinate lyase deficiency
+50,E79.81,Aicardi-Goutières syndrome
+58,G31.86,Alexander disease
+101,G11.8,Other hereditary ataxias
+135,E75.2,Other sphingolipidosis
+199,Q87.1,"Congenital malformation syndromes predominantly associated with short stature"
+261,G71.0,Muscular dystrophy
+360,C71,Malignant neoplasm of brain
+365,E74.02,Pompe disease
+407,E72.51,Non-ketotic hyperglycinemia
+475,Q04.3,Other reduction deformities of brain
+480,H49.81,Kearns-Sayre syndrome
+487,E75.23,Krabbe disease
+506,G31.82,"Leigh's disease"
+508,E34.8,Other specified endocrine disorders
+531,Q04.3,Other reduction deformities of brain
+550,E88.41,Melas syndrome
+564,Q61.9,"Cystic kidney disease, unspecified"
+565,E83.09,"Menkes' disease"
+581,E76.22,Sanfilippo mucopolysaccharidoses
+616,C71.6,Malignant neoplasm of cerebellum
+664,E72.4,Disorders of ornithine metabolism
+778,F84.2,Rett's syndrome
+845,E75.02,Tay-Sachs disease
+1466,Q87.1,Congenital malformation syndromes predominantly associated with short stature
+1762,Q02,Microcephaly
+1930,B00.4,Herpesviral encephalitis
+1934,G40.3,Generalized idiopathic epilepsy and epileptic syndromes
+1935,G40.4,Other generalized epilepsy and epileptic syndromes
+2053,Q87.0,Congenital malformation syndromes predominantly affecting facial appearance
+2254,Q04.3,Other reduction deformities of brain
+2510,Q87.0,Congenital malformation syndromes predominantly affecting facial appearance
+2806,A81.1,Subacute sclerosing panencephalitis
+3157,Q04.4,Septo-optic dysplasia of brain
+3205,Q85.8,"Other phakomatoses, not elsewhere classified"
+3206,Q78.8,Other specified osteochondrodysplasias
+3378,Q91.7,"Patau syndrome, unspecified"
+3380,Q91.3,"Edwards syndrome, unspecified"
+3451,G40.4,Other generalized epilepsy and epileptic syndromes
+35069,G23.0,Hallervorden-Spatz disease
+35656,G11.1,Early-onset cerebellar ataxia
+35981,Q04.3,Other reduction deformities of brain
+68373,E71.3,Disorders of fatty-acid metabolism
+77260,E75.22,Gaucher disease
+77261,E75.22,Gaucher disease
+79113,Q75.4,Mandibulofacial dysostosis
+79189,E71.510,Zellweger syndrome
+79212,E75.11,Mucolipidosis IV
+79255,E75.1,Other and unspecified gangliosidosis
+79264,E75.4,Neuronal ceroid lipofuscinosis
+79318,E77.8,Other disorders of glycoprotein metabolism
+79327,E77.8,Other disorders of glycoprotein metabolism
+98896,G71.01,Duchenne or Becker muscular dystrophy
+98920,E26.1,Secondary hyperaldosteronism
+99776,Q92.1,"Whole chromosome trisomy, mosaicism (mitotic nondisjunction)"
+157850,G23.0,"Hallervorden-Spatz disease"
+168491,E75.4,Neuronal ceroid lipofuscinosis
+217085,E76.1,"Mucopolysaccharidosis, type II"
+223713,E88.8,Other specified metabolic disorders
+225681,E77,Glycoprotein storage disorders
+228349,E75.4,Neuronal ceroid lipofuscinosis
+246200,E34.8,Other specified endocrine disorders
+251646,C71.5,Malignant neoplasm of cerebral ventricle
+251870,C71.9,"Malignant neoplasm of brain, unspecified"
+251905,C75.3,Malignant neoplasm of pineal gland
+252050,C70.9,"Malignant neoplasm of meninges, unspecified"
+254519,Q87.8,"Other specified congenital malformation syndromes, not elsewhere classified"
+254857,E88.40,"Mitochondrial metabolism disorder, unspecified"
+268950,Q04.8,"Other specified congenital malformations of brain"
+300605,G12.21,Amyotrophic lateral sclerosis
+309178,E75.0,GM2 gangliosidosis
+309256,E75.25,Metachromatic leukodystrophy
+314637,E88.8,Other specified metabolic disorders
+363558,G40,Epilepsy and recurrent seizures
+364028,F72,Severe intellectual disabilities
+442835,G40.3,Generalized idiopathic epilepsy and epileptic syndromes
+457375,G40.4,Other generalized epilepsy and epileptic syndromes
+497188,C72.8,"Malignant neoplasm: Overlapping lesion of brain and other parts of central nervous system"
+527276,E88.40,"Mitochondrial metabolism disorder, unspecified"
+604257,Q87.8,"Other specified congenital malformation syndromes, not elsewhere classified"
+618899,E75.242,Niemann-Pick disease type C
+251646,C71.9,"Malignant neoplasm of brain, unspecified"
+251870,C72.9,"Malignant neoplasm of central nervous system, unspecified"
+289494,G11.1,Early-onset cerebellar ataxia
+442835,G40.4,Other generalized epilepsy and epileptic syndromes
+G32.89,G32.89,Other specified degenerative disorders of nervous system in diseases classified elsewhere
+C71,C71,Malignant neoplasm of brain
+C71.7,C71.7,Malignant neoplasm of brain stem
+E75.02,E75.02,Tay-Sachs disease
+G80.9,G80.9,"Cerebral palsy, unspecified"
+P11.2,P11.2,Unspecified brain damage due to birth injury
+P91.2,P91.2,Neonatal cerebral leukomalacia
+P91.60,P91.60,"Hypoxic ischemic encephalopathy [HIE], unspecified"
+P91.819,P91.819,"Neonatal encephalopathy, unspecified"
+Q07.9,Q07.9,"Congenital malformation of nervous system, unspecified"
+Q28.2,Q28.2,Arteriovenous malformation of cerebral vessels
+Q87.5,Q87.5,"Other congenital malformation syndromes with other skeletal changes"
+Q99.9,Q99.9,"Chromosomal abnormality, unspecified"
+W74,W74,Unspecified cause of accidental drowning and submersion

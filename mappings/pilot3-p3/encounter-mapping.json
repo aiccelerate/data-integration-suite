@@ -14,11 +14,27 @@
       "category": "concept-map",
       "url": "$CONTEXT_REPO/pilot3-p3/encounter-type-concept-map.csv"
     },
+    "encounterServiceConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot3-p3/encounter-service-type-concept-map.csv"
+    },
     "dischargeTypeConceptMap": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/pilot3-p3/discharge-type-concept-map.csv"
     }
   },
+  "variable": [
+    {
+      "name": "encType",
+      "language": "text/fhirpath",
+      "expression": "type.utl:split('-').first()"
+    },
+    {
+      "name": "encServiceType",
+      "language": "text/fhirpath",
+      "expression": "type.utl:split('-').tail()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
@@ -46,17 +62,29 @@
             "code": "{{iif(type='183452005', 'EMER', category)}}",
             "display": "{{iif(category='AMB', iif(type='183452005', 'Emergency', 'Ambulatory'), 'Inpatient encounter')}}"
           },
-          "type": {
-            "{{#encounterType}}": "{{type}}",
-            "{{*}}": {
+          "type": [
+            {
               "coding": [
                 {
                   "system": "http://snomed.info/sct",
-                  "code": "{{%encounterType}}",
-                  "display": "{{? mpp:getConcept(%encounterConceptMap, %encounterType, 'source_display')}}"
+                  "code": "{{%encType}}",
+                  "display": "{{? mpp:getConcept(%encounterConceptMap, %encType, 'source_display')}}"
                 }
               ]
             }
+          ],
+          "serviceType": {
+            "{{#stype}}": "{{%encServiceType}}",
+            "{{?}}": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{mpp:getConcept(%encounterServiceConceptMap, %stype, 'target_code')}}",
+                  "display": "{{mpp:getConcept(%encounterServiceConceptMap, %stype, 'target_display')}}"
+                }
+              ],
+              "text": "{{mpp:getConcept(%encounterServiceConceptMap, %stype, 'source_display')}}"
+           }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "period": {

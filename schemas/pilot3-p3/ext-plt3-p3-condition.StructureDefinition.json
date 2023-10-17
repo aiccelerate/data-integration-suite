@@ -27,7 +27,7 @@
         "path": "Ext-plt3-p3-condition.sourceID",
         "short": "?",
         "definition": "?",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -123,7 +123,7 @@
         "path": "Ext-plt3-p3-condition.onsetDateTime",
         "short": "Condition start date",
         "definition": "When this condition is started or diagnosis is set. ",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -162,6 +162,22 @@
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt3-p3-condition.prognosis",
+        "path": "Ext-plt3-p3-condition.prognosis",
+        "short": "Prognosis for the diagnosis",
+        "definition": "Prognosis for the diagnosis; 0: Untreatable. Life expectancy < 2 years | 1: Untreatable with uncertain prognosis. Life expectancy > 2 years",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]

@@ -1,0 +1,8 @@
+source_code,source_display,target_code,target_display
+1,"Telematic assistance",448337001,"Telemedicine consultation with patient"
+2,"External consultations",84251009,"Comprehensive consultation"
+3,"Test",76464004,"Hospital admission, for observation"
+4,"Treatment",304566005,"Admission for treatment"
+5,"Outpatient Hospital",40274000,"General outpatient clinic admission"
+6,"Procedure",65043002,"Hospital admission, short-term, day care"
+7,"Home assistance",60689008,"Home care of patient"

@@ -75,7 +75,7 @@
         "path": "Ext-plt3-p3-encounter.type",
         "short": "Type of encounter/episode",
         "definition": "Type of the encounter or episode. If this is an episode, use one of the following -> 305354007: Pediatric Ward Stay, 305353001: PICU stay. If this is an encounter, use one of the following -> 183452005: ER visits, 305731000: nurse (C2P2INF), 305647009: pediatric (C2P2), 310348003: psychologist (C2P2PSQ).",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "type": [
           {

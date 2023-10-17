@@ -7,8 +7,88 @@
     "alias": "source",
     "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p3-condition"
   }],
+  "context": {
+    "mainConditionConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot3-p3/main-condition-map.csv"
+    }
+  },
   "mapping": [
     {
+      "precondition": {
+        "name": "isMain",
+        "language": "text/fhirpath",
+        "expression": "clinicalStatus = 'main'"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Condition",
+          "id": "{{mpp:getHashedId('Condition', 'main' & code & pid)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                  "code": "problem-list-item",
+                  "display": "Problem list item"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "{{%sourceSystem.sourceUri}}/CodeSystem/main-diagnosis",
+                "code": "{{code.trim()}}",
+                "display": "{{? codeDisplay.trim()}}"
+              },
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "code": "{{mpp:getConcept(%mainConditionConceptMap, code.trim(), 'target_code')}}",
+                "display": "{{mpp:getConcept(%mainConditionConceptMap, code.trim(), 'target_display')}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "onsetDateTime": "{{? iif(onsetDateTime.exists(), onsetDateTime, @1970-01-01T00:00:00Z)}}",
+          "stage": {
+            "{{#prgn}}": "{{prognosis}}",
+            "{{*}}": {
+              "summary": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "{{iif(%prgn = 0, '170969009', '170970005')}}",
+                    "display": "{{iif(%prgn = 0, 'Prognosis bad', 'Prognosis uncertain')}}"
+                  }
+                ],
+                "text": "{{iif(%prgn = 0, 'Untreatable. Life expectancy < 2 years', 'Untreatable with uncertain prognosis. Life expectancy > 2 years')}}"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "isNotMain",
+        "language": "text/fhirpath",
+        "expression": "clinicalStatus != 'main' and code.trim().startsWith('Z').not()"
+      },
       "expression": {
         "name": "result",
         "language": "application/fhir-template+json",
@@ -19,13 +99,14 @@
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
-          "identifier": [
-            {
+          "identifier": {
+            "{{#cid}}": "{{conditionID}}",
+            "{{*}}":  {
               "use": "official",
               "system": "{{%sourceSystem.sourceUri}}",
-              "value": "{{conditionID}}"
+              "value": "{{%cid}}"
             }
-          ],
+          },
           "clinicalStatus": {
             "coding": [
               {
@@ -46,17 +127,28 @@
               ]
             }
           },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                  "code": "encounter-diagnosis",
+                  "display": "Encounter diagnosis"
+                }
+              ]
+            }
+          ],
           "code": {
             "coding": [
               {
                 "system": "http://hl7.org/fhir/sid/icd-10",
                 "code": "{{code.trim()}}",
-                "display": "{{? codeDisplay}}"
+                "display": "{{? codeDisplay.trim()}}"
               }
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "onsetDateTime": "{{onsetDateTime}}",
+          "onsetDateTime": "{{? onsetDateTime}}",
           "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterID)}}"
         }
       }
