@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureDefinition",
-  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details-joined-patient-details",
-  "name": "Ext-plt2-unipd-joined-patient-details-joined-patient-details",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details",
+  "name": "Ext-plt2-unipd-joined-patient-details",
   "status": "draft",
   "fhirVersion": "4.0.1",
   "kind": "logical",
@@ -87,8 +87,8 @@
         ]
       },
       {
-        "id": "Ext-plt2-unipd.mh_age_at_s_onset",
-        "path": "Ext-plt2-unipd.mh_age_at_s_onset",
+        "id": "Ext-plt2-unipd-joined-patient-details.mh_age_at_s_onset",
+        "path": "Ext-plt2-unipd-joined-patient-details.mh_age_at_s_onset",
         "short": "Age at symtoms onset",
         "definition": "Age at symtoms onset",
         "min": 0,

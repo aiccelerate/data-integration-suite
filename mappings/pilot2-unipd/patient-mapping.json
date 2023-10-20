@@ -5,7 +5,7 @@
   "title": "Mapping of patient schema for pilots to AIC-Patient and AIC- FHIR profile",
   "source": [{
     "alias": "unipd_export",
-    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details-joined-patient-details"
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt2-unipd-joined-patient-details"
   }],
   "variable": [
     {
