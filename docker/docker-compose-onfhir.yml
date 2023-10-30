@@ -41,7 +41,7 @@ services:
 
 networks:
   aic:
-    name: aic_net
+    name: onfhir-network
 
 volumes:
   fhirdb: {}
