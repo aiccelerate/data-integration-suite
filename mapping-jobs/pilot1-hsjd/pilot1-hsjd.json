@@ -4,7 +4,7 @@
     "source": {
       "jsonClass": "FileSystemSourceSettings",
       "name": "HSJD",
-      "sourceUri": "https://aiccelerate.eu/hsjd",
+      "sourceUri": "https://aiccelerate.eu/hsjd-pilot1",
       "dataFolderPath": "${DATA_FOLDER_PATH}"
     }
   },
