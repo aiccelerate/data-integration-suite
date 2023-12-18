@@ -1,7 +1,7 @@
 package eu.aiccelerate.dis
 
-import io.tofhir.engine.config.ErrorHandlingType.ErrorHandlingType
-import io.tofhir.engine.config.{ErrorHandlingType, ToFhirConfig}
+
+import io.tofhir.engine.config.ToFhirConfig
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.scalatest.flatspec.AsyncFlatSpec
@@ -10,9 +10,6 @@ import org.scalatest.{Inside, Inspectors, OptionValues}
 
 class PilotTestSpec extends AsyncFlatSpec with should.Matchers with
   OptionValues with Inside with Inspectors {
-
-  val mappingErrorHandling: ErrorHandlingType = ErrorHandlingType.HALT
-  val fhirWriteErrorHandling: ErrorHandlingType = ErrorHandlingType.HALT
 
   val sparkConf: SparkConf = new SparkConf()
     .setAppName(ToFhirConfig.sparkAppName)
