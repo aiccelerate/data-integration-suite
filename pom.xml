@@ -18,7 +18,7 @@
         <scala.version>2.13.8</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
         <scalatest.version>3.1.4</scalatest.version>
-        <tofhir.version>1.0-SNAPSHOT</tofhir.version>
+        <tofhir.version>1.1-SNAPSHOT</tofhir.version>
         <onfhir.version>3.2-SNAPSHOT</onfhir.version>
         <spark.version>3.2.1</spark.version>
         <logback.version>1.2.11</logback.version>
