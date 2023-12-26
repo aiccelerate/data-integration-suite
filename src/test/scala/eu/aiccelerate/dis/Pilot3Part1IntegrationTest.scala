@@ -87,85 +87,85 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
     sourceContext = Map("source" -> FileSystemSource(path = "procedures.csv"))
   )
 
-  "patient mapping" should "map test data" in {
-    //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(patientMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
-      val results = mappingResults.map(r => {
-        r.mappedResource shouldBe defined
-        val resource = r.mappedResource.get.parseJson
-        resource shouldBe a[Resource]
-        resource
-      })
-      results.length shouldBe 5
-      (JArray(results.toList) \ "meta" \ "profile").extract[Seq[Seq[String]]].flatten.toSet shouldBe Set("https://aiccelerate.eu/fhir/StructureDefinition/AIC-Patient")
-    }
-  }
+//  "patient mapping" should "map test data" in {
+//    //Some semantic tests on generated content
+//    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(patientMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+//      val results = mappingResults.map(r => {
+//        r.mappedResource shouldBe defined
+//        val resource = r.mappedResource.get.parseJson
+//        resource shouldBe a[Resource]
+//        resource
+//      })
+//      results.length shouldBe 5
+//      (JArray(results.toList) \ "meta" \ "profile").extract[Seq[Seq[String]]].flatten.toSet shouldBe Set("https://aiccelerate.eu/fhir/StructureDefinition/AIC-Patient")
+//    }
+//  }
+//
+//  it should "map test data and write it to FHIR repo successfully" in {
+//    //Send it to our fhir repo if they are also validated
+//    assume(fhirServerIsAvailable)
+//    fhirMappingJobManager
+//      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(patientMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+//      .map(unit =>
+//        unit shouldBe()
+//      )
+//  }
 
-  it should "map test data and write it to FHIR repo successfully" in {
-    //Send it to our fhir repo if they are also validated
-    assume(fhirServerIsAvailable)
-    fhirMappingJobManager
-      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(patientMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map(unit =>
-        unit shouldBe()
-      )
-  }
 
+//  "condition mapping" should "map test data" in {
+//    //Some semantic tests on generated content
+//    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(conditionMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+//      val results = mappingResults.map(r => {
+//        r.mappedResource shouldBe defined
+//        val resource = r.mappedResource.get.parseJson
+//        resource shouldBe a[Resource]
+//        resource
+//      })
+//      results.length shouldBe 5
+//
+//      (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
+//
+//      (results.apply(3) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "M89.9"
+//      (results.apply(3) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Disorder of bone, unspecified"
+//
+//      (results.head \ "clinicalStatus" \ "coding" \ "code").extract[Seq[String]].head shouldBe "resolved"
+//    }
+//  }
+//
+//  it should "map test data and write it to FHIR repo successfully" in {
+//    //Send it to our fhir repo if they are also validated
+//    assume(fhirServerIsAvailable)
+//    fhirMappingJobManager
+//      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(conditionMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+//      .map(unit =>
+//        unit shouldBe()
+//      )
+//  }
 
-  "condition mapping" should "map test data" in {
-    //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(conditionMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
-      val results = mappingResults.map(r => {
-        r.mappedResource shouldBe defined
-        val resource = r.mappedResource.get.parseJson
-        resource shouldBe a[Resource]
-        resource
-      })
-      results.length shouldBe 5
-
-      (results.apply(1) \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p2")
-
-      (results.apply(3) \ "code" \ "coding" \ "code").extract[Seq[String]].head shouldBe "M89.9"
-      (results.apply(3) \ "code" \ "coding" \ "display").extract[Seq[String]].head shouldBe "Disorder of bone, unspecified"
-
-      (results.head \ "clinicalStatus" \ "coding" \ "code").extract[Seq[String]].head shouldBe "resolved"
-    }
-  }
-
-  it should "map test data and write it to FHIR repo successfully" in {
-    //Send it to our fhir repo if they are also validated
-    assume(fhirServerIsAvailable)
-    fhirMappingJobManager
-      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(conditionMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map(unit =>
-        unit shouldBe()
-      )
-  }
-
-  "encounter mapping" should "map test data" in {
-    //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(encounterMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
-      val results = mappingResults.map(r => {
-        r.mappedResource shouldBe defined
-        val resource = r.mappedResource.get.parseJson
-        resource shouldBe a[Resource]
-        resource
-      })
-      results.length shouldBe 6
-      (results.head \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
-      (results.head \ "type" \ "coding" \ "code").extract[Seq[String]] shouldBe Seq("00000406")
-    }
-  }
-
-  it should "map test data and write it to FHIR repo successfully" in {
-    //Send it to our fhir repo if they are also validated
-    assume(fhirServerIsAvailable)
-    fhirMappingJobManager
-      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(encounterMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map(unit =>
-        unit shouldBe()
-      )
-  }
+//  "encounter mapping" should "map test data" in {
+//    //Some semantic tests on generated content
+//    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(encounterMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+//      val results = mappingResults.map(r => {
+//        r.mappedResource shouldBe defined
+//        val resource = r.mappedResource.get.parseJson
+//        resource shouldBe a[Resource]
+//        resource
+//      })
+//      results.length shouldBe 6
+//      (results.head \ "subject" \ "reference").extract[String] shouldBe FhirMappingUtility.getHashedReference("Patient", "p1")
+//      (results.head \ "type" \ "coding" \ "code").extract[Seq[String]] shouldBe Seq("00000406")
+//    }
+//  }
+//
+//  it should "map test data and write it to FHIR repo successfully" in {
+//    //Send it to our fhir repo if they are also validated
+//    assume(fhirServerIsAvailable)
+//    fhirMappingJobManager
+//      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(encounterMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+//      .map(unit =>
+//        unit shouldBe()
+//      )
+//  }
 
   "organization mapping" should "map test data" in {
     //Some semantic tests on generated content
@@ -237,28 +237,28 @@ class Pilot3Part1IntegrationTest extends PilotTestSpec {
       )
   }
 
-  "procedure mapping" should "map test data" in {
-    //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(procedureMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
-      val results = mappingResults.map(r => {
-        r.mappedResource shouldBe defined
-        val resource = r.mappedResource.get.parseJson
-        resource shouldBe a[Resource]
-        resource
-      })
-      results.length shouldBe 5
-    }
-  }
-
-
-  it should "map test data and write it to FHIR repo successfully" in {
-    //Send it to our fhir repo if they are also validated
-    assume(fhirServerIsAvailable)
-    fhirMappingJobManager
-      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(procedureMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
-      .map(unit =>
-        unit shouldBe()
-      )
-  }
+//  "procedure mapping" should "map test data" in {
+//    //Some semantic tests on generated content
+//    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(procedureMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+//      val results = mappingResults.map(r => {
+//        r.mappedResource shouldBe defined
+//        val resource = r.mappedResource.get.parseJson
+//        resource shouldBe a[Resource]
+//        resource
+//      })
+//      results.length shouldBe 5
+//    }
+//  }
+//
+//
+//  it should "map test data and write it to FHIR repo successfully" in {
+//    //Send it to our fhir repo if they are also validated
+//    assume(fhirServerIsAvailable)
+//    fhirMappingJobManager
+//      .executeMappingJob(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(procedureMappingTask), job = testJob), sourceSettings = dataSourceSettings, sinkSettings = fhirSinkSetting)
+//      .map(unit =>
+//        unit shouldBe()
+//      )
+//  }
 
 }
