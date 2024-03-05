@@ -599,7 +599,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "77720-1",
                 "display": "UPDRS - Motor examination panel (Part 3) Total score"
               }
@@ -647,7 +647,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "77721-9",
                 "display": "UPDRS - Complications of therapy (Part 4) Total score"
               }
@@ -695,7 +695,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "77718-5",
                 "display": "UPDRS - Mentation, Behavior and Mood (Part 1) Total score"
               }
@@ -742,7 +742,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "77719-3",
                 "display": "UPDRS - Activities of Daily Living (Part 2) Total score"
               }

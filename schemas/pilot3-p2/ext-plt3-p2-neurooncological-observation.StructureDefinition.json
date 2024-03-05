@@ -23,10 +23,10 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-neurooncological-observation.observationID",
-        "path": "Ext-plt3-p2-neurooncological-observation.observationID",
-        "short": "Unique identifier for this vital sign observation.",
-        "definition": "Unique identifier for this vital sign observation.",
+        "id": "Ext-plt3-p2-neurooncological-observation.pid",
+        "path": "Ext-plt3-p2-neurooncological-observation.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
         "min": 1,
         "max": "1",
         "type": [
@@ -39,10 +39,10 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-neurooncological-observation.pid",
-        "path": "Ext-plt3-p2-neurooncological-observation.pid",
-        "short": "Patient identifier",
-        "definition": "Unique patient identifier  (a pseudoynm)",
+        "id": "Ext-plt3-p2-neurooncological-observation.observationID",
+        "path": "Ext-plt3-p2-neurooncological-observation.observationID",
+        "short": "Unique identifier for this vital sign observation.",
+        "definition": "Unique identifier for this vital sign observation.",
         "min": 1,
         "max": "1",
         "type": [

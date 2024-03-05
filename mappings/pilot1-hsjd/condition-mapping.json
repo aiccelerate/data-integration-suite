@@ -58,7 +58,7 @@
                 "{{#icd10Code}}": "{{code.trim()}}",
                 "{{?}}": {
                   "system": "http://hl7.org/fhir/sid/icd-10",
-                  "code": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_code')}}",
+                  "code": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_code').orElse(%icd10Code)}}",
                   "display": "{{mpp:getConcept(%icdConceptMap, %icd10Code, 'target_display').orElse(codeDisplay)}}"
                 }
               }

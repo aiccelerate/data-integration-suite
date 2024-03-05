@@ -23,10 +23,10 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-procedure.procedureId",
-        "path": "Ext-plt3-p2-procedure.procedureId",
-        "short": "Unique identifier for this procedure record.",
-        "definition": "Unique identifier for this procedure record.",
+        "id": "Ext-plt3-p2-procedure.pid",
+        "path": "Ext-plt3-p2-procedure.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier (a pseudoynm)",
         "min": 1,
         "max": "1",
         "type": [
@@ -39,10 +39,10 @@
         ]
       },
       {
-        "id": "Ext-plt3-p2-procedure.pid",
-        "path": "Ext-plt3-p2-procedure.pid",
-        "short": "Patient identifier",
-        "definition": "Unique patient identifier (a pseudoynm)",
+        "id": "Ext-plt3-p2-procedure.procedureId",
+        "path": "Ext-plt3-p2-procedure.procedureId",
+        "short": "Unique identifier for this procedure record.",
+        "definition": "Unique identifier for this procedure record.",
         "min": 1,
         "max": "1",
         "type": [

@@ -1,0 +1,70 @@
+{
+  "id": "operation-episode-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/operation-episode-mapping",
+  "name": "operation-episode-mapping",
+  "title": "Mapping of schema Operation Episodes to FHIR EpisodeOfCare",
+  "source": [
+    {
+      "alias": "episodes",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-operation-episode",
+      "joinOn": ["pid"]
+    },
+    {
+      "alias": "conditions",
+      "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-condition",
+      "joinOn": ["pid"]
+    }
+  ],
+  "mapping": [
+    {
+
+      "expression": {
+        "name": "episode-mapping",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "EpisodeOfCare",
+          "id": "{{mpp:getHashedId('EpisodeOfCare', episodeId)}}",
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{episodeId}}"
+            }
+          ],
+          "status": "finished",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "736770009",
+                  "display": "Surgery care"
+                }
+              ]
+            }
+          ],
+          "diagnosis": {
+            "{{#condition}}": "{{%conditions.where((diagnosisType='main' or diagnosisType='other') and onsetDateTime.toDate() <= %context.endTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss').toDate() and onsetDateTime.toDate() >= %context.startTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss').toDate())}}",
+            "{{*}}":  {
+              "condition": "{{mpp:createFhirReferenceWithHashedId('Condition', pid & %condition.causeCode & %condition.onsetDateTime.toString())}}",
+              "role": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                    "code": "{{iif(%condition.diagnosisType = 'main', 'pre-op', 'CM')}}",
+                    "display": "{{iif(%condition.diagnosisType = 'main', 'Pre-op diagnosis', 'Comorbidity diagnosis')}}"
+                  }
+                ]
+              }
+            }
+          },
+          "patient":  "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "period": {
+            "start": "{{startTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss')}}",
+            "end": "{{? endTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss')}}"
+          }
+        }
+      }
+    }
+  ]
+}

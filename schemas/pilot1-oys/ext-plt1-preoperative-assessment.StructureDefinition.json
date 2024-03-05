@@ -1,0 +1,123 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-preoperative-assessment",
+  "name": "Ext-plt1-preoperative-assessment",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt1-preoperative-assessment",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt1-preoperative-assessment",
+        "path": "Ext-plt1-preoperative-assessment",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-preoperative-assessment.pid",
+        "path": "Ext-plt1-preoperative-assessment.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-preoperative-assessment.encounterId",
+        "path": "Ext-plt1-preoperative-assessment.encounterId",
+        "short": "Encounter",
+        "definition": "Reference to the encounter that this assessment is done",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-preoperative-assessment.asaClassification",
+        "path": "Ext-plt1-preoperative-assessment.asaClassification",
+        "short": "ASA classification of patient",
+        "definition": "ASA classification of patient before surgery. Use one of the following codes; (asa1 | asa2 | asa3 | asa4 | asa5 | asa6)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-preoperative-assessment.urgencyClassification",
+        "path": "Ext-plt1-preoperative-assessment.urgencyClassification",
+        "short": "Urgency of Surgery",
+        "definition": "Urgency classification of patient before surgery. Use one of the following codes; (R1 | R2 | R3 | P1 | P2 | P3 | H)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/code"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-preoperative-assessment.isDayCaseSurgery",
+        "path": "Ext-plt1-preoperative-assessment.isDayCaseSurgery",
+        "short": "Day case surgery",
+        "definition": "Whether this is day-case-surgery",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-preoperative-assessment.isIsolationNeeded",
+        "path": "Ext-plt1-preoperative-assessment.isIsolationNeeded",
+        "short": "Isolation needed",
+        "definition": "Whether isolation is needed",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

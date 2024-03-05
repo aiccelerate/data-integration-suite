@@ -213,7 +213,8 @@
           "jsonClass": "FileSystemSource",
           "path": "Complication.csv",
           "options": {
-            "sep": ";"
+            "sep": ";",
+            "distinct": "true"
           }
         },
         "encounters": {

@@ -1,0 +1,5 @@
+pid,episodeId,encounterId,subspecialty,mainProcedureCode,otherProcedureCodes,bodySite,status,cancellationTime,reasonForCancelling,location,anesthesiaType,anesthesiaCodes,isIntubated,intubationType,surgicalWoundClassification,surgicalWoundClassificationStart,primarySurgeon,otherSurgeons,anesthesiologist,nurses,estimatedDuration,pet,pct,ort,act,ost,oet,plt,cst,cet,typeOfSurgery
+p1,ep1,e11,394609007,AAC00,,,finished,,,or1,50697003,WX402,FALSE,,2,,pr1,pr2 pr3,pr5,pr4,125,15.05.2012 08:30:00,15.05.2012 09:45:00,15.05.2012 10:00:00,15.05.2012 10:20:00,15.05.2012 10:22:00,15.05.2012 12:25:00,15.05.2012 12:35:00,15.05.2012 12:30:00,15.05.2012 12:45:00,274075007
+p2,ep2,e21,394610002,ADA30,ADA99 ADB,left,finished,,,or1,26402001,WX220,TRUE,232678001,2,,pr2,,pr5,pr4 p6,185,,,10.06.2011 08:10:00,,,,10.06.2011 09:45:00,,,274075007
+p3,ep3,e31,394610002,ADA30,ADB,right,finished,,,or1,88815003,WX204,TRUE,697984004,2,,pr2,,pr5,pr4 p6,185,,,10.05.2003 14:30:00,,,,10.05.2003 16:30:00,,,274075007
+p3,ep3,e41,394610002,ADA30,ADB,right,finished,,,or1,88815003,WX204,TRUE,697984004,2,,pr2,,pr5,pr4 p6,185,,,22.05.2003 14:30:00,,,,22.05.2003 16:30:00,,,274075007

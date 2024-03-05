@@ -1,0 +1,87 @@
+{
+  "id": "condition-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/condition-mapping",
+  "name": "condition-mapping",
+  "title": "Mapping of condition schema for pilots to AIC-Condition FHIR profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-condition"
+  }],
+  "mapping": [
+    {
+      "expression": {
+        "name": "cause",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Condition",
+          "id": "{{mpp:getHashedId('Condition', pid & causeCode & onsetDateTime.toString())}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "verificationStatus": "{{? utl:createFhirCodeableConcept('http://terminology.hl7.org/CodeSystem/condition-ver-status', certainity, {})}}",
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "code": "{{causeCode}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
+          "onsetDateTime": "{{onsetDateTime}}"
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasSymptomCode",
+        "language": "text/fhirpath",
+        "expression": "symptomCode.exists()"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Condition",
+          "id": "{{mpp:getHashedId('Condition', pid & symptomCode & onsetDateTime.toString())}}",
+          "meta": {
+            "profile": [
+              "https://aiccelerate.eu/fhir/StructureDefinition/AIC-Condition"
+            ],
+            "source": "{{%sourceSystem.sourceUri}}",
+            "tag": [
+              {
+                "system": "https://aiccelerate.eu/fhir/CodeSystem/condition-tags",
+                "code": "symptom"
+              }
+            ]
+          },
+          "verificationStatus": "{{? utl:createFhirCodeableConcept('http://terminology.hl7.org/CodeSystem/condition-ver-status', certainity, {})}}",
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "code": "{{symptomCode}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
+          "onsetDateTime": "{{onsetDateTime}}",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/condition-related",
+              "valueReference": {
+                "reference": "Condition/{%cause.id}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

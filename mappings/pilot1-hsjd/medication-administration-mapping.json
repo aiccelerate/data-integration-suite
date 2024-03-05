@@ -82,8 +82,8 @@
               },
               {
                 "system": "http://www.whocc.no/atc",
-                "code": "{{%atcCode.target_code}}",
-                "display": "{{? %atcCode.target_display}}"
+                "code": "{{%atcCode.target_code.orElse(code.substring(3))}}",
+                "display": "{{? %atcCode.target_display.orElse(codeDisplay.trim())}}"
               }
             ],
             "text": "{{codeDisplay}}"

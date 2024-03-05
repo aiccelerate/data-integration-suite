@@ -99,6 +99,7 @@
           "fileFormat": "csv",
           "options": {
             "sep": ";",
+            "distinct": "true",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
           }

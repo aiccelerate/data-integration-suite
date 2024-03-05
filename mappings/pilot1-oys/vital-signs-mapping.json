@@ -1,16 +1,16 @@
 {
   "id": "vital-signs-mapping",
-  "url": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/vital-signs-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/vital-signs-mapping",
   "name": "vital-signs-mapping",
   "title": "Mapping of schema vital signs to FHIR Vital signs profiles",
   "source": [{
     "alias": "source",
-    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt3-p2-vital-signs"
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-vital-signs"
   }],
   "context": {
     "vitalSignsConceptMap":  {
       "category": "concept-map",
-      "url": "$CONTEXT_REPO/pilot3-p2/vital-signs-concept-map.csv"
+      "url": "$CONTEXT_REPO/pilot1-oys/vital-signs-concept-map.csv"
     }
   },
   "mapping": [
@@ -25,18 +25,11 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Observation",
-          "id": "{{mpp:getHashedId('Observation', observationID)}}",
+          "id": "{{mpp:getHashedId('Observation', pid & code & time.toString())}}",
           "meta": {
             "profile": ["{{mpp:getConcept(%vitalSignsConceptMap, code, 'profile')}}"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
-          "identifier": [
-            {
-              "use": "official",
-              "system": "{{%sourceSystem.sourceUri}}",
-              "value": "{{observationID}}"
-            }
-          ],
           "status": "final",
           "category": [
             {
@@ -59,7 +52,8 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "effectiveDateTime": "{{startDate}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
+          "effectiveDateTime": "{{time.replace(' ', '').toDateTime()}}",
           "valueQuantity": {
             "value": "{{value.toDecimal()}}",
             "unit": "{{mpp:getConcept(%vitalSignsConceptMap, code, 'unit')}}",
@@ -80,18 +74,11 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "Observation",
-          "id": "{{mpp:getHashedId('Observation', observationID)}}",
+          "id": "{{mpp:getHashedId('Observation', pid & code & time.toString())}}",
           "meta": {
             "profile": ["{{mpp:getConcept(%vitalSignsConceptMap, code, 'profile')}}"],
             "source": "{{%sourceSystem.sourceUri}}"
           },
-          "identifier": [
-            {
-              "use": "official",
-              "system": "{{%sourceSystem.sourceUri}}",
-              "value": "{{observationID}}"
-            }
-          ],
           "status": "final",
           "category": [
             {
@@ -114,7 +101,8 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "effectiveDateTime": "{{startDate}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', encounterId)}}",
+          "effectiveDateTime": "{{time.replace(' ', '').toDateTime()}}",
           "component": [
             {
               "code": {
@@ -143,24 +131,11 @@
                   }
                 ]
               },
-              "valueQuantity":{
-                "{{#diastolic}}": "{{value.split('-')[1].toDecimal()}}",
-                "{{?}}": {
-                  "value": "{{%diastolic}}",
-                  "unit": "mmHg",
-                  "system": "http://unitsofmeasure.org",
-                  "code": "mm[Hg]"
-                }
-              },
-              "dataAbsentReason": {
-                "{{#valueNotExists}}": "{{iif(value.split('-')[1].empty(), true,{})}}",
-                "{{?}}": {
-                  "coding": [{
-                    "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
-                    "code": "unknown",
-                    "display": "Unknown"
-                  }]
-                }
+              "valueQuantity": {
+                "value": "{{value.split('-')[1].toDecimal()}}",
+                "unit": "mmHg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mm[Hg]"
               }
             }
           ]

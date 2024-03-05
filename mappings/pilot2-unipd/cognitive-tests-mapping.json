@@ -41,7 +41,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "72106-8",
                 "display": "MMSE total score"
               }
@@ -79,7 +79,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "72172-0",
                 "display": "Montreal Cognitive Assessment- MoCA"
               }
@@ -541,7 +541,7 @@
           "code": {
             "coding": [
               {
-                "system": "https://loinc.org",
+                "system": "http://loinc.org",
                 "code": "89209-1",
                 "display": "Beck Depression Inventory II"
               }
@@ -750,6 +750,46 @@
                 "system": "http://snomed.info/sct",
                 "code": "{{mpp:getConcept(%assessmentConceptMap, npsid_cog_status, 'target_code')}}",
                 "display": "{{mpp:getConcept(%assessmentConceptMap, npsid_cog_status, 'target_display')}}"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "precondition": {
+        "name": "hasCognitiveStatus2",
+        "language": "text/fhirpath",
+        "expression": "redcap_event_name = 'clinical_visit_arm_1' and clv_visit_date.exists() and st_ter_cog_status.exists($this!='NAN') and st_ter_cog_status.toInteger() < 5"
+      },
+      "expression": {
+        "name": "cognitiveStatus2",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', record_id & clv_visit_date.toString() & 'cognitive-status2')}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-PatientObservation"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "407628009",
+                "display": "Global deterioration scale finding for assessment of primary degenerative dementia"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', record_id)}}",
+          "effectiveDateTime": "{{clv_visit_date.utl:toFhirDate('dd/MM/yyyy')}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "{{mpp:getConcept(%assessmentConceptMap, st_ter_cog_status, 'target_code')}}",
+                "display": "{{mpp:getConcept(%assessmentConceptMap, st_ter_cog_status, 'target_display')}}"
               }
             ]
           }

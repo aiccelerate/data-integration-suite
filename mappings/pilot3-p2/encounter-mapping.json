@@ -54,7 +54,7 @@
                   "{{?}}": {
                     "system": "{{%sourceSystem.sourceUri}}/encounter-types",
                     "code": "{{%typ}}",
-                    "display": "{{mpp:getConcept(%encounterConceptMap, %typ, 'source_display')}}"
+                    "display": "{{? mpp:getConcept(%encounterConceptMap, %typ, 'source_display')}}"
                   }
                 }
               ]

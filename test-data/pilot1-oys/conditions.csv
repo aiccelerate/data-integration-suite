@@ -1,0 +1,10 @@
+pid,causeCode,symptomCode,onsetDateTime,encounterId,diagnosisType,certainity
+p1,I67.1,,2012-05-10,,main,confirmed,
+p1,I67.84,,2012-05-10,,comorbidity,confirmed,
+p1,I10,,2008-03-10,,other,confirmed,
+p2,L97.909,,2011-06-05,,main,confirmed
+p2,I22.2,,2010-02-05,,other,confirmed
+p2,G71.03,,2009-07-12,,other,confirmed
+p3,L97,,2003-05-10,,main,unconfirmed
+p3,F06.7,,2000-05-10,,other,unconfirmed
+

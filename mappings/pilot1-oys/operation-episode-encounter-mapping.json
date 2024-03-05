@@ -1,0 +1,78 @@
+{
+  "id": "operation-episode-encounter-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/operation-episode-encounter-mapping",
+  "name": "operation-episode-encounter-mapping",
+  "title": "Mapping of OperationEpisodeEncounter schema for pilots to AIC-OperationEpisodeEncounter FHIR profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-operation-episode-encounter"
+  }],
+  "context": {
+    "encounterTypeConceptMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot1-oys/encounter-type-concept-map.csv"
+    }
+  },
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isNotSurgeryEncounter",
+        "language": "text/fhirpath",
+        "expression": "type != 'procedure'"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Encounter",
+          "id": "{{mpp:getHashedId('Encounter',encounterId)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-OperationEpisodeEncounter"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "{{status}}",
+          "identifier": [
+            {
+              "use": "official",
+              "system": "{{%sourceSystem.sourceUri}}",
+              "value": "{{encounterId}}"
+            }
+          ],
+          "class": {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code": "{{iif(type='866171008' or type='703120008', 'AMB', 'IMP')}}",
+            "display": "{{iif(type='866171008' or type='703120008', 'Ambulatory', 'Inpatient encounter')}}"
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "{{type}}",
+                  "display": "{{mpp:getConcept(%encounterTypeConceptMap, type, 'source_display')}}"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "episodeOfCare": [ "{{mpp:createFhirReferenceWithHashedId('EpisodeOfCare', episodeId)}}"],
+          "period": {
+            "start": "{{startTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss')}}",
+            "end": "{{? endTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss')}}"
+          },
+          "location": {
+            "{{#loc}}": "{{location}}",
+            "{{*}}": {
+              "location": "{{mpp:createFhirReferenceWithHashedId('Location', %loc)}}",
+              "period": {
+                "start": "{{startTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss')}}",
+                "end": "{{? endTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss')}}"
+              }
+            }
+          },
+          "length": "{{? utl:getDurationAsQuantityObject(startTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss'), endTime.utl:toFhirDateTime('dd.MM.yyyy HH:mm:ss'))}}"
+        }
+      }
+    }
+  ]
+}

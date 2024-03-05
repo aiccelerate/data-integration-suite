@@ -1,0 +1,84 @@
+{
+  "id": "lab-results-mapping",
+  "url": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/lab-results-mapping",
+  "name": "lab-results-mapping",
+  "title": "Mapping of schema lab results to AIC-LabResults profile",
+  "source": [{
+    "alias": "source",
+    "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-lab-results"
+  }],
+  "context": {
+    "labResultsConceptMap":  {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/pilot1-oys/lab-results-concept-map.csv"
+    },
+    "labResultUnitConversion": {
+      "category": "unit-conversion",
+      "url": "$CONTEXT_REPO/pilot1-oys/lab-results-unit-conversion.csv"
+    }
+  },
+  "mapping": [
+    {
+      "precondition": {
+        "name": "hasValue",
+        "language": "text/fhirpath",
+        "expression": "interpretation.exists() or (value.exists() and value.convertsToDecimal())"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "resourceType": "Observation",
+          "id": "{{mpp:getHashedId('Observation', pid & code & time)}}",
+          "meta": {
+            "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-LabResultWithinSurgicalWorkflow"],
+            "source": "{{%sourceSystem.sourceUri}}"
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [{
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory result"
+              }]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "{{%sourceSystem.sourceUri}}/fhir/CodeSystem/lab-results",
+                "code": "{{code}}",
+                "display": "{{? description}}"
+              },
+              {
+                "{{#tc}}": "{{mpp:getConcept(%labResultsConceptMap, code)}}",
+                "{{?}}": {
+                  "system": "http://loinc.org",
+                  "code": "{{%tc.target_code}}",
+                  "display": "{{? %tc.target_display}}"
+                }
+              }
+            ],
+            "text": "{{? description}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "effectiveDateTime": "{{time.utl:toFhirDate('dd.MM.yyyy')}}",
+          "valueQuantity": "{{? iif(value.exists(), mpp:convertAndReturnQuantity(%labResultUnitConversion, code, value, unit.nav:orElse('-')), {})}}",
+          "valueBoolean": "{{? iif(value.exists(), {}, true)}}",
+          "referenceRange": {
+            "{{#rfExists}}":"{{iif(referenceMin.exists() or referenceMax.exists(), true, {})}}",
+            "{{*}}": {
+              "low": "{{mpp:convertAndReturnQuantity(%labResultUnitConversion, code, referenceMin, unit.nav:orElse('-'))}}",
+              "high": "{{? iif(referenceMax.exists(), mpp:convertAndReturnQuantity(%labResultUnitConversion, code, referenceMax, unit.nav:orElse('-')), {})}}"
+            }
+          },
+          "interpretation": {
+            "{{#intp}}": "{{interpretation}}",
+            "{{*}}": "{{utl:createFhirCodeableConcept('http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation', %intp, {})}}"
+          }
+        }
+      }
+    }
+  ]
+}

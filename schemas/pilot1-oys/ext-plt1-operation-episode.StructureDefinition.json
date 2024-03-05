@@ -1,0 +1,91 @@
+{
+  "resourceType": "StructureDefinition",
+  "url": "https://aiccelerate.eu/fhir/StructureDefinition/Ext-plt1-oys-operation-episode",
+  "name": "Ext-plt1-operation-episode",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Ext-plt1-operation-episode",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Ext-plt1-operation-episode",
+        "path": "Ext-plt1-operation-episode",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-operation-episode.pid",
+        "path": "Ext-plt1-operation-episode.pid",
+        "short": "Patient identifier",
+        "definition": "Unique patient identifier  (a pseudoynm)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-operation-episode.episodeId",
+        "path": "Ext-plt1-operation-episode.episodeId",
+        "short": "Episode identifier",
+        "definition": "Unique identifier of the episode of care that surgery is performed",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "id",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-operation-episode.startTime",
+        "path": "Ext-plt1-operation-episode.startTime",
+        "short": "Start time of episode",
+        "definition": "Start time of episode (SQL timestamp format)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Ext-plt1-operation-episode.endTime",
+        "path": "Ext-plt1-operation-episode.endTime",
+        "short": "End time of episode",
+        "definition": "End time of episode (SQL timestamp format)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

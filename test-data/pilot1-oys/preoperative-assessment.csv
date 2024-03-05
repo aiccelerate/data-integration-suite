@@ -1,0 +1,5 @@
+pid,encounterId,asaClassification,urgencyClassification,isDayCaseSurgery,isIsolationNeeded
+p1,e11,asa1,P1,false,false
+p2,e21,asa3,H,true,true
+p3,e31,asa5,P2,false,
+p3,e41,asa4,P2,false,

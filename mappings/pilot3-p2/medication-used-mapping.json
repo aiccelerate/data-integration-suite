@@ -20,7 +20,7 @@
         "language": "application/fhir-template+json",
         "value": {
           "resourceType": "MedicationStatement",
-          "id": "{{mpp:getHashedId('MedicationStatement',pid & code & startDate.toString())}}",
+          "id": "{{mpp:getHashedId('MedicationStatement',pid & code & startDate.toString() & endDate.toString())}}",
           "meta": {
             "profile": ["https://aiccelerate.eu/fhir/StructureDefinition/AIC-MedicationUsed"],
             "source": "{{%sourceSystem.sourceUri}}"
