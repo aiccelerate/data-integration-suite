@@ -2,15 +2,13 @@ package eu.aiccelerate.dis
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.StatusCodes
-import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
 import io.onfhir.path.FhirPathUtilFunctionsFactory
-import io.onfhir.util.JsonFormatter._
-import io.tofhir.engine.execution.RunningJobRegistry
-import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IFhirSchemaLoader, IMappingContextLoader, MappingContextLoader, SchemaFolderLoader}
-import io.tofhir.engine.model.{ArchiveModes, DataProcessingSettings, FhirMappingJob, FhirMappingJobExecution, FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
-import io.tofhir.engine.util.FhirMappingUtility
-import org.json4s.JArray
+import io.tofhir.engine.mapping.context.{IMappingContextLoader, MappingContextLoader}
+import io.tofhir.engine.mapping.job.FhirMappingJobManager
+import io.tofhir.engine.mapping.schema.{IFhirSchemaLoader, SchemaFolderLoader}
+import io.tofhir.engine.model.{ArchiveModes, DataProcessingSettings, FhirMappingJob, FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
+import io.tofhir.engine.repository.mapping.{FhirMappingFolderRepository, IFhirMappingRepository}
 
 import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
@@ -23,7 +21,7 @@ class Pilot3Part3IntegrationTest extends PilotTestSpec {
   val mappingRepository: IFhirMappingRepository =
     new FhirMappingFolderRepository(Paths.get("mappings/pilot3-p3").toAbsolutePath.toUri)
 
-  val contextLoader: IMappingContextLoader = new MappingContextLoader(mappingRepository)
+  val contextLoader: IMappingContextLoader = new MappingContextLoader
 
   val schemaLoader: IFhirSchemaLoader = new SchemaFolderLoader(Paths.get("schemas/pilot3-p3").toAbsolutePath.toUri)
 
@@ -41,9 +39,7 @@ class Pilot3Part3IntegrationTest extends PilotTestSpec {
   val testJob: FhirMappingJob = FhirMappingJob(id = jobId, dataProcessingSettings = testDataProcessingSettings,
     sourceSettings = Map(("_") -> testSourceSettings), sinkSettings = testSinkSettings, mappings = Seq.empty)
 
-  val runningJobRegistry: RunningJobRegistry = new RunningJobRegistry(sparkSession)
-
-  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, Map(FhirPathUtilFunctionsFactory.defaultPrefix -> FhirPathUtilFunctionsFactory), sparkSession, runningJobRegistry)
+  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, Map(FhirPathUtilFunctionsFactory.defaultPrefix -> FhirPathUtilFunctionsFactory), sparkSession)
 
   val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = sys.env.getOrElse("FHIR_REPO_URL", "http://localhost:8080/fhir"))
   implicit val actorSystem: ActorSystem = ActorSystem("Pilot3Part3IntegrationTest")

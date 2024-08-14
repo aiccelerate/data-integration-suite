@@ -5,11 +5,13 @@ import akka.http.scaladsl.model.StatusCodes
 import io.onfhir.api.Resource
 import io.onfhir.client.OnFhirNetworkClient
 import io.onfhir.path.FhirPathUtilFunctionsFactory
-import io.tofhir.engine.mapping.{FhirMappingFolderRepository, FhirMappingJobManager, IFhirMappingRepository, IFhirSchemaLoader, IMappingContextLoader, MappingContextLoader, SchemaFolderLoader}
 import io.tofhir.engine.model.{ArchiveModes, DataProcessingSettings, FhirMappingJob, FhirMappingJobExecution, FhirMappingTask, FhirRepositorySinkSettings, FileSystemSource, FileSystemSourceSettings}
 import io.tofhir.engine.util.FhirMappingUtility
 import io.onfhir.util.JsonFormatter._
-import io.tofhir.engine.execution.RunningJobRegistry
+import io.tofhir.engine.mapping.context.{IMappingContextLoader, MappingContextLoader}
+import io.tofhir.engine.mapping.job.FhirMappingJobManager
+import io.tofhir.engine.mapping.schema.{IFhirSchemaLoader, SchemaFolderLoader}
+import io.tofhir.engine.repository.mapping.{FhirMappingFolderRepository, IFhirMappingRepository}
 import org.json4s.JsonAST.JArray
 
 import java.nio.file.Paths
@@ -23,7 +25,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
   val mappingRepository: IFhirMappingRepository =
     new FhirMappingFolderRepository(Paths.get("mappings/pilot2").toAbsolutePath.toUri)
 
-  val contextLoader: IMappingContextLoader = new MappingContextLoader(mappingRepository)
+  val contextLoader: IMappingContextLoader = new MappingContextLoader
 
   val schemaLoader: IFhirSchemaLoader = new SchemaFolderLoader(Paths.get("schemas/pilot2").toAbsolutePath.toUri)
 
@@ -41,9 +43,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
   val testJob: FhirMappingJob = FhirMappingJob(id = jobId, dataProcessingSettings = testDataProcessingSettings,
     sourceSettings = Map(("_") -> testSourceSettings), sinkSettings = testSinkSettings, mappings = Seq.empty)
 
-  val runningJobRegistry: RunningJobRegistry = new RunningJobRegistry(sparkSession)
-
-  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, Map(FhirPathUtilFunctionsFactory.defaultPrefix -> FhirPathUtilFunctionsFactory), sparkSession, runningJobRegistry)
+  val fhirMappingJobManager = new FhirMappingJobManager(mappingRepository, contextLoader, schemaLoader, Map(FhirPathUtilFunctionsFactory.defaultPrefix -> FhirPathUtilFunctionsFactory), sparkSession)
 
   val fhirSinkSetting: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = sys.env.getOrElse("FHIR_REPO_URL", "http://localhost:8080/fhir"))
   implicit val actorSystem = ActorSystem("Pilot2IntegrationTest")
@@ -100,7 +100,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "patient mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(patientMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(patientMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
@@ -165,7 +165,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "symptom assessment mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(symptomsAssMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(symptomsAssMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
@@ -197,7 +197,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "symptom existence mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(symptomsExistenceMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(symptomsExistenceMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
@@ -228,7 +228,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "other assessment mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(otherAssMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(otherAssMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
@@ -258,7 +258,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "condition mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(conditionMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(conditionMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
@@ -318,7 +318,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "device used mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(deviceUsedMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(deviceUsedMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
@@ -343,7 +343,7 @@ class Pilot2IntegrationTest extends PilotTestSpec {
 
   "clinical note mapping" should "map test data" in {
     //Some semantic tests on generated content
-    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(clinicalNoteMappingTask), job = testJob), sourceSettings = dataSourceSettings) map { mappingResults =>
+    fhirMappingJobManager.executeMappingTaskAndReturn(mappingJobExecution = FhirMappingJobExecution(mappingTasks = Seq(clinicalNoteMappingTask), job = testJob), mappingJobSourceSettings = dataSourceSettings) map { mappingResults =>
       val results = mappingResults.map(r => {
         r.mappedResource shouldBe defined
         val resource = r.mappedResource.get.parseJson
