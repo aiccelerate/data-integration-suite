@@ -36,7 +36,7 @@ class Pilot1IntegrationTest extends PilotTestSpec {
   val inputFilePath = "test-input-file"
   val testSourceSettings: FileSystemSourceSettings = FileSystemSourceSettings(name = "test", sourceUri = "test", dataFolderPath = sourceFolderPath)
   val testFileSystemSource: FileSystemSource = FileSystemSource(path = inputFilePath)
-  val testMappingTask: FhirMappingTask = FhirMappingTask(sourceContext = Map("_" -> testFileSystemSource), mappingRef = "test")
+  val testMappingTask: FhirMappingTask = FhirMappingTask(sourceBinding = Map("_" -> testFileSystemSource), mappingRef = "test")
   val testSinkSettings: FhirRepositorySinkSettings = FhirRepositorySinkSettings(fhirRepoUrl = "test")
   val testDataProcessingSettings: DataProcessingSettings = DataProcessingSettings(archiveMode = ArchiveModes.ARCHIVE)
   val testJob: FhirMappingJob = FhirMappingJob(id = jobId, dataProcessingSettings = testDataProcessingSettings,
@@ -57,108 +57,108 @@ class Pilot1IntegrationTest extends PilotTestSpec {
 
   val patientMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/patient-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "patients.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "patients.csv"))
   )
   val encounterMappingTask =
     FhirMappingTask(
       mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/operation-episode-encounter-mapping",
-      sourceContext = Map("source" -> FileSystemSource(path = "operation-episode-encounters.csv"))
+      sourceBinding = Map("source" -> FileSystemSource(path = "operation-episode-encounters.csv"))
     )
   val surgeryPlanMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-plan-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "surgery-plans.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "surgery-plans.csv"))
   )
 
   val surgeryDetailsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-details-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "surgery-details.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "surgery-details.csv"))
   )
 
   val preopAssMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-assessment-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "preoperative-assessment.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "preoperative-assessment.csv"))
   )
 
   val healthBehaviorMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/health-behavior-assessment-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "health-behavior-assessment.csv"
+    sourceBinding = Map("source" -> FileSystemSource(path = "health-behavior-assessment.csv"
     ))
   )
 
   val otherObsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/other-observation-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "other-observations.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "other-observations.csv"))
   )
 
   val medUsedMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/medication-used-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "medication-used.csv"
+    sourceBinding = Map("source" -> FileSystemSource(path = "medication-used.csv"
     ))
   )
 
   val medAdmMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/medication-administration-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "medication-administration.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "medication-administration.csv"))
   )
 
   val conditionMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/condition-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "conditions.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "conditions.csv"))
   )
 
   val vitalSignsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/vital-signs-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "vitalsigns.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "vitalsigns.csv"))
   )
 
   val labResultsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/lab-results-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "lab-results.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "lab-results.csv"))
   )
 
   val radStudiesMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/radiological-studies-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "radiological-studies.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "radiological-studies.csv"))
   )
 
   val hospitalUnitMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/hospital-unit-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "hospital-unit.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "hospital-unit.csv"))
   )
 
   val practitionerMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/practitioner-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "practitioners.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "practitioners.csv"))
   )
 
   val workshiftMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/workshift-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "workshift.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "workshift.csv"))
   )
 
   val backgroundInfMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/background-information-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "background-information.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "background-information.csv"))
   )
 
   val preopRisksMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-risks-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "preoperative-risk-factors.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "preoperative-risk-factors.csv"))
   )
 
   val patientReportedConditionsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/patient-reported-conditions-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "patient-reported-conditions.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "patient-reported-conditions.csv"))
   )
 
   val preopSymptomsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-symptoms-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "preoperative-symptoms.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "preoperative-symptoms.csv"))
   )
 
   val anestObsMappingTask = FhirMappingTask(
     mappingRef = "https://aiccelerate.eu/fhir/mappings/pilot1/anesthesia-observations-mapping",
-    sourceContext = Map("source" -> FileSystemSource(path = "anesthesia-observations.csv"))
+    sourceBinding = Map("source" -> FileSystemSource(path = "anesthesia-observations.csv"))
   )
 
   "patient mapping" should "map test data" in {

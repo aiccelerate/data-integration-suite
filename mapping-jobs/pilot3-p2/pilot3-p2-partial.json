@@ -15,7 +15,7 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/lab-results-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "LabResult.csv",
@@ -24,7 +24,8 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     }

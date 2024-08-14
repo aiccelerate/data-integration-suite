@@ -15,7 +15,7 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/patient-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "1_Patient.csv",
@@ -24,13 +24,14 @@
             "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "2_Condition.csv",
@@ -39,13 +40,14 @@
             "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "4_DiagStd.csv",
@@ -54,13 +56,14 @@
             "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/procedure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "5_Procedure.csv",
@@ -69,7 +72,8 @@
             "sep": ",",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     }

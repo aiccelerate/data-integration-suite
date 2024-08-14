@@ -15,109 +15,121 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/patient-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "patients.csv"
+          "path":  "patients.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/encounter-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "encounters.csv"
+          "path":  "encounters.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "conditions.csv"
+          "path":  "conditions.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-used-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "medications-used.csv"
+          "path":  "medications-used.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-administration-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "medication-administrations.csv"
+          "path":  "medication-administrations.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/lab-results-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "lab-results.csv"
+          "path":  "lab-results.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/neurooncological-observation-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "neurooncological-observations.csv"
+          "path":  "neurooncological-observations.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/symptom-observation-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "symptoms.csv"
+          "path": "symptoms.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/vital-signs-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "vitalsigns.csv"
+          "path": "vitalsigns.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/procedure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "procedures.csv"
+          "path": "procedures.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/radiological-studies-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "radiological-studies.csv"
+          "path": "radiological-studies.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/clinical-note-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path": "clinical-notes.csv"
+          "path": "clinical-notes.csv",
+          "sourceRef": "source"
         }
       }
     }

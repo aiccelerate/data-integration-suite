@@ -15,143 +15,156 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/patient-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "Patient.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/operation-episode-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "episodes": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisode.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         },
         "conditions": {
           "jsonClass": "FileSystemSource",
           "path": "Condition.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/operation-episode-encounter-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "Condition.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/lab-results-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "labResults": {
           "jsonClass": "FileSystemSource",
           "path": "LabResults.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/surgery-details-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "surgeryDetails": {
           "jsonClass": "FileSystemSource",
           "path": "SurgeryDetails.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/vital-signs-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "vitalSigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsWard.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/vital-signs-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "vitalSigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsICU.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsWard.csv",
@@ -159,20 +172,22 @@
             "sep": ";",
             "distinct": "true"
           },
-          "preprocessSql": "SELECT * FROM (SELECT pid,time,code,value,unit,episodeId FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))"
+          "preprocessSql": "SELECT * FROM (SELECT pid,time,code,value,unit,episodeId FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))",
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsICU.csv",
@@ -180,47 +195,52 @@
             "sep": ";",
             "distinct": "true"
           },
-          "preprocessSql": "SELECT * FROM (SELECT pid,time,code,value,unit,episodeId FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))"
+          "preprocessSql": "SELECT * FROM (SELECT pid,time,code,value,unit,episodeId FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))",
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/medication-administration-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "MedicationAdministration.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/complication-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "complications": {
           "jsonClass": "FileSystemSource",
           "path": "Complication.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
           "options": {
             "sep": ";"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     }

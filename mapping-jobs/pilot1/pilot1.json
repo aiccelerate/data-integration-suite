@@ -16,191 +16,212 @@
   },
   "mappings" : [ {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/patient-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "patients.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/practitioner-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "practitioners.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/hospital-unit-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "hospital-unit.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/workshift-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "workshift.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-plan-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "surgery-plans.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/operation-episode-encounter-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "operation-episode-encounters.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/surgery-details-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "surgery-details.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/condition-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "conditions.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/patient-reported-conditions-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "patient-reported-conditions.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/medication-used-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "medication-used.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/medication-administration-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "medication-administration.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/health-behavior-assessment-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "health-behavior-assessment.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/background-information-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "background-information.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-assessment-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "preoperative-assessment.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-risks-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "preoperative-risk-factors.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/preoperative-symptoms-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "preoperative-symptoms.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/radiological-studies-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "radiological-studies.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/lab-results-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "lab-results.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/vital-signs-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "vitalsigns.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/anesthesia-observations-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "anesthesia-observations.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   }, {
     "mappingRef" : "https://aiccelerate.eu/fhir/mappings/pilot1/other-observation-mapping",
-    "sourceContext" : {
+    "sourceBinding" : {
       "source" : {
         "jsonClass" : "FileSystemSource",
         "path" : "other-observations.csv",
-        "options" : { }
+        "options" : { },
+        "sourceRef": "source"
       }
     }
   } ],

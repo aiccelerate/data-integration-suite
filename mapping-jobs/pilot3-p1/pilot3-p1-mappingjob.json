@@ -15,55 +15,61 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/patient-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "patients.csv"
+          "path":  "patients.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "conditions.csv"
+          "path":  "conditions.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/organization-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "organizations.csv"
+          "path":  "organizations.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/hospitalUnit-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "hospitalUnits.csv"
+          "path":  "hospitalUnits.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/procedure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "procedures.csv"
+          "path":  "procedures.csv",
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p1/diagnostic-study-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
-          "path":  "diagnostic-studies.csv"
+          "path":  "diagnostic-studies.csv",
+          "sourceRef": "source"
         }
       }
     }

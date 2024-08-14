@@ -15,85 +15,91 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/patient-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "patient.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/encounter-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "encounter.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "condition.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/medication-used-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "medicationUsed.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/procedure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "procedure.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/assessment-observation-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "assessmentObservation.csv",
           "options": {
             "sep": ";",
             "distinct": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/blood-pressure-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
           "path": "assessmentObservation.csv",
@@ -101,7 +107,8 @@
             "sep": ";",
             "distinct": "true"
           },
-          "preprocessSql": "SELECT * FROM (SELECT pid,observationDateTime,code,value FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))"
+          "preprocessSql": "SELECT * FROM (SELECT pid,observationDateTime,code,value FROM vitalsigns WHERE code='8480-6' OR code='8462-4') PIVOT (LAST(value) as value FOR code IN ('8480-6' as systolic, '8462-4' as diastolic))",
+          "sourceRef": "source"
         }
       }
     }

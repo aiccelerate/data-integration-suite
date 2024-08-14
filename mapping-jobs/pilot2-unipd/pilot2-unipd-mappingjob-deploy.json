@@ -15,7 +15,7 @@
   "mappings": [
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/patient-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "unipd_export": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -24,13 +24,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/encounter-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -38,13 +39,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -52,13 +54,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/initial-condition-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -67,13 +70,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/symptom-existence-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -81,13 +85,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/medication-used-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -96,13 +101,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/device-used-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -110,13 +116,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/updrs-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -124,13 +131,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/nmss-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -138,13 +146,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/nms-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -152,13 +161,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/cognitive-tests-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -166,13 +176,14 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     },
     {
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/other-assessments-mapping",
-      "sourceContext": {
+      "sourceBinding": {
         "unipd_export": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
@@ -181,7 +192,8 @@
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
             "ignoreTrailingWhiteSpace": "true"
-          }
+          },
+          "sourceRef": "source"
         }
       }
     }
