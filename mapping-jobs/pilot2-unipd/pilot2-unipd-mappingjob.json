@@ -1,5 +1,5 @@
 {
-  "id": "pilot2-unipd-mapping-job",
+  "id": "pilot2-unipd-mappingjob",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",

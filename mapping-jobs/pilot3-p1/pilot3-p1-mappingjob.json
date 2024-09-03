@@ -1,5 +1,5 @@
 {
-  "id": "pilot3-p1-mapping-job",
+  "id": "pilot3-p1-mappingjob",
   "sourceSettings": {
     "source": {
       "jsonClass": "FileSystemSourceSettings",

@@ -1,5 +1,5 @@
 {
-  "id": "symptom-assessment-mapping",
+  "id": "updrs-mapping",
   "url": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/updrs-mapping",
   "name": "updrs-mapping",
   "title": "Mapping of UNIPD's data schema with UPDRS data for pilot 2 to AIC-ParkinsonMotorObservation and its children profiles",
