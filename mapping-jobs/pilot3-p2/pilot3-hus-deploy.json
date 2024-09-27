@@ -14,12 +14,13 @@
   },
   "mappings": [
     {
+      "name": "patient-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/patient-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "Patient.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -30,12 +31,13 @@
       }
     },
     {
+      "name": "encounter-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/encounter-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "Encounters.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -46,12 +48,13 @@
       }
     },
     {
+      "name": "condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "Conditions.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -62,12 +65,13 @@
       }
     },
     {
+      "name": "medication-used-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-used-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "MedicationUsed.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -78,12 +82,13 @@
       }
     },
     {
+      "name": "medication-administration-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/medication-administration-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "MedicationAdministration.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -94,12 +99,13 @@
       }
     },
     {
+      "name": "lab-results-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/lab-results-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "LabResult.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true",
@@ -111,12 +117,13 @@
       }
     },
     {
+      "name": "neurooncological-observation-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/neurooncological-observation-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "NeurooncologicalObservation.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -127,12 +134,13 @@
       }
     },
     {
+      "name": "symptom-observation-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/symptom-observation-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "SymptomObservation_fromtext.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -143,12 +151,13 @@
       }
     },
     {
+      "name": "symptom-observation-icd10-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/symptom-observation-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "SymptomObservation_icd10.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -159,12 +168,13 @@
       }
     },
     {
+      "name": "vital-signs-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/vital-signs-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "VitalObservation.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -175,12 +185,13 @@
       }
     },
     {
+      "name": "procedure-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/procedure-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "Procedure.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -191,12 +202,13 @@
       }
     },
     {
+      "name": "radiological-studies-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/radiological-studies-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "RadiologicalStudy.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -207,12 +219,13 @@
       }
     },
     {
+      "name": "clinical-note-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/clinical-note-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "Notes.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",

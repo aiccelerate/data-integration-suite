@@ -14,11 +14,13 @@
   },
   "mappings": [
     {
+      "name": "patient-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/patient-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "patient.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -28,11 +30,13 @@
       }
     },
     {
+      "name": "encounter-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/encounter-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "encounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -42,11 +46,13 @@
       }
     },
     {
+      "name": "condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "condition.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -56,11 +62,13 @@
       }
     },
     {
+      "name": "medication-used-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/medication-used-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "medicationUsed.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -70,11 +78,13 @@
       }
     },
     {
+      "name": "procedure-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/procedure-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "procedure.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -84,11 +94,13 @@
       }
     },
     {
+      "name": "assessment-observation-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/assessment-observation-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "assessmentObservation.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -98,11 +110,13 @@
       }
     },
     {
+      "name": "blood-pressure-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p3/blood-pressure-mapping",
       "sourceBinding": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
           "path": "assessmentObservation.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"

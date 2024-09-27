@@ -16,21 +16,25 @@
   "mappingErrorHandling": "continue",
   "mappings": [
     {
+      "name": "patient-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/patient-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "patients.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "operation-episode-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/operation-episode-mapping",
       "sourceBinding": {
         "episodes": {
           "jsonClass": "FileSystemSource",
           "path": "operation-episodes.csv",
+          "contentType": "csv",
           "options": {
             "sep": ","
           },
@@ -39,6 +43,7 @@
         "conditions": {
           "jsonClass": "FileSystemSource",
           "path": "conditions.csv",
+          "contentType": "csv",
           "options": {
             "sep": ","
           },
@@ -46,58 +51,68 @@
         }
       }
     },
-
     {
+      "name": "operation-episode-encounter-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/operation-episode-encounter-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "operation-episode-encounters.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "surgery-details-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/surgery-details-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "surgery-details.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "conditions.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "preoperative-assessment-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/preoperative-assessment-mapping",
       "sourceBinding": {
         "assessment": {
           "jsonClass": "FileSystemSource",
           "path":  "preoperative-assessment.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         },
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path":  "operation-episode-encounters.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "vital-signs-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-oys/vital-signs-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "vital-signs.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }

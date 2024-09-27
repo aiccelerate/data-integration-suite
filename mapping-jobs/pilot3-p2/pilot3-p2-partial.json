@@ -14,12 +14,13 @@
   },
   "mappings": [
     {
+      "name": "lab-results-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot3-p2/lab-results-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "LabResult.csv",
-          "fileFormat": "csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",

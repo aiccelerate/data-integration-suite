@@ -14,91 +14,109 @@
   },
   "mappings": [
     {
+      "name": "patient-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/patient-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "patients.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "encounter-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/encounter-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "encounters.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "conditions-withoutCodeDisplay.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "medication-used-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/medication-used-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "medication-used.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "device-used-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/device-used-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "device-used.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "symptom-existence-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-existence-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "parkinson-symptom-existence.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "symptom-assessment-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/symptom-assessment-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "parkinson-symptom-assessments.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "other-assessments-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/other-assessments-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "other-assessments.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }
     },
     {
+      "name": "clinical-note-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2/clinical-note-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path":  "clinical-notes.csv",
+          "contentType": "csv",
           "sourceRef": "source"
         }
       }

@@ -14,11 +14,13 @@
   },
   "mappings": [
     {
+      "name": "patient-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/patient-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "Patient.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -28,11 +30,13 @@
       }
     },
     {
+      "name": "operation-episode-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/operation-episode-mapping",
       "sourceBinding": {
         "episodes": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisode.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -41,6 +45,7 @@
         "conditions": {
           "jsonClass": "FileSystemSource",
           "path": "Condition.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -49,11 +54,13 @@
       }
     },
     {
+      "name": "operation-episode-encounter-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/operation-episode-encounter-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -62,11 +69,13 @@
       }
     },
     {
+      "name": "condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "Condition.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -76,11 +85,13 @@
       }
     },
     {
+      "name": "lab-results-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/lab-results-mapping",
       "sourceBinding": {
         "labResults": {
           "jsonClass": "FileSystemSource",
           "path": "LabResults.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -90,6 +101,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -98,11 +110,13 @@
       }
     },
     {
+      "name": "surgery-details-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/surgery-details-mapping",
       "sourceBinding": {
         "surgeryDetails": {
           "jsonClass": "FileSystemSource",
           "path": "SurgeryDetails.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -111,6 +125,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -119,11 +134,13 @@
       }
     },
     {
+      "name": "vital-signs-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/vital-signs-mapping",
       "sourceBinding": {
         "vitalSigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsWard.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -133,6 +150,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -141,11 +159,13 @@
       }
     },
     {
+      "name": "vital-signs-icu-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/vital-signs-mapping",
       "sourceBinding": {
         "vitalSigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsICU.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -155,6 +175,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -163,11 +184,13 @@
       }
     },
     {
+      "name": "blood-pressure-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
       "sourceBinding": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsWard.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -178,6 +201,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -186,11 +210,13 @@
       }
     },
     {
+      "name": "blood-pressure-icu-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/blood-pressure-mapping",
       "sourceBinding": {
         "vitalsigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSignsICU.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -201,6 +227,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },
@@ -209,11 +236,13 @@
       }
     },
     {
+      "name": "medication-administration-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/medication-administration-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "MedicationAdministration.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -223,11 +252,13 @@
       }
     },
     {
+      "name": "complication-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot1-hsjd/complication-mapping",
       "sourceBinding": {
         "complications": {
           "jsonClass": "FileSystemSource",
           "path": "Complication.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "distinct": "true"
@@ -237,6 +268,7 @@
         "encounters": {
           "jsonClass": "FileSystemSource",
           "path": "OperationEpisodeEncounter.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";"
           },

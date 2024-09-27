@@ -14,11 +14,13 @@
   },
   "mappings": [
     {
+      "name": "patient-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/patient-mapping",
       "sourceBinding": {
         "unipd_export": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "preprocessSql": "SELECT P.record_id,P.reg_sex,P.patient_reg_death,P.patient_reg_death_age,P.mh_age_at_s_onset,V.clv_visit_date,V.clv_age_v,PV.npsid_data_npsi,PV.npsid_age_v\nFROM unipd_export P \nLEFT JOIN (select V.record_id, V.clv_visit_date,V.clv_age_v FROM unipd_export V WHERE V.redcap_event_name='clinical_visit_arm_1' AND V.redcap_repeat_instance = 1) as V ON P.record_id = V.record_id\nLEFT JOIN (select PV.record_id, PV.npsid_data_npsi,PV.npsid_age_v FROM unipd_export PV WHERE PV.redcap_event_name='npsi_arm_1' AND PV.redcap_repeat_instance = 1) as PV ON P.record_id = PV.record_id\nWHERE P.redcap_event_name='patient_registry_arm_1'",
           "options": {
             "sep": ";",
@@ -30,11 +32,13 @@
       }
     },
     {
+      "name": "encounter-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/encounter-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -45,11 +49,13 @@
       }
     },
     {
+      "name": "condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -60,11 +66,13 @@
       }
     },
     {
+      "name": "initial-condition-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/initial-condition-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "preprocessSql": "SELECT P.*, V.clv_visit_date as clv_visit_date FROM unipd_export P, unipd_export V WHERE P.record_id = V.record_id AND P.redcap_event_name='patient_registry_arm_1' AND V.redcap_event_name='clinical_visit_arm_1' AND V.redcap_repeat_instance = 1",
           "options": {
             "sep": ";",
@@ -76,11 +84,13 @@
       }
     },
     {
+      "name": "symptom-existence-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/symptom-existence-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -91,11 +101,13 @@
       }
     },
     {
+      "name": "medication-used-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/medication-used-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "preprocessSql": "SELECT V1.*, V2.clv_visit_date as npsid_data_npsi FROM source AS V1 LEFT JOIN (SELECT * FROM source S WHERE S.redcap_event_name='clinical_visit_arm_1') AS V2 ON V1.record_id = V2.record_id AND V1.redcap_repeat_instance + 1 = V2.redcap_repeat_instance WHERE V1.redcap_event_name='clinical_visit_arm_1'",
           "options": {
             "sep": ";",
@@ -107,11 +119,13 @@
       }
     },
     {
+      "name": "device-used-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/device-used-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -122,11 +136,13 @@
       }
     },
     {
+      "name": "updrs-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/updrs-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -137,11 +153,13 @@
       }
     },
     {
+      "name": "nmss-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/nmss-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -152,11 +170,13 @@
       }
     },
     {
+      "name": "nms-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/nms-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -167,11 +187,13 @@
       }
     },
     {
+      "name": "cognitive-tests-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/cognitive-tests-mapping",
       "sourceBinding": {
         "source": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+          "contentType": "csv",
           "options": {
             "sep": ";",
             "ignoreLeadingWhiteSpace": "true",
@@ -182,11 +204,13 @@
       }
     },
     {
+      "name": "other-assessments-mapping",
       "mappingRef": "https://aiccelerate.eu/fhir/mappings/pilot2-unipd/other-assessments-mapping",
       "sourceBinding": {
         "unipd_export": {
           "jsonClass": "FileSystemSource",
           "path": "unipd_dataset.csv",
+		  "contentType": "csv",
           "preprocessSql": "SELECT P.*, V.clv_visit_date as clv_visit_date FROM unipd_export P, unipd_export V WHERE P.record_id = V.record_id AND P.redcap_event_name='patient_registry_arm_1' AND V.redcap_event_name='clinical_visit_arm_1' AND V.redcap_repeat_instance = 1",
           "options": {
             "sep": ";",
